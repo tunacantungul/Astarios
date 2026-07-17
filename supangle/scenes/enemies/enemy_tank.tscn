@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1"]
+
+[sub_resource type="Gradient" id="Gradient_body"]
+colors = PackedColorArray(0.42, 0.2, 0.52, 1, 0.42, 0.2, 0.52, 1)
+
+[sub_resource type="GradientTexture2D" id="Tex_body"]
+gradient = SubResource("Gradient_body")
+width = 58
+height = 58
+
+[sub_resource type="RectangleShape2D" id="Shape_body"]
+size = Vector2(52, 52)
+
+[sub_resource type="RectangleShape2D" id="Shape_hit"]
+size = Vector2(62, 62)
+
+[node name="EnemyTank" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 6
+motion_mode = 1
+script = ExtResource("1")
+move_speed = 70.0
+max_health = 90.0
+contact_damage = 18.0
+damage_interval = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("Tex_body")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Shape_body")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("Shape_hit")
