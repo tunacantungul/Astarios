@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/orbiting_swords.tscn" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://assets/placeholder/player.svg" id="4"]
 [ext_resource type="Texture2D" path="res://assets/placeholder/divine_aura.svg" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/stab_sword.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/lightning_nova.tscn" id="7"]
 
 [sub_resource type="RectangleShape2D" id="Shape_body"]
 size = Vector2(40, 40)
@@ -34,3 +35,5 @@ position_smoothing_speed = 8.0
 [node name="OrbitingSwords" parent="." instance=ExtResource("2")]
 
 [node name="BoltShooter" parent="." instance=ExtResource("3")]
+
+[node name="LightningNova" parent="." instance=ExtResource("7")]

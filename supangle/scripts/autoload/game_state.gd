@@ -17,31 +17,56 @@ const XP_PER_KILL := 1
 ## Her seviye bir öncekinden bu kadar fazla XP ister (1->2: 10, 2->3: 20...).
 const XP_STEP := 10
 
-## Kart havuzu: her dizi bir gelişim hattı, sıradaki eleman alınacak kartı anlatır.
+## Kart havuzu: her hat {min_chapter, tiers} taşır; tiers'ın sıradaki elemanı
+## alınacak kartı anlatır. min_chapter, kartın havuza girdiği bölüm (0 tabanlı).
 const UPGRADE_TRACKS: Dictionary = {
-	"orbit": [
-		{"title": "Dönen Kılıç", "desc": "Etrafında dönen 1 kılıç"},
-		{"title": "Dönen Kılıç II", "desc": "Dönen kılıç sayısı 2 olur"},
-		{"title": "Dönen Kılıç III", "desc": "Dönen kılıç sayısı 3 olur"},
-	],
-	"bolt": [
-		{"title": "Büyü Işını", "desc": "15 sn'de bir en yakın düşmana ışın"},
-		{"title": "Hızlı Işın", "desc": "Işın bekleme süresi 8 sn'ye iner"},
-		{"title": "Güçlü Işın", "desc": "Işın hasarı iki katına çıkar"},
-	],
-	"stab": [
-		{"title": "Çift Saplama", "desc": "Kılıç art arda 2 kez saplanır"},
-		{"title": "Keskin Kılıç", "desc": "Saplama hasarı %50 artar"},
-	],
-	"speed": [
-		{"title": "Rüzgar Adımı", "desc": "Hareket hızı %20 artar"},
-		{"title": "Rüzgar Adımı II", "desc": "Hareket hızı toplam %40 artar"},
-	],
-	"vitality": [
-		{"title": "Yaşam Gücü", "desc": "+25 azami can ve anında iyileşme"},
-		{"title": "Yaşam Gücü II", "desc": "+25 azami can ve anında iyileşme"},
-		{"title": "Yaşam Gücü III", "desc": "+25 azami can ve anında iyileşme"},
-	],
+	"orbit": {
+		"min_chapter": 0,
+		"tiers": [
+			{"title": "Dönen Kılıç", "desc": "Etrafında dönen 1 kılıç"},
+			{"title": "Dönen Kılıç II", "desc": "Dönen kılıç sayısı 2 olur"},
+			{"title": "Dönen Kılıç III", "desc": "Dönen kılıç sayısı 3 olur"},
+		],
+	},
+	"bolt": {
+		"min_chapter": 0,
+		"tiers": [
+			{"title": "Büyü Işını", "desc": "15 sn'de bir en yakın düşmana ışın"},
+			{"title": "Hızlı Işın", "desc": "Işın bekleme süresi 8 sn'ye iner"},
+			{"title": "Güçlü Işın", "desc": "Işın hasarı iki katına çıkar"},
+		],
+	},
+	"stab": {
+		"min_chapter": 0,
+		"tiers": [
+			{"title": "Çift Saplama", "desc": "Kılıç art arda 2 kez saplanır"},
+			{"title": "Keskin Kılıç", "desc": "Saplama hasarı %50 artar"},
+		],
+	},
+	"speed": {
+		"min_chapter": 0,
+		"tiers": [
+			{"title": "Rüzgar Adımı", "desc": "Hareket hızı %20 artar"},
+			{"title": "Rüzgar Adımı II", "desc": "Hareket hızı toplam %40 artar"},
+		],
+	},
+	"vitality": {
+		"min_chapter": 0,
+		"tiers": [
+			{"title": "Yaşam Gücü", "desc": "+25 azami can ve anında iyileşme"},
+			{"title": "Yaşam Gücü II", "desc": "+25 azami can ve anında iyileşme"},
+			{"title": "Yaşam Gücü III", "desc": "+25 azami can ve anında iyileşme"},
+		],
+	},
+	# Zeus'un gazabına karşılık: yıldırım bölümlerinde (2+) açılır.
+	"nova": {
+		"min_chapter": 1,
+		"tiers": [
+			{"title": "Yıldırım Kalkanı", "desc": "6 sn'de bir çevrene yıldırım şoku"},
+			{"title": "Fırtına Yüreği", "desc": "Şok sıklığı artar (4 sn)"},
+			{"title": "Gök Gürültüsü", "desc": "Şok hasarı ve alanı büyür"},
+		],
+	},
 }
 
 const LEVEL_SCENES: Array[String] = [
@@ -116,13 +141,17 @@ func upgrade_tier(id: String) -> int:
 
 ## Sıradaki kartın başlık/açıklaması (havuzdaki mevcut seviyeye göre).
 func upgrade_card_info(id: String) -> Dictionary:
-	return UPGRADE_TRACKS[id][upgrade_tier(id)]
+	return UPGRADE_TRACKS[id]["tiers"][upgrade_tier(id)]
 
-## Henüz tükenmemiş hatlardan rastgele en fazla `count` kart seçer.
+## Bu bölümde açık olan ve henüz tükenmemiş hatlardan rastgele en fazla
+## `count` kart seçer.
 func pick_upgrade_options(count: int = 3) -> Array[String]:
 	var pool: Array[String] = []
 	for id: String in UPGRADE_TRACKS:
-		if upgrade_tier(id) < UPGRADE_TRACKS[id].size():
+		var track: Dictionary = UPGRADE_TRACKS[id]
+		if current_level < track["min_chapter"]:
+			continue
+		if upgrade_tier(id) < track["tiers"].size():
 			pool.append(id)
 	pool.shuffle()
 	return pool.slice(0, count)
