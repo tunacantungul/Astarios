@@ -12,6 +12,8 @@ const COLOR_LOST := Color(1.0, 1.0, 1.0, 0.2)
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var immortal_label: Label = %ImmortalLabel
 @onready var kill_label: Label = %KillLabel
+@onready var level_label: Label = %LevelLabel
+@onready var xp_bar: ProgressBar = %XPBar
 @onready var power_immortality: Label = %PowerImmortality
 @onready var power_flight: Label = %PowerFlight
 @onready var power_attack: Label = %PowerAttack
@@ -19,7 +21,11 @@ const COLOR_LOST := Color(1.0, 1.0, 1.0, 0.2)
 func _ready() -> void:
 	GameState.kills_changed.connect(_on_kills_changed)
 	GameState.powers_changed.connect(_refresh_powers)
+	GameState.xp_changed.connect(_on_xp_changed)
+	GameState.player_level_changed.connect(_on_player_level_changed)
 	_on_kills_changed(GameState.kills, GameState.kill_quota)
+	_on_xp_changed(GameState.xp, GameState.xp_required())
+	_on_player_level_changed(GameState.player_level)
 
 	var player := get_tree().get_first_node_in_group("player") as Player
 	if player != null:
@@ -30,6 +36,13 @@ func _ready() -> void:
 func _on_health_changed(current: float, max_value: float) -> void:
 	health_bar.max_value = max_value
 	health_bar.value = current
+
+func _on_xp_changed(current: int, required: int) -> void:
+	xp_bar.max_value = required
+	xp_bar.value = current
+
+func _on_player_level_changed(level: int) -> void:
+	level_label.text = "Seviye %d" % level
 
 var _kills: int = 0
 var _required: int = 0
