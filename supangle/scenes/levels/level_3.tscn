@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" path="res://scenes/levels/boss_arena.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/boss_3.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://scenes/effects/lightning_spawner.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/ui/upgrade_menu.tscn" id="15"]
 
 [sub_resource type="RectangleShape2D" id="Shape_wall_h"]
 size = Vector2(3280, 40)
@@ -23,7 +24,7 @@ size = Vector2(40, 2080)
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1")
-kill_quota = 35
+kill_quota = 60
 god_name = "Athena"
 dialogue_lines = Array[String](["Athena: Buraya kadar savaşarak geldin. Stratejin fena değildi... bir ölümlü için.", "Sen: Son kapı sensin Athena. Ne istersen al.", "Athena: Savaş benim sanatımdır — ve sanatım, benden kaçanlarla gitmez.", "Athena: Kılıçların, ışının, gücün... hepsi bende kalıyor. Git, sıradan insan. Umarım aşkın buna değer."])
 power_to_lose = 2
@@ -100,3 +101,5 @@ spawn_area = Rect2(-1550, -950, 3100, 1900)
 [node name="HUD" parent="UI" instance=ExtResource("6")]
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("7")]
+
+[node name="UpgradeMenu" parent="UI" instance=ExtResource("15")]

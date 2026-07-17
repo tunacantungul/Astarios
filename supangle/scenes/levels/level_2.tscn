@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://scenes/levels/boss_arena.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/boss_2.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://scenes/effects/lightning_spawner.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://scenes/ui/upgrade_menu.tscn" id="14"]
 
 [sub_resource type="RectangleShape2D" id="Shape_wall_h"]
 size = Vector2(3280, 40)
@@ -22,7 +23,7 @@ size = Vector2(40, 2080)
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1")
-kill_quota = 25
+kill_quota = 50
 god_name = "Hermes"
 dialogue_lines = Array[String](["Hermes: Zeus'un gazabından sağ çıktın; buna saygı duyarım, yolcu.", "Sen: O zaman kenara çekil Hermes. Yolum uzun.", "Hermes: Kural kuraldır. Olympus'tan inen, göğü de geride bırakır.", "Hermes: Kanatların artık benim. Bundan sonra her adımını toprakta atacaksın."])
 power_to_lose = 1
@@ -95,3 +96,5 @@ spawn_area = Rect2(-1550, -950, 3100, 1900)
 [node name="HUD" parent="UI" instance=ExtResource("6")]
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("7")]
+
+[node name="UpgradeMenu" parent="UI" instance=ExtResource("14")]

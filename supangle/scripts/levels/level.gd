@@ -15,17 +15,46 @@ extends Node2D
 @onready var boss_arena: Area2D = $BossArena
 @onready var dialogue_box: PanelContainer = $UI/DialogueBox
 @onready var hud: Control = $UI/HUD
+@onready var upgrade_menu: Control = $UI/UpgradeMenu
 
 var _arena_armed: bool = false
+## Kart menüsü açıkken biriken ek seviye atlamaları (aynı karede çoklu ölüm).
+var _pending_level_ups: int = 0
 
 func _ready() -> void:
 	get_tree().paused = false
 	GameState.setup_level(kill_quota)
 	GameState.kills_changed.connect(_on_kills_changed)
+	GameState.leveled_up.connect(_on_leveled_up)
+	upgrade_menu.card_chosen.connect(_on_card_chosen)
 	exit_gate.visible = false
 	exit_gate.player_entered.connect(_on_gate_entered)
 	boss_arena.triggered.connect(_on_arena_triggered)
 	dialogue_box.finished.connect(_on_dialogue_finished)
+
+## --- Seviye atlama / kart seçimi ---
+
+func _on_leveled_up() -> void:
+	if upgrade_menu.visible:
+		_pending_level_ups += 1
+		return
+	_open_upgrade_menu()
+
+func _open_upgrade_menu() -> void:
+	var options := GameState.pick_upgrade_options()
+	if options.is_empty():
+		get_tree().paused = false
+		return
+	get_tree().paused = true
+	upgrade_menu.open(options)
+
+func _on_card_chosen(id: String) -> void:
+	GameState.apply_upgrade(id)
+	if _pending_level_ups > 0:
+		_pending_level_ups -= 1
+		_open_upgrade_menu()
+	else:
+		get_tree().paused = false
 
 func _on_kills_changed(current: int, _required: int) -> void:
 	if current >= kill_quota and not _arena_armed:

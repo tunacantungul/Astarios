@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/upgrade_menu.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="Style_card"]
+bg_color = Color(0.13, 0.12, 0.18, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.72, 0.35, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="Style_card_hover"]
+bg_color = Color(0.2, 0.18, 0.27, 0.98)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.88, 0.5, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="UpgradeMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.62)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.5, 1)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+text = "SEVİYE ATLADIN — Bir güç seç"
+
+[node name="Cards" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+
+[node name="Card1" type="Button" parent="CenterContainer/VBoxContainer/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 190)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("Style_card")
+theme_override_styles/hover = SubResource("Style_card_hover")
+theme_override_styles/pressed = SubResource("Style_card_hover")
+theme_override_styles/focus = SubResource("Style_card_hover")
+text = "Kart 1"
+
+[node name="Card2" type="Button" parent="CenterContainer/VBoxContainer/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 190)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("Style_card")
+theme_override_styles/hover = SubResource("Style_card_hover")
+theme_override_styles/pressed = SubResource("Style_card_hover")
+theme_override_styles/focus = SubResource("Style_card_hover")
+text = "Kart 2"
+
+[node name="Card3" type="Button" parent="CenterContainer/VBoxContainer/Cards"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 190)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("Style_card")
+theme_override_styles/hover = SubResource("Style_card_hover")
+theme_override_styles/pressed = SubResource("Style_card_hover")
+theme_override_styles/focus = SubResource("Style_card_hover")
+text = "Kart 3"
