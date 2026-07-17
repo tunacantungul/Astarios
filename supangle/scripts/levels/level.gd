@@ -6,7 +6,7 @@ extends Node2D
 @export var god_name: String = "Zeus"
 @export var dialogue_lines: Array[String] = []
 ## Bu bölümün sonunda kaybedilecek güç (GameState.Power sırasıyla aynı).
-@export_enum("Kalkan:0", "Uçuş:1", "Atak:2") var power_to_lose: int = 0
+@export_enum("Ölümsüzlük:0", "Uçuş:1", "Atak:2") var power_to_lose: int = 0
 
 @onready var exit_gate: Area2D = $ExitGate
 @onready var dialogue_box: PanelContainer = $UI/DialogueBox

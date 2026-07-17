@@ -27,9 +27,8 @@ func _ready() -> void:
 	health = max_health
 	health_changed.emit(health, max_health)
 	shield_visual.visible = false
-	if GameState.has_power(GameState.Power.SHIELD):
-		shield_timer.wait_time = shield_cooldown
-		shield_timer.start()
+	shield_timer.wait_time = shield_cooldown
+	shield_timer.start()
 
 func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -57,6 +56,9 @@ func take_hazard_damage(amount: float) -> void:
 
 func _apply_damage(amount: float) -> void:
 	health = maxf(health - amount, 0.0)
+	if health <= 0.0 and GameState.has_power(GameState.Power.IMMORTALITY):
+		# Ölümsüzlük: bir tanrı ölemez, can 1'in altına inmez.
+		health = 1.0
 	health_changed.emit(health, max_health)
 	if health <= 0.0:
 		_die()
@@ -80,8 +82,6 @@ func _die() -> void:
 	GameState.game_over.call_deferred()
 
 func _on_shield_timer_timeout() -> void:
-	if not GameState.has_power(GameState.Power.SHIELD):
-		return
 	shield_ready = true
 	shield_visual.visible = true
 	shield_state_changed.emit(true)

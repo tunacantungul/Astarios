@@ -20,8 +20,8 @@ size = Vector2(40, 2080)
 [node name="Level2" type="Node2D"]
 script = ExtResource("1")
 kill_quota = 25
-god_name = "Hera"
-dialogue_lines = Array[String](["Hera: Zeus'un öfkesi bile seni durduramadı demek.", "Sen: Hiçbir öfke, kalbimin gittiği yerden daha büyük değil.", "Hera: Aşkı en iyi ben bilirim çocuk... bedelini de.", "Hera: Gökyüzü artık senin değil. Kanatların benimdir!"])
+god_name = "Hermes"
+dialogue_lines = Array[String](["Hermes: Zeus'un gazabından sağ çıktın; buna saygı duyarım, yolcu.", "Sen: O zaman kenara çekil Hermes. Yolum uzun.", "Hermes: Kural kuraldır. Olympus'tan inen, göğü de geride bırakır.", "Hermes: Kanatların artık benim. Bundan sonra her adımını toprakta atacaksın."])
 power_to_lose = 1
 
 [node name="Background" type="ColorRect" parent="."]

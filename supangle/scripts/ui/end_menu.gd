@@ -8,7 +8,7 @@ extends Control
 func _ready() -> void:
 	if GameState.victory:
 		title_label.text = "BEDEL ÖDENDİ"
-		message_label.text = "Kalkanın, kanatların, gücün... hepsi geride kaldı.\nArtık sıradan bir insansın — ama kalbin nihayet özgür."
+		message_label.text = "Ölümsüzlüğün, kanatların, gücün... hepsi geride kaldı.\nArtık sıradan bir insansın — ama kalbin nihayet özgür."
 		retry_button.text = "Baştan Oyna"
 	else:
 		title_label.text = "OLYMPUS KAZANDI"

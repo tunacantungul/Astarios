@@ -5,8 +5,8 @@ extends Node
 signal powers_changed
 signal kills_changed(current: int, required: int)
 
-## Güçler kayıp sırasına göre: önce kalkan, sonra uçuş, en son atak.
-enum Power { SHIELD, FLIGHT, ATTACK }
+## Güçler kayıp sırasına göre: önce ölümsüzlük, sonra uçuş, en son atak.
+enum Power { IMMORTALITY, FLIGHT, ATTACK }
 
 const LEVEL_SCENES: Array[String] = [
 	"res://scenes/levels/level_1.tscn",
@@ -76,7 +76,7 @@ func go_to_main_menu() -> void:
 
 func _reset_powers() -> void:
 	powers = {
-		Power.SHIELD: true,
+		Power.IMMORTALITY: true,
 		Power.FLIGHT: true,
 		Power.ATTACK: true,
 	}
