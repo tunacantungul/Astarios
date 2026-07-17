@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/weapons/orbiting_swords.gd" id="1"]
+
+[sub_resource type="Gradient" id="Gradient_sword"]
+colors = PackedColorArray(0.85, 0.87, 0.93, 1, 0.85, 0.87, 0.93, 1)
+
+[sub_resource type="GradientTexture2D" id="Tex_sword"]
+gradient = SubResource("Gradient_sword")
+width = 14
+height = 48
+
+[sub_resource type="RectangleShape2D" id="Shape_sword"]
+size = Vector2(14, 48)
+
+[node name="OrbitingSwords" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Sword1" type="Area2D" parent="."]
+position = Vector2(90, 0)
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword1"]
+texture = SubResource("Tex_sword")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword1"]
+shape = SubResource("Shape_sword")
+
+[node name="Sword2" type="Area2D" parent="."]
+position = Vector2(-45, 77.9423)
+rotation = 3.66519
+collision_layer = 0
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword2"]
+texture = SubResource("Tex_sword")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword2"]
+shape = SubResource("Shape_sword")
+
+[node name="Sword3" type="Area2D" parent="."]
+position = Vector2(-45, -77.9423)
+rotation = 5.75959
+collision_layer = 0
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Sword3"]
+texture = SubResource("Tex_sword")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword3"]
+shape = SubResource("Shape_sword")

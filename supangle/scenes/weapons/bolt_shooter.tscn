@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/weapons/bolt_shooter.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/weapons/bolt.tscn" id="2"]
+
+[node name="BoltShooter" type="Node2D"]
+script = ExtResource("1")
+bolt_scene = ExtResource("2")
+
+[node name="FireTimer" type="Timer" parent="."]
+wait_time = 0.9
+
+[connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
