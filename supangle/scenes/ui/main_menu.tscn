@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="Style_panel"]
+bg_color = Color(0.1, 0.09, 0.17, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.96, 0.83, 0.35, 0.6)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -20,7 +32,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.07, 0.06, 0.13, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="MenuBox" type="CenterContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,39 +41,184 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+[node name="VBox" type="VBoxContainer" parent="MenuBox"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 18
 
-[node name="TitleLabel" type="Label" parent="CenterContainer/VBox"]
+[node name="TitleLabel" type="Label" parent="MenuBox/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.83, 0.35, 1)
 theme_override_font_sizes/font_size = 110
 horizontal_alignment = 1
 text = "SUPANGLE"
 
-[node name="SubtitleLabel" type="Label" parent="CenterContainer/VBox"]
+[node name="SubtitleLabel" type="Label" parent="MenuBox/VBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.9, 0.8)
 theme_override_font_sizes/font_size = 28
 horizontal_alignment = 1
 text = "Olympus'tan bir bedel ödemeden ayrılamazsın."
 
-[node name="Spacer" type="Control" parent="CenterContainer/VBox"]
-custom_minimum_size = Vector2(0, 60)
+[node name="Spacer" type="Control" parent="MenuBox/VBox"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="CenterContainer/VBox"]
-custom_minimum_size = Vector2(340, 78)
+[node name="StartButton" type="Button" parent="MenuBox/VBox"]
+custom_minimum_size = Vector2(340, 74)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Başla"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBox"]
-custom_minimum_size = Vector2(340, 64)
+[node name="SettingsButton" type="Button" parent="MenuBox/VBox"]
+custom_minimum_size = Vector2(340, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Ayarlar"
+
+[node name="CreditsButton" type="Button" parent="MenuBox/VBox"]
+custom_minimum_size = Vector2(340, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Emeği Geçenler"
+
+[node name="QuitButton" type="Button" parent="MenuBox/VBox"]
+custom_minimum_size = Vector2(340, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "Çıkış"
 
-[connection signal="pressed" from="CenterContainer/VBox/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CenterContainer/VBox/QuitButton" to="." method="_on_quit_button_pressed"]
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -220.0
+offset_right = 300.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="Margin" type="MarginContainer" parent="SettingsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 28
+
+[node name="VBox" type="VBoxContainer" parent="SettingsPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="SettingsTitle" type="Label" parent="SettingsPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.83, 0.35, 1)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+text = "Ayarlar"
+
+[node name="VolumeRow" type="HBoxContainer" parent="SettingsPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VolumeLabel" type="Label" parent="SettingsPanel/Margin/VBox/VolumeRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Ses Seviyesi"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/Margin/VBox/VolumeRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(260, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 100.0
+value = 100.0
+
+[node name="FullscreenCheck" type="CheckBox" parent="SettingsPanel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+button_pressed = true
+text = "Tam Ekran"
+
+[node name="SettingsSpacer" type="Control" parent="SettingsPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SettingsBackButton" type="Button" parent="SettingsPanel/Margin/VBox"]
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Geri"
+
+[node name="CreditsPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -260.0
+offset_right = 300.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("Style_panel")
+
+[node name="Margin" type="MarginContainer" parent="CreditsPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 28
+
+[node name="VBox" type="VBoxContainer" parent="CreditsPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="CreditsTitle" type="Label" parent="CreditsPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.96, 0.83, 0.35, 1)
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+text = "Emeği Geçenler"
+
+[node name="CreditsText" type="Label" parent="CreditsPanel/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.85, 0.85, 0.9, 0.9)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+autowrap_mode = 3
+text = "Hikâye ve Tasarım — Supangle Ekibi
+
+2D Sanat — [Artist Adı]
+
+Kod — [Geliştirici Adları]
+
+Müzik ve Ses — [Besteci Adı]
+
+Godot Engine ile yapıldı."
+
+[node name="CreditsBackButton" type="Button" parent="CreditsPanel/Margin/VBox"]
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Geri"
+
+[connection signal="pressed" from="MenuBox/VBox/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MenuBox/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuBox/VBox/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MenuBox/VBox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="SettingsPanel/Margin/VBox/VolumeRow/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="SettingsPanel/Margin/VBox/FullscreenCheck" to="." method="_on_fullscreen_check_toggled"]
+[connection signal="pressed" from="SettingsPanel/Margin/VBox/SettingsBackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CreditsPanel/Margin/VBox/CreditsBackButton" to="." method="_on_back_button_pressed"]
