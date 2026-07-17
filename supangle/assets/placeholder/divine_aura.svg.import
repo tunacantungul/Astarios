@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://canv2wte7p737"
-path="res://.godot/imported/shield_aura.svg-9329bfb9a57cd6a17565a08d90a268e4.ctex"
+uid="uid://cnf8q0md3h1pm"
+path="res://.godot/imported/divine_aura.svg-cfd88c14a60312f0db7dd8ad181a94d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/placeholder/shield_aura.svg"
-dest_files=["res://.godot/imported/shield_aura.svg-9329bfb9a57cd6a17565a08d90a268e4.ctex"]
+source_file="res://assets/placeholder/divine_aura.svg"
+dest_files=["res://.godot/imported/divine_aura.svg-cfd88c14a60312f0db7dd8ad181a94d7.ctex"]
 
 [params]
 
