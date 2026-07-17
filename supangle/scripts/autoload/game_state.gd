@@ -15,6 +15,7 @@ const LEVEL_SCENES: Array[String] = [
 ]
 const MAIN_MENU_SCENE := "res://scenes/ui/main_menu.tscn"
 const END_MENU_SCENE := "res://scenes/ui/end_menu.tscn"
+const EPILOGUE_SCENE := "res://scenes/levels/epilogue.tscn"
 
 var powers: Dictionary = {}
 var current_level: int = 0
@@ -58,14 +59,18 @@ func retry_level() -> void:
 	victory = false
 	_change_scene(LEVEL_SCENES[current_level])
 
-## Bölüm sonu diyaloğu bitince çağrılır.
+## Bölüm sonu diyaloğu bitince çağrılır. Son bölümden sonra kavuşma sahnesine geçilir.
 func advance_level() -> void:
 	current_level += 1
 	if current_level >= LEVEL_SCENES.size():
-		victory = true
-		_change_scene(END_MENU_SCENE)
+		_change_scene(EPILOGUE_SCENE)
 	else:
 		_change_scene(LEVEL_SCENES[current_level])
+
+## Kavuşma sahnesi bitince çağrılır: zaferle oyun sonu.
+func finish_game() -> void:
+	victory = true
+	_change_scene(END_MENU_SCENE)
 
 func game_over() -> void:
 	victory = false
