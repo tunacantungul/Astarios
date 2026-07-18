@@ -17,6 +17,9 @@ const SPEAKER_MAX_LENGTH := 24
 
 ## Saniyede kaç harf yazılacağı.
 @export var chars_per_second: float = 45.0
+## Diyalog açıkken arkayı karartan filtrenin rengi ve yoğunluğu.
+@export var dim_color := Color(0.0, 0.0, 0.0, 0.55)
+@export var dim_fade_time: float = 0.25
 ## Portrenin kutuya göre konumu: x panelin sol kenarından kayma,
 ## y ise portrenin altının panelin üst kenarına ne kadar bineceği.
 ## (0, 0) = portre tam kutunun dış çerçevesinden başlar.
@@ -30,6 +33,11 @@ var _portraits := {
 
 var _lines: Array[String] = []
 var _index: int = 0
+## Arkayı karartan tam ekran dikdörtgen. Kendi çocuğumuz olamaz (kutunun
+## kapsayıcısı onu panele sığdırırdı ve panelin önüne çizilirdi), bu yüzden
+## kardeşimiz olarak hemen önümüze ekleniyor: HUD/harita/canavarların üstünde,
+## diyalog kutusu ve portrenin altında kalıyor.
+var _dim: ColorRect
 var _typing: bool = false
 ## Kesirli ilerleme; int'e yuvarlanarak visible_characters'a yazılır.
 var _revealed: float = 0.0
@@ -53,9 +61,39 @@ func start(speaker: String, lines: Array[String]) -> void:
 	name_label.text = speaker
 	visible = true
 	set_process(true)
+	_show_dim()
 	_show_line()
 	# İlk karede kutunun yerleşimi henüz kesinleşmemiş olabiliyor.
 	_update_portrait_position.call_deferred()
+
+## --- Arka plan karartması ---
+
+func _show_dim() -> void:
+	var parent := get_parent()
+	if parent == null:
+		return
+	if _dim == null or not is_instance_valid(_dim):
+		_dim = ColorRect.new()
+		_dim.name = "DialogueDim"
+		_dim.color = dim_color
+		_dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		# Oyun diyalog sırasında duraklatılmış oluyor.
+		_dim.process_mode = Node.PROCESS_MODE_ALWAYS
+		parent.add_child(_dim)
+		_dim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	# Bizden hemen önceki sıraya al: arkamızda, diğer her şeyin önünde kalsın.
+	parent.move_child(_dim, get_index())
+	_dim.visible = true
+	_dim.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(_dim, "modulate:a", 1.0, dim_fade_time)
+
+func _hide_dim() -> void:
+	if _dim == null or not is_instance_valid(_dim):
+		return
+	var tween := create_tween()
+	tween.tween_property(_dim, "modulate:a", 0.0, dim_fade_time)
+	tween.tween_callback(_dim.hide)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
@@ -123,4 +161,5 @@ func _close() -> void:
 	visible = false
 	portrait.visible = false
 	set_process(false)
+	_hide_dim()
 	finished.emit()
