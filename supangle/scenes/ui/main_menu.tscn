@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://duunyohlbffh4"]
 
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1"]
-[ext_resource type="Theme" path="res://resources/menu_theme.tres" id="2"]
-[ext_resource type="Texture2D" path="res://assets/Astarios Dialogue.png" id="3"]
+[ext_resource type="Script" uid="uid://bm5emevrocm7c" path="res://scripts/ui/main_menu.gd" id="1"]
+[ext_resource type="Theme" uid="uid://h8r3ouj6gmqv" path="res://resources/menu_theme.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://c535i22q6xliq" path="res://assets/Astarios Dialogue.png" id="3"]
 
 [sub_resource type="Gradient" id="Grad_bg"]
 offsets = PackedFloat32Array(0, 0.55, 1)
@@ -10,7 +10,6 @@ colors = PackedColorArray(0.03, 0.028, 0.062, 1, 0.075, 0.05, 0.095, 1, 0.13, 0.
 
 [sub_resource type="GradientTexture2D" id="Tex_bg"]
 gradient = SubResource("Grad_bg")
-fill_from = Vector2(0, 0)
 fill_to = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Grad_scrim"]
@@ -19,10 +18,8 @@ colors = PackedColorArray(0.03, 0.028, 0.062, 1, 0.03, 0.028, 0.062, 0.82, 0.03,
 
 [sub_resource type="GradientTexture2D" id="Tex_scrim"]
 gradient = SubResource("Grad_scrim")
-fill_from = Vector2(0, 0)
-fill_to = Vector2(1, 0)
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=856979309]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +29,7 @@ grow_vertical = 2
 theme = ExtResource("2")
 script = ExtResource("1")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=61081991]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,20 +39,25 @@ grow_vertical = 2
 texture = SubResource("Tex_bg")
 expand_mode = 1
 
-[node name="Portrait" type="TextureRect" parent="."]
+[node name="Portrait" type="TextureRect" parent="." unique_id=440159198]
+modulate = Color(1, 0.96, 0.9, 0.92)
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.4
 anchor_top = -0.04
 anchor_right = 1.02
 anchor_bottom = 1.0
+offset_left = 352.0
+offset_top = 432.2
+offset_right = -37.399902
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-modulate = Color(1, 0.96, 0.9, 0.92)
 texture = ExtResource("3")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Scrim" type="TextureRect" parent="."]
+[node name="Scrim" type="TextureRect" parent="." unique_id=192777663]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,7 +68,7 @@ mouse_filter = 2
 texture = SubResource("Tex_scrim")
 expand_mode = 1
 
-[node name="MenuBox" type="MarginContainer" parent="."]
+[node name="MenuBox" type="MarginContainer" parent="." unique_id=1808167224]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 9
@@ -77,38 +79,38 @@ theme_override_constants/margin_left = 110
 theme_override_constants/margin_top = 90
 theme_override_constants/margin_bottom = 90
 
-[node name="VBox" type="VBoxContainer" parent="MenuBox"]
+[node name="VBox" type="VBoxContainer" parent="MenuBox" unique_id=1875331545]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 0
 
-[node name="TitleLabel" type="Label" parent="MenuBox/VBox"]
+[node name="TitleLabel" type="Label" parent="MenuBox/VBox" unique_id=1021881511]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.85, 0.5, 1)
 theme_override_font_sizes/font_size = 104
 text = "ASTARIOS"
 
-[node name="Rule" type="ColorRect" parent="MenuBox/VBox"]
+[node name="Rule" type="ColorRect" parent="MenuBox/VBox" unique_id=1855727591]
 custom_minimum_size = Vector2(300, 3)
 layout_mode = 2
 size_flags_horizontal = 0
 color = Color(0.93, 0.78, 0.42, 0.85)
 
-[node name="RuleSpacer" type="Control" parent="MenuBox/VBox"]
+[node name="RuleSpacer" type="Control" parent="MenuBox/VBox" unique_id=1924199095]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 
-[node name="SubtitleLabel" type="Label" parent="MenuBox/VBox"]
+[node name="SubtitleLabel" type="Label" parent="MenuBox/VBox" unique_id=1813146886]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.78, 0.75, 0.82, 0.85)
 theme_override_font_sizes/font_size = 26
 text = "Olympus'tan bir bedel ödemeden ayrılamazsın."
 
-[node name="Spacer" type="Control" parent="MenuBox/VBox"]
+[node name="Spacer" type="Control" parent="MenuBox/VBox" unique_id=278596365]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="MenuBox/VBox"]
+[node name="StartButton" type="Button" parent="MenuBox/VBox" unique_id=1189898573]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -116,31 +118,32 @@ theme_override_font_sizes/font_size = 36
 text = "Başla"
 alignment = 0
 
-[node name="SettingsButton" type="Button" parent="MenuBox/VBox"]
+[node name="SettingsButton" type="Button" parent="MenuBox/VBox" unique_id=1930700646]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Ayarlar"
 alignment = 0
 
-[node name="CreditsButton" type="Button" parent="MenuBox/VBox"]
+[node name="CreditsButton" type="Button" parent="MenuBox/VBox" unique_id=108913009]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Emeği Geçenler"
 alignment = 0
 
-[node name="QuitButton" type="Button" parent="MenuBox/VBox"]
+[node name="QuitButton" type="Button" parent="MenuBox/VBox" unique_id=1483905414]
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Çıkış"
 alignment = 0
 
-[node name="SettingsPanel" type="PanelContainer" parent="."]
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=450285422]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -152,59 +155,58 @@ offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Margin" type="MarginContainer" parent="SettingsPanel"]
+[node name="Margin" type="MarginContainer" parent="SettingsPanel" unique_id=1361965330]
 layout_mode = 2
 theme_override_constants/margin_left = 44
 theme_override_constants/margin_top = 36
 theme_override_constants/margin_right = 44
 theme_override_constants/margin_bottom = 36
 
-[node name="VBox" type="VBoxContainer" parent="SettingsPanel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="SettingsPanel/Margin" unique_id=1689670929]
 layout_mode = 2
 theme_override_constants/separation = 22
 
-[node name="SettingsTitle" type="Label" parent="SettingsPanel/Margin/VBox"]
+[node name="SettingsTitle" type="Label" parent="SettingsPanel/Margin/VBox" unique_id=444942307]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.85, 0.5, 1)
 theme_override_font_sizes/font_size = 38
 text = "AYARLAR"
 
-[node name="TitleRule" type="ColorRect" parent="SettingsPanel/Margin/VBox"]
+[node name="TitleRule" type="ColorRect" parent="SettingsPanel/Margin/VBox" unique_id=152740920]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.93, 0.78, 0.42, 0.35)
 
-[node name="VolumeRow" type="HBoxContainer" parent="SettingsPanel/Margin/VBox"]
+[node name="VolumeRow" type="HBoxContainer" parent="SettingsPanel/Margin/VBox" unique_id=1599754401]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="VolumeLabel" type="Label" parent="SettingsPanel/Margin/VBox/VolumeRow"]
+[node name="VolumeLabel" type="Label" parent="SettingsPanel/Margin/VBox/VolumeRow" unique_id=1010214765]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Ses Seviyesi"
 
-[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/Margin/VBox/VolumeRow"]
+[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/Margin/VBox/VolumeRow" unique_id=1709307444]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(260, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-max_value = 100.0
 value = 100.0
 
-[node name="FullscreenCheck" type="CheckBox" parent="SettingsPanel/Margin/VBox"]
+[node name="FullscreenCheck" type="CheckBox" parent="SettingsPanel/Margin/VBox" unique_id=916608173]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 button_pressed = true
 text = "Tam Ekran"
 
-[node name="SettingsSpacer" type="Control" parent="SettingsPanel/Margin/VBox"]
+[node name="SettingsSpacer" type="Control" parent="SettingsPanel/Margin/VBox" unique_id=180307539]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SettingsBackButton" type="Button" parent="SettingsPanel/Margin/VBox"]
+[node name="SettingsBackButton" type="Button" parent="SettingsPanel/Margin/VBox" unique_id=839364732]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -212,10 +214,11 @@ theme_override_font_sizes/font_size = 26
 text = "Geri"
 alignment = 0
 
-[node name="CreditsPanel" type="PanelContainer" parent="."]
+[node name="CreditsPanel" type="PanelContainer" parent="." unique_id=893262183]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -227,35 +230,33 @@ offset_bottom = 330.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Margin" type="MarginContainer" parent="CreditsPanel"]
+[node name="Margin" type="MarginContainer" parent="CreditsPanel" unique_id=180477542]
 layout_mode = 2
 theme_override_constants/margin_left = 44
 theme_override_constants/margin_top = 36
 theme_override_constants/margin_right = 44
 theme_override_constants/margin_bottom = 36
 
-[node name="VBox" type="VBoxContainer" parent="CreditsPanel/Margin"]
+[node name="VBox" type="VBoxContainer" parent="CreditsPanel/Margin" unique_id=1625173649]
 layout_mode = 2
 theme_override_constants/separation = 22
 
-[node name="CreditsTitle" type="Label" parent="CreditsPanel/Margin/VBox"]
+[node name="CreditsTitle" type="Label" parent="CreditsPanel/Margin/VBox" unique_id=1287585761]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.96, 0.85, 0.5, 1)
 theme_override_font_sizes/font_size = 38
 text = "EMEĞİ GEÇENLER"
 
-[node name="TitleRule" type="ColorRect" parent="CreditsPanel/Margin/VBox"]
+[node name="TitleRule" type="ColorRect" parent="CreditsPanel/Margin/VBox" unique_id=847862610]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.93, 0.78, 0.42, 0.35)
 
-[node name="CreditsText" type="RichTextLabel" parent="CreditsPanel/Margin/VBox"]
+[node name="CreditsText" type="RichTextLabel" parent="CreditsPanel/Margin/VBox" unique_id=942624387]
 layout_mode = 2
 size_flags_vertical = 3
-bbcode_enabled = true
-fit_content = true
-scroll_active = false
 theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
 text = "[color=#eec96b]HİKÂYE[/color]
 Kaan Demir Oksay
 
@@ -267,8 +268,10 @@ Nilsu Dila Cabbar
 Tuna Can Tungul
 
 [color=#8a8792]Godot Engine ile yapıldı.[/color]"
+fit_content = true
+scroll_active = false
 
-[node name="CreditsBackButton" type="Button" parent="CreditsPanel/Margin/VBox"]
+[node name="CreditsBackButton" type="Button" parent="CreditsPanel/Margin/VBox" unique_id=486242076]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
 size_flags_horizontal = 0
