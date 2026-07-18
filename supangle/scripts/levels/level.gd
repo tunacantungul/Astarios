@@ -3,6 +3,10 @@ extends Node2D
 ## kota dolunca boss arenası aktifleşir -> arenaya girince boss doğar ->
 ## boss ölünce kapı belirir -> kapıya girince tanrı diyaloğu -> güç kaybı -> sonraki bölüm.
 
+## Hedef okunun renkleri: arena kızıl, açılan kapı yeşil.
+const ARENA_ARROW_COLOR := Color(1.0, 0.36, 0.24)
+const GATE_ARROW_COLOR := Color(0.42, 1.0, 0.55)
+
 @export var kill_quota: int = 15
 @export var god_name: String = "Zeus"
 ## Vurgulanacak kelimeler satır metnine BBCode ile yazılır: [shake]ölümsüz[/shake].
@@ -122,6 +126,8 @@ func _on_kills_changed(current: int, _required: int) -> void:
 	if current >= kill_quota and not _arena_armed:
 		_arena_armed = true
 		boss_arena.arm()
+		hud.set_objective("Boss arenasına git!")
+		hud.point_to(boss_arena, ARENA_ARROW_COLOR)
 
 func _on_arena_triggered() -> void:
 	var boss: Boss = boss_scene.instantiate()
@@ -129,13 +135,18 @@ func _on_arena_triggered() -> void:
 	add_child(boss)
 	boss.boss_died.connect(_on_boss_died)
 	hud.set_objective("Boss'u yen!")
+	# Boss dövüşü sırasında gösterilecek bir yön yok.
+	hud.clear_arrow()
 
 func _on_boss_died() -> void:
 	exit_gate.visible = true
 	exit_gate.activate()
-	hud.set_objective("Kapı açıldı! Çıkışa ilerle")
+	hud.set_objective("Kapı açıldı!")
+	hud.point_to(exit_gate, GATE_ARROW_COLOR)
 
 func _on_gate_entered() -> void:
+	hud.set_objective("")
+	hud.clear_arrow()
 	get_tree().paused = true
 	dialogue_box.start(god_name, dialogue_lines)
 

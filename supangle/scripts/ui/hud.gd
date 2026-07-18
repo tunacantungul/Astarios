@@ -14,7 +14,8 @@ const UPGRADE_ENTRY_SCENE := preload("res://scenes/ui/upgrade_entry.tscn")
 @onready var upgrades_box: VBoxContainer = %UpgradesBox
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var immortal_label: Label = %ImmortalLabel
-@onready var kill_label: Label = %KillLabel
+@onready var objective_label: Label = %ObjectiveLabel
+@onready var objective_arrow: Control = %ObjectiveArrow
 @onready var level_label: Label = %LevelLabel
 @onready var xp_bar: ProgressBar = %XPBar
 @onready var power_immortality: Label = %PowerImmortality
@@ -22,13 +23,11 @@ const UPGRADE_ENTRY_SCENE := preload("res://scenes/ui/upgrade_entry.tscn")
 @onready var power_attack: Label = %PowerAttack
 
 func _ready() -> void:
-	GameState.kills_changed.connect(_on_kills_changed)
 	GameState.powers_changed.connect(_refresh_powers)
 	GameState.xp_changed.connect(_on_xp_changed)
 	GameState.player_level_changed.connect(_on_player_level_changed)
 	GameState.upgrades_changed.connect(_refresh_upgrades)
 	_refresh_upgrades()
-	_on_kills_changed(GameState.kills, GameState.kill_quota)
 	_on_xp_changed(GameState.xp, GameState.xp_required())
 	_on_player_level_changed(GameState.player_level)
 
@@ -61,29 +60,17 @@ func _refresh_upgrades() -> void:
 		upgrades_box.add_child(entry)
 		entry.setup(GameState.upgrade_icon(id), "%s  Sv %d" % [GameState.upgrade_name(id), tier], GameState.rarity_color(id))
 
-var _kills: int = 0
-var _required: int = 0
-var _objective: String = ""
-
-func _on_kills_changed(current: int, required: int) -> void:
-	_kills = current
-	_required = required
-	_update_kill_label()
-
-## Level scripti boss akışı sırasında hedef metnini bununla değiştirir.
+## Level scripti boss akışı sırasında ekranın üstündeki hedef metnini bununla
+## değiştirir. Canavar sayacı artık gösterilmiyor, arka planda sayılıyor.
 func set_objective(text: String) -> void:
-	_objective = text
-	_update_kill_label()
+	objective_label.text = text
 
-func _update_kill_label() -> void:
-	if _objective != "":
-		kill_label.text = _objective
-	elif _required <= 0:
-		kill_label.text = ""
-	elif _kills >= _required:
-		kill_label.text = "Arena hazır! İşaretli alana gir"
-	else:
-		kill_label.text = "Canavar: %d / %d" % [_kills, _required]
+## Hedef okunu verilen düğüme yöneltir (boss arenası, çıkış kapısı...).
+func point_to(target: Node2D, color: Color) -> void:
+	objective_arrow.point_to(target, color)
+
+func clear_arrow() -> void:
+	objective_arrow.clear_target()
 
 func _refresh_powers() -> void:
 	var immortal := GameState.has_power(GameState.Power.IMMORTALITY)
