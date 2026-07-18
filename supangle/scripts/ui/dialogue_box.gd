@@ -29,6 +29,7 @@ const SPEAKER_MAX_LENGTH := 24
 ## bir satır eklemek yeterli; adı olmayan konuşmacıda portre gizlenir.
 var _portraits := {
 	"Astarios": preload("res://assets/Astarios Dialogue.png"),
+	"Zeus": preload("res://assets/Zeus.png"),
 }
 
 var _lines: Array[String] = []
