@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1"]
 [ext_resource type="Texture2D" path="res://assets/placeholder/enemy_tank.svg" id="2"]
 
-[sub_resource type="RectangleShape2D" id="Shape_body"]
-size = Vector2(234, 234)
+[sub_resource type="CircleShape2D" id="Shape_body"]
+radius = 80.0
 
 [sub_resource type="RectangleShape2D" id="Shape_hit"]
 size = Vector2(280, 280)
 
 [node name="EnemyTank" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 6
 motion_mode = 1
 script = ExtResource("1")
 move_speed = 230.0

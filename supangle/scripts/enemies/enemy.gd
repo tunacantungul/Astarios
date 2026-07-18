@@ -17,10 +17,13 @@ const HURT_SCALE_PUNCH := 0.85
 ## Yürüme sallanması: çok hafif sağa-sola dönme açısı (radyan) ve hızı.
 const WALK_WOBBLE_ANGLE := 0.06
 const WALK_WOBBLE_SPEED := 10.0
-## Düşmanlar birbirinin içinden geçtiği için (Vampire Survivors'ta olduğu gibi)
-## hepsi tıpatıp aynı hızda gidince tek bir yığın hâline geliyorlar. Her düşmana
+## Hepsi tıpatıp aynı hızda gidince tek bir yığın hâline geliyorlar. Her düşmana
 ## doğduğunda küçük bir hız sapması vererek sürü kendiliğinden yayılıyor.
 const SPEED_JITTER := 0.09
+## Canavarlar birbirini engellemesin diye: çarpışınca arkadaki, öndekini kenara
+## doğru iter. Yalnızca çarpışmak yetmiyor, o zaman hızlılar yavaşların arkasında
+## sıkışıp kalıyor. 1.0 = kendi hızı kadar itme.
+const PUSH_STRENGTH := 0.8
 
 @export var move_speed: float = 395.0
 @export var max_health: float = 30.0
@@ -62,8 +65,23 @@ func _physics_process(delta: float) -> void:
 	var direction := (_player.global_position - global_position).normalized()
 	velocity = direction * move_speed * speed_multiplier()
 	move_and_slide()
+	_push_blocking_enemies(delta)
 	_animate_walk(delta)
 	_tick_contact_damage(delta)
+
+## Yolumuzu kesen canavarları kenara iter. Godot'da iki CharacterBody2D
+## birbirini kendiliğinden itmez, sadece durdurur; bu yüzden temas eden
+## canavarı çarpışma normali boyunca elle kaydırıyoruz. Sonuç: hızlı canavar
+## yavaşın arkasında sıkışmak yerine onu aralayarak geçiyor.
+func _push_blocking_enemies(delta: float) -> void:
+	var push_speed := move_speed * speed_multiplier() * PUSH_STRENGTH * delta
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var other := collision.get_collider() as Enemy
+		if other == null:
+			continue
+		# Normal bizden ona doğru bakar; itmek için ters yöne kaydırıyoruz.
+		other.global_position -= collision.get_normal() * push_speed
 
 ## Yürürken sprite'ı çok hafif sağa-sola sallar; durunca düzelir.
 func _animate_walk(delta: float) -> void:
