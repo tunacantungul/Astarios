@@ -1,9 +1,8 @@
 extends Control
 ## Bölüm sonu diyaloğundan sonra gelen siyah ekran: kaybedilen gücü yazar.
-## Oyun ağacı o sırada duraklatılmış olduğu için process_mode: Always.
-## Yazı belirir, kısa süre kalır, kararır ve finished sinyali yayılır.
-
-signal finished
+## Transition autoload'u tarafından yönetilir; kararma ile açılma arasında
+## sahne değişimi yapılabilsin diye iki aşama ayrı ayrı beklenebiliyor.
+## Oyun ağacı o sırada duraklatılmış olabildiği için process_mode: Always.
 
 @export var fade_in: float = 0.8
 @export var hold: float = 1.8
@@ -14,12 +13,18 @@ signal finished
 func _ready() -> void:
 	modulate.a = 0.0
 
+## Ekranı karartıp yazıyı gösterir; yazı okunacak kadar bekledikten sonra döner.
 ## Örnek: "Ölümsüzlüğünü kaybettin..."
-func show_loss(text: String) -> void:
+func fade_to_black(text: String) -> void:
 	label.text = text
-	visible = true
+	modulate.a = 0.0
 	var tween := create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, fade_in)
 	tween.tween_interval(hold)
+	await tween.finished
+
+## Karanlığı açar; arkadaki yeni bölüm ortaya çıkar.
+func reveal() -> void:
+	var tween := create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, fade_out)
-	tween.tween_callback(func() -> void: finished.emit())
+	await tween.finished
