@@ -2,8 +2,9 @@ extends Boss
 ## Fırtına Habercisi (Bölüm 2 bossu): mesafesini korur ve oyuncuya 3'lü mermi yelpazesi atar.
 
 @export var bolt_scene: PackedScene
-@export var fire_cooldown: float = 2.0
-@export var bolt_damage: float = 12.0
+@export var fire_cooldown: float = 2.6
+## Yelpazedeki her mermi ayrı vurduğu için tek atışın toplamı bunun 3 katı.
+@export var bolt_damage: float = 7.0
 ## Oyuncuyla korumaya çalıştığı mesafe.
 @export var preferred_distance: float = 1700.0
 

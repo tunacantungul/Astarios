@@ -208,6 +208,9 @@ var victory: bool = false
 var player_level: int = 1
 var xp: int = 0
 var upgrades: Dictionary = {}
+## Bölümün seviye atlama maliyeti çarpanı. 1'in altında olması o bölümde
+## daha sık seviye atlanması demek; zor bölümleri yumuşatmak için kullanılır.
+var xp_requirement_mult: float = 1.0
 
 func _ready() -> void:
 	_reset_powers()
@@ -224,9 +227,10 @@ func lose_power(power: int) -> void:
 
 ## Her bölüm başında bölüm sahnesi tarafından çağrılır.
 ## Bedel teması gereği XP, seviye ve alınan kartlar da her bölümde sıfırlanır.
-func setup_level(quota: int) -> void:
+func setup_level(quota: int, xp_mult: float = 1.0) -> void:
 	kills = 0
 	kill_quota = quota
+	xp_requirement_mult = xp_mult
 	player_level = 1
 	xp = 0
 	upgrades = {}
@@ -248,7 +252,7 @@ func gain_xp(amount: int) -> void:
 
 ## Bir sonraki seviye için gereken XP.
 func xp_required() -> int:
-	return player_level * XP_STEP
+	return maxi(int(round(player_level * XP_STEP * xp_requirement_mult)), 1)
 
 func _gain_xp(amount: int) -> void:
 	xp += amount

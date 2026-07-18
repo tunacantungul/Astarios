@@ -32,7 +32,7 @@ script = ExtResource("1")
 bolt_scene = ExtResource("3")
 move_speed = 460.0
 max_health = 350.0
-contact_damage = 15.0
+contact_damage = 9.0
 damage_interval = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
