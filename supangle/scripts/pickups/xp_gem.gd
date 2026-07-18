@@ -35,6 +35,9 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if _player == null or not is_instance_valid(_player) or _player.health <= 0.0:
 		return
+	# Havadayken yerdekiler toplanmaz; taş ne çekilir ne alınır.
+	if _player.is_flying:
+		return
 	var dist := global_position.distance_to(_player.global_position)
 	if dist <= collect_radius:
 		GameState.gain_xp(xp_value)

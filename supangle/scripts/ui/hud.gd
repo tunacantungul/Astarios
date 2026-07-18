@@ -22,6 +22,10 @@ const UPGRADE_ENTRY_SCENE := preload("res://scenes/ui/upgrade_entry.tscn")
 @onready var power_immortality: Label = %PowerImmortality
 @onready var power_flight: Label = %PowerFlight
 @onready var power_attack: Label = %PowerAttack
+@onready var flight_box: VBoxContainer = %FlightBox
+@onready var flight_label: Label = %FlightLabel
+@onready var flight_bar: ProgressBar = %FlightBar
+@onready var control_fly: Label = %ControlFly
 
 func _ready() -> void:
 	GameState.powers_changed.connect(_refresh_powers)
@@ -35,6 +39,8 @@ func _ready() -> void:
 	var player := get_tree().get_first_node_in_group("player") as Player
 	if player != null:
 		player.health_changed.connect(_on_health_changed)
+		player.flight_changed.connect(_on_flight_changed)
+		player.flight_cooldown_changed.connect(_on_flight_cooldown_changed)
 		_on_health_changed(player.health, player.max_health)
 	_refresh_powers()
 
@@ -73,11 +79,32 @@ func point_to(target: Node2D, color: Color) -> void:
 func clear_arrow() -> void:
 	objective_arrow.clear_target()
 
+## --- Uçuş göstergesi ---
+
+## Havadayken sayaç yerine "HAVADASIN" yazar; bar bu sırada doluluğunu korur.
+func _on_flight_changed(flying: bool) -> void:
+	if flying:
+		flight_label.text = "UÇUŞ  ·  HAVADASIN"
+		flight_bar.value = 1.0
+
+func _on_flight_cooldown_changed(remaining: float, total: float) -> void:
+	if remaining <= 0.0:
+		flight_label.text = "UÇUŞ  ·  HAZIR"
+		flight_bar.value = 1.0
+		return
+	flight_label.text = "UÇUŞ  ·  %.1f sn" % remaining
+	# Bar dolarak hazır olmaya ne kadar kaldığını gösteriyor.
+	flight_bar.value = 1.0 - remaining / maxf(total, 0.001)
+
 func _refresh_powers() -> void:
 	var immortal := GameState.has_power(GameState.Power.IMMORTALITY)
 	immortal_label.visible = immortal
 	if fill_style_normal != null and fill_style_immortal != null:
 		health_bar.add_theme_stylebox_override("fill", fill_style_immortal if immortal else fill_style_normal)
 	power_immortality.modulate = COLOR_ACTIVE if immortal else COLOR_LOST
-	power_flight.modulate = COLOR_ACTIVE if GameState.has_power(GameState.Power.FLIGHT) else COLOR_LOST
+	var can_fly := GameState.has_power(GameState.Power.FLIGHT)
+	power_flight.modulate = COLOR_ACTIVE if can_fly else COLOR_LOST
 	power_attack.modulate = COLOR_ACTIVE if GameState.has_power(GameState.Power.ATTACK) else COLOR_LOST
+	# Uçuş gücü gidince ne sayaç ne de tuş ipucu bir işe yarar.
+	flight_box.visible = can_fly
+	control_fly.visible = can_fly

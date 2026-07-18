@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://c2f6fs8xlrc2b" path="res://assets/player/run backward/4.png" id="22"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/styx_aura.tscn" id="23"]
 [ext_resource type="Script" uid="uid://bhqxaj5v3hyvc" path="res://scripts/effects/spinning_ring.gd" id="24"]
+[ext_resource type="Script" path="res://scripts/effects/landing_shadow.gd" id="25"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
@@ -117,6 +118,11 @@ texture = ExtResource("5")
 script = ExtResource("24")
 degrees_per_second = 22.0
 
+[node name="LandingShadow" type="Node2D" parent="."]
+position = Vector2(0, 110)
+z_index = -1
+script = ExtResource("25")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=859965465]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_player")
@@ -131,16 +137,16 @@ zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 
-[node name="StabSword" parent="." unique_id=45308521 instance=ExtResource("6")]
+[node name="StabSword" parent="." unique_id=45308521 instance=ExtResource("6") groups=["player_weapons"]]
 
-[node name="OrbitingSwords" parent="." unique_id=920059564 instance=ExtResource("2")]
+[node name="OrbitingSwords" parent="." unique_id=920059564 instance=ExtResource("2") groups=["player_weapons"]]
 
-[node name="BoltShooter" parent="." unique_id=1300392958 instance=ExtResource("3")]
+[node name="BoltShooter" parent="." unique_id=1300392958 instance=ExtResource("3") groups=["player_weapons"]]
 
-[node name="FreezeNova" parent="." unique_id=423019041 instance=ExtResource("8")]
+[node name="FreezeNova" parent="." unique_id=423019041 instance=ExtResource("8") groups=["player_weapons"]]
 
-[node name="DiscusThrower" parent="." unique_id=219721428 instance=ExtResource("9")]
+[node name="DiscusThrower" parent="." unique_id=219721428 instance=ExtResource("9") groups=["player_weapons"]]
 
-[node name="ArrowShooter" parent="." unique_id=336114443 instance=ExtResource("14")]
+[node name="ArrowShooter" parent="." unique_id=336114443 instance=ExtResource("14") groups=["player_weapons"]]
 
-[node name="StyxAura" parent="." unique_id=1440690763 instance=ExtResource("23")]
+[node name="StyxAura" parent="." unique_id=1440690763 instance=ExtResource("23") groups=["player_weapons"]]

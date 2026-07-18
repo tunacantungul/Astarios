@@ -13,6 +13,9 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if _player == null or not is_instance_valid(_player) or _player.health <= 0.0:
 		return
+	# Havadayken yerdekiler toplanmaz.
+	if _player.is_flying:
+		return
 	if global_position.distance_to(_player.global_position) <= collect_radius:
 		_player.heal(heal_amount)
 		queue_free()
