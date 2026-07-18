@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="Script" path="res://scripts/levels/level.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/boss_2.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://scenes/effects/lightning_spawner.tscn" id="13"]
 [ext_resource type="PackedScene" path="res://scenes/ui/upgrade_menu.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="15"]
 
 [sub_resource type="RectangleShape2D" id="Shape_wall_h"]
 size = Vector2(14760, 180)
@@ -98,3 +99,5 @@ spawn_area = Rect2(-7000, -4300, 14000, 8600)
 [node name="DialogueBox" parent="UI" instance=ExtResource("7")]
 
 [node name="UpgradeMenu" parent="UI" instance=ExtResource("14")]
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("15")]

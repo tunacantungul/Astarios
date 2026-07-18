@@ -6,7 +6,8 @@ extends Node2D
 
 ## Temel düşmanı (30 can) tek vuruşta düşürecek şekilde ayarlı.
 @export var damage: float = 35.0
-@export var cooldown: float = 2.0
+## Tek hedefe vurduğu için kısa tutuldu; kalabalık bölümlerde yetişebilsin.
+@export var cooldown: float = 1.0
 ## Saplamanın tetiklenmesi için düşmanın bu menzilde olması gerekir.
 @export var trigger_range: float = 1080.0
 ## Kılıcın oyuncudan başlangıç uzaklığı ve ileri uzanma mesafesi.
