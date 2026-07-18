@@ -27,7 +27,7 @@ size = Vector2(180, 9360)
 script = ExtResource("1")
 kill_quota = 80
 god_name = "Athena"
-dialogue_lines = Array[String](["Athena: Ölümsüzlüğünü ve kanatlarını bir ölümlü için feda ettin,", "Athena: … ne kadar da [b]TATLI![/b]", "Spanguleus: Alınacak başka bir şeyim kalmadı Athena,", "Spanguleus: … ne alacaksan al!", "Spanguleus: Benim hiçbirine ihtiyacım [b]yok![/b]", "Athena: Sen öyle san!"])
+dialogue_lines = Array[String](["Athena: Ölümsüzlüğünü ve kanatlarını bir ölümlü için feda ettin,", "Athena: … ne kadar da [shake rate=22 level=14]TATLI![/shake]", "Astarios: Alınacak başka bir şeyim kalmadı Athena,", "Astarios: … ne alacaksan al!", "Astarios: Benim hiçbirine ihtiyacım [shake rate=22 level=14]yok![/shake]", "Athena: Sen öyle san!"])
 power_to_lose = 2
 boss_scene = ExtResource("13")
 
