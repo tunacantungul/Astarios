@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://do20w7v3enxlt" path="res://assets/player/run forward/3.PNG" id="12"]
 [ext_resource type="Texture2D" uid="uid://bxm4o73mwrwa5" path="res://assets/player/run forward/4.PNG" id="13"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/arrow_shooter.tscn" id="14"]
+[ext_resource type="Texture2D" uid="uid://b02yo5bsdi2uc" path="res://assets/player/run horizontal axis/1.PNG" id="15"]
+[ext_resource type="Texture2D" uid="uid://bp8kkej7qxv5u" path="res://assets/player/run horizontal axis/2.PNG" id="16"]
+[ext_resource type="Texture2D" uid="uid://h8gtx0xwn3ff" path="res://assets/player/run horizontal axis/3.PNG" id="17"]
+[ext_resource type="Texture2D" uid="uid://cyo5m6222b15n" path="res://assets/player/run horizontal axis/4.PNG" id="18"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
@@ -60,16 +64,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10")
+"texture": ExtResource("15")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11")
+"texture": ExtResource("16")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12")
+"texture": ExtResource("17")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13")
+"texture": ExtResource("18")
 }],
 "loop": 1,
 "name": &"run_left",
@@ -77,16 +81,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10")
+"texture": ExtResource("15")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11")
+"texture": ExtResource("16")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12")
+"texture": ExtResource("17")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13")
+"texture": ExtResource("18")
 }],
 "loop": 1,
 "name": &"run_right",

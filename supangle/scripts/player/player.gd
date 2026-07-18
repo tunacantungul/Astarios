@@ -44,16 +44,21 @@ func _physics_process(delta: float) -> void:
 		_invuln_left -= delta
 
 ## Yön animasyonu: baskın eksene göre seçilir.
-## Şimdilik yalnızca "run_forward" (aşağı yürüyüş) gerçek çizim; run_back /
-## run_left / run_right aynı kareleri kullanıyor — artist kareleri çizince
-## player.tscn'deki SpriteFrames içinde sadece o animasyonların kareleri değişecek.
+## Yatay kareler sola yürüyüş olarak çizildi; sağa giderken aynı kareler
+## flip_h ile aynalanıyor. run_back hâlâ run_forward'ın kareleriyle çalışıyor —
+## artist o kareleri çizince player.tscn'deki SpriteFrames güncellenecek.
 func _update_animation(input_dir: Vector2) -> void:
 	if input_dir == Vector2.ZERO:
+		# idle karesi öne bakan çizim, aynalanmış hâli tutarsız duruyor.
+		sprite.flip_h = false
 		sprite.play("idle")
 		return
 	if absf(input_dir.x) > absf(input_dir.y):
-		sprite.play("run_right" if input_dir.x > 0.0 else "run_left")
+		var going_right := input_dir.x > 0.0
+		sprite.flip_h = going_right
+		sprite.play("run_right" if going_right else "run_left")
 	else:
+		sprite.flip_h = false
 		sprite.play("run_forward" if input_dir.y > 0.0 else "run_back")
 
 ## "vitality" kartı: seviye başına +25 azami can ve aynı miktarda iyileşme.
