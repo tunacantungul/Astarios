@@ -6,7 +6,8 @@ extends Area2D
 var direction := Vector2.RIGHT
 var damage := 25.0
 
-@export var speed: float = 4000.0
+## Okun gidişi gözle takip edilebilsin diye bilinçli olarak yavaş.
+@export var speed: float = 2300.0
 
 ## Aynı okun aynı düşmana bir kez vurması için.
 var _hit: Dictionary = {}
