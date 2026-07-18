@@ -11,12 +11,15 @@ extends Node2D
 ## "magnet" kartı kademelerine göre çekim menzili çarpanı (0 = kart yok).
 const MAGNET_MULT := [1.0, 1.1, 2.0]
 
-## Bu değerin altındaki taşlar mavi kalır, üstündekiler mor parlar; zor
-## canavarların bıraktığı taş yerden fark edilsin diye.
-const RARE_XP_THRESHOLD := 3
-## Taş görseli mavi çizildi; modulate çarpma yaptığı için moru bu katsayılarla
-## elde ediyoruz.
-const RARE_MODULATE := Color(2.1, 0.5, 1.15)
+## Taşın rengi XP değerinden geliyor ve düşürdüğü canavarın rengiyle eşleşiyor:
+## temel canavar mavi, turuncu hızlı canavar turuncu, mor tank mor taş bırakır.
+## Böylece yerdeki taşın ne kadar değerli olduğu uzaktan okunuyor.
+## Taş görseli mavi çizildi; modulate çarpma yaptığı için renkleri bu
+## katsayılarla elde ediyoruz. Liste büyük değerden küçüğe taranır.
+const GEM_TIERS: Array = [
+	{"min_xp": 5, "modulate": Color(2.1, 0.5, 1.15)},
+	{"min_xp": 2, "modulate": Color(3.0, 0.85, 0.2)},
+]
 
 var _player: Player
 
@@ -24,8 +27,10 @@ var _player: Player
 
 func _ready() -> void:
 	_player = get_tree().get_first_node_in_group("player") as Player
-	if xp_value >= RARE_XP_THRESHOLD:
-		sprite.modulate = RARE_MODULATE
+	for tier: Dictionary in GEM_TIERS:
+		if xp_value >= tier["min_xp"]:
+			sprite.modulate = tier["modulate"]
+			break
 
 func _physics_process(delta: float) -> void:
 	if _player == null or not is_instance_valid(_player) or _player.health <= 0.0:
