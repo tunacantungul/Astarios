@@ -74,7 +74,15 @@ advance={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+; Oyuncu ve canavarlar _physics_process icinde (60 Hz) hareket ediyor, ekran ise
+; monitorun tazeleme hizinda ciziliyor. 60 Hz'in uzerindeki ekranlarda bir fizik
+; adimina birden fazla cizim karesi dustugu icin karakter bazi karelerde hic
+; kimildamayip sonra sicriyordu. Enterpolasyon ara kareleri doldurur.
+common/physics_interpolation=true
 
 [rendering]
 
-rendering_device/driver.windows="d3d12"
+; d3d12 arka ucu Windows'ta Vulkan'a kiyasla daha oynak frame pacing veriyor ve
+; pipeline'lari tembel derledigi icin ilk karsilasmada takiliyor. Mac bu satiri
+; hic okumadigi icin sorun yalnizca Windows'ta goruluyordu.
+rendering_device/driver.windows="vulkan"
