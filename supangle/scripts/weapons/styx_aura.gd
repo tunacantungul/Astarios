@@ -9,8 +9,8 @@ extends Node2D
 @export var tick_interval: float = 0.5
 @export var tick_damage: float = 9.0
 @export var strong_tick_damage: float = 15.0
-@export var radius: float = 620.0
-@export var big_radius: float = 860.0
+@export var radius: float = 420.0
+@export var big_radius: float = 560.0
 ## Halkanın nefes alır gibi büyüyüp küçülme oranı ve hızı.
 @export var pulse_amount: float = 0.04
 @export var pulse_speed: float = 2.2
