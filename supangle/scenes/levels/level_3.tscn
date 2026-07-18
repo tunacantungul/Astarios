@@ -96,6 +96,7 @@ position = Vector2(6500, 0)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3")]
 enemy_scenes = Array[PackedScene]([ExtResource("9"), ExtResource("10"), ExtResource("11")])
+spawn_weights = Array[float]([4.0, 2.0, 1.0])
 spawn_interval = 1.05
 spawn_area = Rect2(-7000, -4300, 14000, 8600)
 

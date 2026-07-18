@@ -11,10 +11,21 @@ extends Node2D
 ## "magnet" kartı kademelerine göre çekim menzili çarpanı (0 = kart yok).
 const MAGNET_MULT := [1.0, 1.1, 2.0]
 
+## Bu değerin altındaki taşlar mavi kalır, üstündekiler mor parlar; zor
+## canavarların bıraktığı taş yerden fark edilsin diye.
+const RARE_XP_THRESHOLD := 3
+## Taş görseli mavi çizildi; modulate çarpma yaptığı için moru bu katsayılarla
+## elde ediyoruz.
+const RARE_MODULATE := Color(2.1, 0.5, 1.15)
+
 var _player: Player
+
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
 	_player = get_tree().get_first_node_in_group("player") as Player
+	if xp_value >= RARE_XP_THRESHOLD:
+		sprite.modulate = RARE_MODULATE
 
 func _physics_process(delta: float) -> void:
 	if _player == null or not is_instance_valid(_player) or _player.health <= 0.0:
