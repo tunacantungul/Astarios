@@ -45,7 +45,10 @@ işaretliyor:
    yerleri boya. Kenarlar otomatik oturur.
 4. Süs için `Grass_2` karelerini üst katmana elle serpiştir.
 
-`Cimen` katmanının `z_index`'i 1; kum katmanının üstünde çizilsin diye.
+Katmanların `z_index`'i **0 kalmalı**. Çizim sırası ağaç sırasından geliyor:
+`Kum` → `Cimen` → oyuncu/canavarlar. `Cimen`'e `z_index = 1` verilirse ağaç
+sırasını ezer ve çimen oyuncunun, canavarların, toplanabilirlerin de üstüne
+çıkar (bir kez bu hataya düşüldü).
 
 ## Bilinen sınır
 
@@ -68,7 +71,7 @@ Harita elle değil, üretilerek dolduruldu:
 
 - **Kum**: 114×72 = 8208 hücre, tüm oynanabilir alanı kaplıyor. Her hücreye
   9 kum varyantından rastgele biri konuldu ve üstüne rastgele bir döndürme
-  uygulandı (8 yönün hepsi) — 72 farklı görünüm, zemin hiç tekrar etmiyor.
+  uygulandı (8 yönün hepsi): 72 farklı görünüm.
 - **Çimen**: 2567 hücre (%31 kaplama). Üst üste binen dairelerden organik
   yamalar üretildi, iki yumuşatma geçişiyle kenarları düzeltildi, sonra
   3×3 kuralına göre kenar kareleri atandı.
@@ -87,3 +90,23 @@ deseniyle karışmasın diye.
 Haritayı yeniden üretmek gerekirse mantık basit: her hücre için 12 bayt
 (`int16 x, y, kaynak, atlas_x, atlas_y, alternatif`), başa `uint16 0`
 başlığı, tümü base64 olarak `tile_map_data` içine yazılıyor.
+
+
+## Kum dokusunun dikişsizleştirilmesi
+
+`Kum.png`'nin ilk hâlinde lekeler her karenin ortasında kümelenmişti: kenar
+şeridinde %2, iç bölgede %29 doluluk. Kareler yan yana gelince o seyrek
+şeritler birleşip açık renkli bir ızgara oluşturuyordu ve rastgele döndürme
+bunu çözemiyordu, çünkü boşluk dört kenarda birden vardı.
+
+Arka planın kendisi zaten düz krem olduğu için (kenar 207.7, iç 202.4
+parlaklık) dokuyu yeniden çizmeye gerek kalmadı; yalnızca lekeleri yeniden
+dağıtmak yetti. Kaynak karenin yoğun bölgesinden küçük pencereler alınıp
+çıktı karesine rastgele, `mod 128` sararak yapıştırıldı:
+
+- fırça izleri olduğu gibi korundu, bulanıklaştırma yok,
+- yoğunluk her yerde eşit oldu, ızgara kayboldu,
+- sarma sayesinde kare hem kendine hem komşusuna dikişsiz oturuyor.
+
+Sonuç: kenar/iç farkı **+27.34 puandan −1.43'e** indi, yani sistematik fark
+kalmadı. Orijinal dosya `Kum_orijinal.png` olarak duruyor.
