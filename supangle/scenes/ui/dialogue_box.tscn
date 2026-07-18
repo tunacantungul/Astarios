@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/dialogue_box.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c535i22q6xliq" path="res://assets/Astarios Dialogue.png" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="Style_panel"]
 bg_color = Color(0.06, 0.05, 0.11, 0.94)
@@ -60,3 +61,15 @@ modulate = Color(1, 1, 1, 0.55)
 theme_override_font_sizes/font_size = 16
 horizontal_alignment = 2
 text = "İlerle: SPACE / E"
+
+[node name="Portrait" type="TextureRect" parent="."]
+unique_name_in_owner = true
+top_level = true
+visible = false
+custom_minimum_size = Vector2(260, 260)
+offset_right = 260.0
+offset_bottom = 260.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5

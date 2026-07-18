@@ -17,6 +17,15 @@ const SPEAKER_MAX_LENGTH := 24
 
 ## Saniyede kaç harf yazılacağı.
 @export var chars_per_second: float = 45.0
+## Portrenin kutuya göre konumu: x panelin sol kenarından kayma,
+## y ise portrenin altının panelin üst kenarına ne kadar bineceği.
+@export var portrait_offset := Vector2(-12.0, 28.0)
+
+## Konuşmacı adına göre diyalog portresi. Yeni portre eklemek için buraya
+## bir satır eklemek yeterli; adı olmayan konuşmacıda portre gizlenir.
+var _portraits := {
+	"Astarios": preload("res://assets/Astarios Dialogue.png"),
+}
 
 var _lines: Array[String] = []
 var _index: int = 0
@@ -26,9 +35,13 @@ var _revealed: float = 0.0
 
 @onready var name_label: Label = %NameLabel
 @onready var text_label: RichTextLabel = %TextLabel
+@onready var portrait: TextureRect = %Portrait
 
 func _ready() -> void:
 	set_process(false)
+	# Portre top_level olduğu için kapsayıcı onu yerleştirmez; kutu her
+	# yeniden boyutlandığında konumunu kendimiz tazeliyoruz.
+	resized.connect(_update_portrait_position)
 
 func start(speaker: String, lines: Array[String]) -> void:
 	if lines.is_empty():
@@ -40,6 +53,8 @@ func start(speaker: String, lines: Array[String]) -> void:
 	visible = true
 	set_process(true)
 	_show_line()
+	# İlk karede kutunun yerleşimi henüz kesinleşmemiş olabiliyor.
+	_update_portrait_position.call_deferred()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
@@ -74,10 +89,29 @@ func _show_line() -> void:
 	if colon > 0 and colon <= SPEAKER_MAX_LENGTH:
 		name_label.text = line.substr(0, colon).strip_edges()
 		line = line.substr(colon + 1).strip_edges()
+	_update_portrait(name_label.text)
 	text_label.text = line
 	text_label.visible_characters = 0
 	_revealed = 0.0
 	_typing = true
+
+## Konuşan kişinin portresi varsa gösterir, yoksa gizler.
+func _update_portrait(speaker: String) -> void:
+	var texture: Texture2D = _portraits.get(speaker)
+	portrait.visible = texture != null
+	if texture == null:
+		return
+	portrait.texture = texture
+	_update_portrait_position()
+
+## Portre kutunun sol üst köşesinden yukarı taşacak şekilde konumlanır.
+func _update_portrait_position() -> void:
+	if not portrait.visible:
+		return
+	portrait.global_position = global_position + Vector2(
+		portrait_offset.x,
+		portrait_offset.y - portrait.size.y
+	)
 
 func _complete_line() -> void:
 	_typing = false
@@ -86,5 +120,6 @@ func _complete_line() -> void:
 func _close() -> void:
 	_typing = false
 	visible = false
+	portrait.visible = false
 	set_process(false)
 	finished.emit()
