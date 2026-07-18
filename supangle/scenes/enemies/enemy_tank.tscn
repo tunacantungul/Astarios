@@ -18,6 +18,8 @@ move_speed = 70.0
 max_health = 90.0
 contact_damage = 18.0
 damage_interval = 1.0
+xp_value = 3
+health_drop_chance = 0.15
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2")
