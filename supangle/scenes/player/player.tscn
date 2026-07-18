@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cbrudmgdyk5y" path="res://assets/player/run backward/3.png" id="21"]
 [ext_resource type="Texture2D" uid="uid://c2f6fs8xlrc2b" path="res://assets/player/run backward/4.png" id="22"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/styx_aura.tscn" id="23"]
-[ext_resource type="Script" path="res://scripts/effects/spinning_ring.gd" id="24"]
+[ext_resource type="Script" uid="uid://bhqxaj5v3hyvc" path="res://scripts/effects/spinning_ring.gd" id="24"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_player"]
 animations = [{
