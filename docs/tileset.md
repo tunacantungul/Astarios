@@ -67,10 +67,18 @@ yönde devam eden) ve yatay/dikey koridor kareleri.
 Harita elle değil, üretilerek dolduruldu:
 
 - **Kum**: 114×72 = 8208 hücre, tüm oynanabilir alanı kaplıyor. Her hücreye
-  9 kum varyantından rastgele biri konuldu, yani zemin tekrar etmiyor.
+  9 kum varyantından rastgele biri konuldu ve üstüne rastgele bir döndürme
+  uygulandı (8 yönün hepsi) — 72 farklı görünüm, zemin hiç tekrar etmiyor.
 - **Çimen**: 2567 hücre (%31 kaplama). Üst üste binen dairelerden organik
   yamalar üretildi, iki yumuşatma geçişiyle kenarları düzeltildi, sonra
   3×3 kuralına göre kenar kareleri atandı.
+
+Çimenin **iç karesi** (1,1) tek bir çizim olduğu için üst üste geldiğinde
+gözle görülür bir ızgara oluşturuyordu. İç karelerin %75'ine rastgele
+yatay/dikey aynalama uygulandı; kenar karelerine dokunulmadı, çünkü onların
+şekli komşuya göre anlamlı. Döndürme, hücrenin "alternatif" alanına Godot'nun
+dönüşüm bayraklarıyla yazılıyor (`FLIP_H = 0x1000`, `FLIP_V = 0x2000`,
+`TRANSPOSE = 0x4000`).
 
 Çimen bilerek şu noktalardan uzak tutuldu: oyuncu başlangıcı, iki bulut
 boşluğu, boss arenası ve çıkış kapısı — tehlike ve hedef alanları zemin
