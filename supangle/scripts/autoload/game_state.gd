@@ -12,8 +12,15 @@ signal player_level_changed(level: int)
 signal leveled_up
 signal upgrades_changed
 
-## Güçler kayıp sırasına göre: önce ölümsüzlük, sonra uçuş, en son atak.
+## Güçler kayıp sırasına göre: önce ölümsüzlük, sonra uçuş, en son tanrısal güç.
 enum Power { IMMORTALITY, FLIGHT, ATTACK }
+
+## Bölüm sonunda siyah ekranda yazılacak kayıp metni.
+const POWER_LOSS_TEXT: Dictionary = {
+	Power.IMMORTALITY: "Ölümsüzlüğünü kaybettin...",
+	Power.FLIGHT: "Kanatlarını kaybettin...",
+	Power.ATTACK: "Tanrısal gücünü kaybettin...",
+}
 
 ## Her seviye bir öncekinden bu kadar fazla XP ister (1->2: 10, 2->3: 20...).
 const XP_STEP := 10
@@ -218,6 +225,9 @@ func _ready() -> void:
 
 func has_power(power: Power) -> bool:
 	return powers.get(power, false)
+
+func power_loss_text(power: int) -> String:
+	return POWER_LOSS_TEXT.get(power, "")
 
 func lose_power(power: int) -> void:
 	powers[power] = false

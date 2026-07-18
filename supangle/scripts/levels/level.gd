@@ -3,6 +3,8 @@ extends Node2D
 ## kota dolunca boss arenası aktifleşir -> arenaya girince boss doğar ->
 ## boss ölünce kapı belirir -> kapıya girince tanrı diyaloğu -> güç kaybı -> sonraki bölüm.
 
+const POWER_LOSS_SCENE := preload("res://scenes/ui/power_loss_screen.tscn")
+
 ## Hedef okunun renkleri: arena kızıl, açılan kapı yeşil.
 const ARENA_ARROW_COLOR := Color(1.0, 0.36, 0.24)
 const GATE_ARROW_COLOR := Color(0.42, 1.0, 0.55)
@@ -150,6 +152,11 @@ func _on_gate_entered() -> void:
 	get_tree().paused = true
 	dialogue_box.start(god_name, dialogue_lines)
 
+## Diyalog biter bitmez güç kaybedilir, sonra siyah ekranda ne kaybedildiği
+## yazılır; ekran kararınca sıradaki bölüme geçilir.
 func _on_dialogue_finished() -> void:
 	GameState.lose_power(power_to_lose)
-	GameState.advance_level()
+	var screen: Control = POWER_LOSS_SCENE.instantiate()
+	$UI.add_child(screen)
+	screen.finished.connect(GameState.advance_level)
+	screen.show_loss(GameState.power_loss_text(power_to_lose))
