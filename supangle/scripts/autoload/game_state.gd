@@ -195,6 +195,7 @@ const LEVEL_SCENES: Array[String] = [
 	"res://scenes/levels/level_2.tscn",
 	"res://scenes/levels/level_3.tscn",
 ]
+const PROLOGUE_SCENE := "res://scenes/levels/prologue.tscn"
 const MAIN_MENU_SCENE := "res://scenes/ui/main_menu.tscn"
 const END_MENU_SCENE := "res://scenes/ui/end_menu.tscn"
 const EPILOGUE_SCENE := "res://scenes/levels/epilogue.tscn"
@@ -342,10 +343,15 @@ func apply_upgrade(id: String) -> void:
 	upgrades[id] = upgrade_tier(id) + 1
 	upgrades_changed.emit()
 
+## Yeni oyun prologla başlar; ilk bölüm prolog bitince açılır.
 func start_new_game() -> void:
 	_reset_powers()
 	current_level = 0
 	victory = false
+	_change_scene(PROLOGUE_SCENE)
+
+## Prolog diyaloğu bitince çağrılır.
+func start_first_level() -> void:
 	_change_scene(LEVEL_SCENES[0])
 
 ## Ölünce mevcut bölümü, o ana kadar kaybedilmiş güçlerle yeniden başlatır.
