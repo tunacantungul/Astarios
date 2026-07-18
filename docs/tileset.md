@@ -58,3 +58,24 @@ genellikle kabul edilebilir görünüyor ama kusursuz değil.
 Kusursuz geçiş istenirse `Grass.png` 16 kareye (4×4) çıkarılmalı:
 mevcut 9 kareye ek olarak tek başına duran kare, uç kareler (yalnızca bir
 yönde devam eden) ve yatay/dikey koridor kareleri.
+
+## Bölüm 1 haritası
+
+`level_1.tscn` bu tileset'e taşındı: eski tek `Ground` katmanı yerine `Kum`
+(alt) ve `Cimen` (üst, `z_index = 1`) var.
+
+Harita elle değil, üretilerek dolduruldu:
+
+- **Kum**: 114×72 = 8208 hücre, tüm oynanabilir alanı kaplıyor. Her hücreye
+  9 kum varyantından rastgele biri konuldu, yani zemin tekrar etmiyor.
+- **Çimen**: 2567 hücre (%31 kaplama). Üst üste binen dairelerden organik
+  yamalar üretildi, iki yumuşatma geçişiyle kenarları düzeltildi, sonra
+  3×3 kuralına göre kenar kareleri atandı.
+
+Çimen bilerek şu noktalardan uzak tutuldu: oyuncu başlangıcı, iki bulut
+boşluğu, boss arenası ve çıkış kapısı — tehlike ve hedef alanları zemin
+deseniyle karışmasın diye.
+
+Haritayı yeniden üretmek gerekirse mantık basit: her hücre için 12 bayt
+(`int16 x, y, kaynak, atlas_x, atlas_y, alternatif`), başa `uint16 0`
+başlığı, tümü base64 olarak `tile_map_data` içine yazılıyor.
