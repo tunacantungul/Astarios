@@ -1,6 +1,7 @@
 extends Control
-## Oyun içi HUD: can barı, canavar sayacı ve güç durumu.
+## Oyun içi HUD: can barı, hedef metni + yön oku ve güç durumu.
 ## Ölümsüzlük varken can barı altın "korumalı" görünüme geçer.
+## Canavar sayacı bilinçli olarak gösterilmez; kota arka planda sayılır.
 
 const COLOR_ACTIVE := Color(1.0, 1.0, 1.0, 1.0)
 const COLOR_LOST := Color(1.0, 1.0, 1.0, 0.2)

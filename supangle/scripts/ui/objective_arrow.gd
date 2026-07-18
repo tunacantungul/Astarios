@@ -5,8 +5,9 @@ extends Control
 ## böylece hedef ekran dışındayken de nereye gidileceği belli olur.
 
 ## Ok yukarıyı (-Y) gösterecek şekilde, merkezi orijinde çizildi.
-## arrow_size ile ölçeklenir.
-const SHAPE: PackedVector2Array = PackedVector2Array([
+## arrow_size ile ölçeklenir. PackedVector2Array sabit ifade olamadığı için
+## düz dizi tutulup çizim sırasında paketleniyor.
+const SHAPE: Array[Vector2] = [
 	Vector2(0.0, -1.0),
 	Vector2(0.72, -0.1),
 	Vector2(0.3, -0.1),
@@ -14,7 +15,7 @@ const SHAPE: PackedVector2Array = PackedVector2Array([
 	Vector2(-0.3, 0.85),
 	Vector2(-0.3, -0.1),
 	Vector2(-0.72, -0.1),
-])
+]
 
 @export var arrow_color: Color = Color(1.0, 0.85, 0.25)
 @export var outline_color: Color = Color(0.0, 0.0, 0.0, 1.0)
