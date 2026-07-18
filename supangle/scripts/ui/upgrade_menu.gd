@@ -19,6 +19,7 @@ func _ready() -> void:
 		_buttons[i].pressed.connect(_on_card_pressed.bind(i))
 
 ## Kart kimliklerini alır, başlık/açıklamaları havuzdan doldurur ve menüyü gösterir.
+## Kartların boyutu sabittir; başlık ve açıklama etiketleri kart içinde sarar.
 func open(options: Array[String]) -> void:
 	_option_ids = options
 	for i in _buttons.size():
@@ -26,8 +27,9 @@ func open(options: Array[String]) -> void:
 		_buttons[i].visible = has_option
 		if has_option:
 			var info: Dictionary = GameState.upgrade_card_info(options[i])
-			_buttons[i].text = "%s\n\n%s" % [info.title, info.desc]
-			_buttons[i].icon = GameState.upgrade_icon(options[i])
+			(_buttons[i].get_node("Content/VBox/Title") as Label).text = info.title
+			(_buttons[i].get_node("Content/VBox/Desc") as Label).text = info.desc
+			(_buttons[i].get_node("Content/VBox/IconRect") as TextureRect).texture = GameState.upgrade_icon(options[i])
 	_refresh_owned()
 	visible = true
 

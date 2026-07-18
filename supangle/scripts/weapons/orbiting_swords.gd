@@ -7,7 +7,7 @@ extends Node2D
 @export var damage: float = 15.0
 ## Aynı düşmana iki vuruş arası minimum süre.
 @export var hit_cooldown: float = 0.5
-@export var orbit_radius: float = 90.0
+@export var orbit_radius: float = 400.0
 
 var _last_hit_at: Dictionary = {}
 

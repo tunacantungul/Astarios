@@ -86,33 +86,162 @@ alignment = 1
 
 [node name="Card1" type="Button" parent="CenterContainer/VBoxContainer/Cards"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 190)
+custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("Style_card")
 theme_override_styles/hover = SubResource("Style_card_hover")
 theme_override_styles/pressed = SubResource("Style_card_hover")
 theme_override_styles/focus = SubResource("Style_card_hover")
+
+[node name="Content" type="MarginContainer" parent="CenterContainer/VBoxContainer/Cards/Card1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Cards/Card1/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/VBoxContainer/Cards/Card1/Content/VBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer/Cards/Card1/Content/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.5, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+autowrap_mode = 3
 text = "Kart 1"
+
+[node name="Desc" type="Label" parent="CenterContainer/VBoxContainer/Cards/Card1/Content/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text = "Açıklama"
 
 [node name="Card2" type="Button" parent="CenterContainer/VBoxContainer/Cards"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 190)
+custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("Style_card")
 theme_override_styles/hover = SubResource("Style_card_hover")
 theme_override_styles/pressed = SubResource("Style_card_hover")
 theme_override_styles/focus = SubResource("Style_card_hover")
+
+[node name="Content" type="MarginContainer" parent="CenterContainer/VBoxContainer/Cards/Card2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Cards/Card2/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/VBoxContainer/Cards/Card2/Content/VBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer/Cards/Card2/Content/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.5, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+autowrap_mode = 3
 text = "Kart 2"
+
+[node name="Desc" type="Label" parent="CenterContainer/VBoxContainer/Cards/Card2/Content/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text = "Açıklama"
 
 [node name="Card3" type="Button" parent="CenterContainer/VBoxContainer/Cards"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 190)
+custom_minimum_size = Vector2(340, 250)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("Style_card")
 theme_override_styles/hover = SubResource("Style_card_hover")
 theme_override_styles/pressed = SubResource("Style_card_hover")
 theme_override_styles/focus = SubResource("Style_card_hover")
+
+[node name="Content" type="MarginContainer" parent="CenterContainer/VBoxContainer/Cards/Card3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Cards/Card3/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/VBoxContainer/Cards/Card3/Content/VBox"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer/Cards/Card3/Content/VBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.5, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+autowrap_mode = 3
 text = "Kart 3"
+
+[node name="Desc" type="Label" parent="CenterContainer/VBoxContainer/Cards/Card3/Content/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text = "Açıklama"

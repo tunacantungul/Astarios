@@ -3,7 +3,7 @@ extends Boss
 
 enum Phase { COOLDOWN, TELEGRAPH, DASH }
 
-@export var dash_speed: float = 750.0
+@export var dash_speed: float = 3400.0
 @export var dash_duration: float = 0.55
 @export var dash_cooldown: float = 3.0
 @export var telegraph_duration: float = 0.4
@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _phase == Phase.DASH:
-		velocity = _dash_dir * dash_speed
+		velocity = _dash_dir * dash_speed * speed_multiplier()
 		move_and_slide()
 		_tick_contact_damage(delta)
 		return

@@ -7,9 +7,9 @@ extends Node2D
 @export var fast_interval: float = 4.0
 @export var damage: float = 20.0
 @export var strong_multiplier: float = 1.6
-@export var discus_speed: float = 550.0
-@export var strong_speed: float = 700.0
-@export var throw_range: float = 700.0
+@export var discus_speed: float = 2500.0
+@export var strong_speed: float = 3200.0
+@export var throw_range: float = 3200.0
 
 @onready var throw_timer: Timer = $ThrowTimer
 

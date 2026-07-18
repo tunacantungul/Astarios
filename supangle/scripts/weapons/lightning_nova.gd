@@ -6,8 +6,8 @@ extends Node2D
 @export var damage: float = 25.0
 @export var base_interval: float = 6.0
 @export var fast_interval: float = 4.0
-@export var radius: float = 160.0
-@export var big_radius: float = 210.0
+@export var radius: float = 720.0
+@export var big_radius: float = 950.0
 ## 3. seviyede hasar çarpanı.
 @export var strong_multiplier: float = 1.6
 

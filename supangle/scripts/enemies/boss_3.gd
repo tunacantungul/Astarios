@@ -9,7 +9,7 @@ enum SlamPhase { COOLDOWN, TELEGRAPH }
 @export var summon_cooldown: float = 6.0
 @export var slam_cooldown: float = 4.0
 @export var slam_telegraph_time: float = 0.9
-@export var slam_radius: float = 230.0
+@export var slam_radius: float = 1000.0
 @export var slam_damage: float = 25.0
 
 var _slam_phase: int = SlamPhase.COOLDOWN
@@ -32,7 +32,7 @@ func _on_summon_timer_timeout() -> void:
 	for i in summon_count:
 		var minion: Node2D = minion_scene.instantiate()
 		var angle := TAU * i / summon_count + randf() * 0.5
-		minion.position = position + Vector2.from_angle(angle) * 130.0
+		minion.position = position + Vector2.from_angle(angle) * 600.0
 		get_parent().add_child(minion)
 	summon_timer.start()
 

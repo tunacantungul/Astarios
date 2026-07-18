@@ -4,9 +4,9 @@ extends Node2D
 ## "magnet" kartı (Kehribar Tılsımı) çekim menzilini büyütür.
 
 @export var xp_value: int = 1
-@export var base_magnet_radius: float = 80.0
-@export var collect_radius: float = 30.0
-@export var fly_speed: float = 480.0
+@export var base_magnet_radius: float = 360.0
+@export var collect_radius: float = 135.0
+@export var fly_speed: float = 2200.0
 
 ## "magnet" kartı kademelerine göre çekim menzili çarpanı (0 = kart yok).
 const MAGNET_MULT := [1.0, 2.2, 4.0]

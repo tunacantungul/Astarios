@@ -19,31 +19,37 @@ Kart ikonları: `assets/icons/icon_<id>.svg`.
 
 | Hat (id) | Kademe | Kart | Etkisi | Bölüm | Değerlerin yeri |
 |---|---|---|---|---|---|
-| `stab` | temel | *Kılıç Saplaması* | Başlangıç silahı: 2 sn'de bir menzildeki (240 px) en yakın düşmana saplama, 35 hasar | 1+ | `stab_sword.gd` |
+| `stab` | temel | *Kılıç Saplaması* | Başlangıç silahı: 2 sn'de bir menzildeki (1080 px) en yakın düşmana saplama, 35 hasar | 1+ | `stab_sword.gd` |
 | `stab` | 1 | Çift Saplama | Art arda 2 saplama, sonra bekleme | 1+ | `stab_sword.gd` |
 | `stab` | 2 | Keskin Kılıç | Saplama hasarı %50 artar (52.5) | 1+ | `stab_sword.gd` |
-| `stab` | 3 | Savaş Çığlığı | Saplama menzili %50 artar (360 px) | 1+ | `stab_sword.gd` |
+| `stab` | 3 | Savaş Çığlığı | Saplama menzili %50 artar (1620 px) | 1+ | `stab_sword.gd` |
 | `orbit` | 1 | Dönen Kılıç | Etrafında dönen 1 kılıç (15 hasar, 0.5 sn vuruş aralığı) | 1+ | `orbiting_swords.gd` |
 | `orbit` | 2 | Dönen Kılıç II | 2 kılıç | 1+ | `orbiting_swords.gd` |
 | `orbit` | 3 | Dönen Kılıç III | 3 kılıç | 1+ | `orbiting_swords.gd` |
-| `bolt` | 1 | Kargı | 8 sn'de bir en yakın düşmana kargı (30 hasar) | 1+ | `bolt_shooter.gd` |
-| `bolt` | 2 | Hızlı Kargı | Bekleme 4 sn'ye iner | 1+ | `bolt_shooter.gd` |
+| `bolt` | 1 | Kargı | 4 sn'de bir en yakın düşmana kargı (30 hasar) | 1+ | `bolt_shooter.gd` |
+| `bolt` | 2 | Hızlı Kargı | Bekleme 2 sn'ye iner | 1+ | `bolt_shooter.gd` |
 | `bolt` | 3 | Güçlü Kargı | Hasar iki katına çıkar (60) | 1+ | `bolt_shooter.gd` |
 | `bolt` | 4 | İkiz Kargı | Aynı anda 2 ayrı hedefe atış | 1+ | `bolt_shooter.gd` |
 | `discus` | 1 | Olimpiyat Diski | 6 sn'de bir gidip geri dönen disk (20 hasar, her bacakta düşman başına 1 vuruş) | 1+ | `discus_thrower.gd`, `discus.gd` |
 | `discus` | 2 | Olimpiyat Diski II | Bekleme 4 sn'ye iner | 1+ | `discus_thrower.gd` |
 | `discus` | 3 | Şampiyon Diski | Hasar %60 artar (32), disk hızlanır | 1+ | `discus_thrower.gd` |
-| `freeze` | 1 | Boreas'ın Soluğu | 10 sn'de bir 220 px içindeki düşmanları 1.5 sn dondurur | 1+ | `freeze_nova.gd` |
+| `freeze` | 1 | Boreas'ın Soluğu | 10 sn'de bir 1000 px içindeki düşmanları 1.5 sn dondurur | 1+ | `freeze_nova.gd` |
 | `freeze` | 2 | Boreas'ın Soluğu II | Sıklık 7 sn, donma 2.5 sn | 1+ | `freeze_nova.gd` |
-| `freeze` | 3 | Kuzeyin Öfkesi | Donma alanı 320 px olur | 1+ | `freeze_nova.gd` |
+| `freeze` | 3 | Kuzeyin Öfkesi | Donma alanı 1450 px olur | 1+ | `freeze_nova.gd` |
 | `speed` | 1 | Rüzgar Adımı | Hareket hızı +%20 | 1+ | `player.gd` (`_physics_process`) |
 | `speed` | 2 | Rüzgar Adımı II | Hareket hızı toplam +%40 | 1+ | `player.gd` |
 | `vitality` | 1-3 | Yaşam Gücü I-III | Her biri +25 azami can ve anında iyileşme | 1+ | `player.gd` (`_on_upgrades_changed`) |
+| `kronos` | 1 | Kronos'un Kumu | Tüm düşmanlar kalıcı %12 yavaşlar (bosslar dahil) | 1+ | `enemy.gd` (`KRONOS_SLOW_PER_TIER`) |
+| `kronos` | 2 | Kronos'un Kumu II | Yavaşlama toplam %24 | 1+ | `enemy.gd` |
+| `kronos` | 3 | Zamanın Ağırlığı | Yavaşlama toplam %36 | 1+ | `enemy.gd` |
+| `artemis` | 1 | Artemis'in Oku | 6 sn'de bir hattaki tüm düşmanları delip geçen ok (25 hasar) | 1+ | `arrow_shooter.gd`, `arrow.gd` |
+| `artemis` | 2 | Artemis'in Oku II | Bekleme 4 sn'ye iner | 1+ | `arrow_shooter.gd` |
+| `artemis` | 3 | Gümüş Ok | Ok hasarı iki katına çıkar (50) | 1+ | `arrow_shooter.gd` |
 | `magnet` | 1 | Kehribar Tılsımı | XP taşı çekim menzili 2.2 katına çıkar | 1+ | `xp_gem.gd` (`MAGNET_MULT`) |
 | `magnet` | 2 | Kehribar Tılsımı II | Çekim menzili 4 katına çıkar | 1+ | `xp_gem.gd` |
-| `nova` | 1 | Yıldırım Kalkanı | 6 sn'de bir çevreye (160 px) yıldırım şoku, 25 hasar | **2+** | `lightning_nova.gd` |
+| `nova` | 1 | Yıldırım Kalkanı | 6 sn'de bir çevreye (720 px) yıldırım şoku, 25 hasar | **2+** | `lightning_nova.gd` |
 | `nova` | 2 | Fırtına Yüreği | Şok sıklığı 4 sn'ye çıkar | **2+** | `lightning_nova.gd` |
-| `nova` | 3 | Gök Gürültüsü | Hasar 40, alan 210 px | **2+** | `lightning_nova.gd` |
+| `nova` | 3 | Gök Gürültüsü | Hasar 40, alan 950 px | **2+** | `lightning_nova.gd` |
 | `armor` | 1 | Kalıntı Zırh | Alınan tüm hasar %20 azalır | **2+** | `player.gd` (`ARMOR_REDUCTION`) |
 | `armor` | 2 | Kalıntı Zırh II | Azalma toplam %35 olur | **2+** | `player.gd` |
 | `bloodprice` | 1 | Kan Bedeli | Düşman ölümünde %10 ihtimalle 5 can | **2+** | `player.gd` (`_on_enemy_killed`) |
@@ -51,11 +57,13 @@ Kart ikonları: `assets/icons/icon_<id>.svg`.
 
 Notlar:
 - Bosslar donmaya (**Boreas'ın Soluğu**) bağışıktır (`boss_base.gd` → `freeze()`).
+- **Kronos'un Kumu** donmanın aksine bossları da yavaşlatır (`enemy.gd` → `speed_multiplier()`).
+- **Artemis'in Oku** düşmanları delip geçer, duvarlarda da durmaz; her ok aynı düşmana bir kez vurur.
 - Disk, gidiş ve dönüş yolunda ayrı ayrı vurur; duvarlardan geçer.
 - Eski "Büyü Işını" hattı temaya uymadığı için **Kargı**ya çevrildi
   (id `bolt` olarak kaldı; sahne/script adları da aynı).
 
-**Havuz büyüklüğü:** Bölüm 1'de 8 hat (23 kart), Bölüm 2-3'te 11 hat (30 kart).
+**Havuz büyüklüğü:** Bölüm 1'de 10 hat (29 kart), Bölüm 2-3'te 13 hat (36 kart).
 Bölüm 2+ kartları ölümsüzlük gittikten sonra anlam kazandığı için kısıtlı
 (`min_chapter: 1`).
 
@@ -76,7 +84,7 @@ Bölüm 2+ kartları ölümsüzlük gittikten sonra anlam kazandığı için kı
 |---|---|---|
 | XP eşiği | seviye × 10 (10, 20, 30...) | `game_state.gd` → `XP_STEP` |
 | XP taşı değeri | temel/hızlı 1, tank 3 | `enemy*.tscn` → `xp_value` |
-| XP taşı çekim menzili | 80 px (kartla 2.2x / 4x) | `xp_gem.gd` |
+| XP taşı çekim menzili | 360 px (kartla 2.2x / 4x) | `xp_gem.gd` |
 | Can küresi | +15 can; %6 şans (tank %15) | `health_orb.gd`, `enemy*.tscn` |
 | Bölüm kotaları | 40 / 60 / 80 | `level_1/2/3.tscn` → `kill_quota` (Inspector) |
 | Düşman canları | temel 30, hızlı 15, tank 90 | `enemy*.tscn` (Inspector) |

@@ -8,8 +8,10 @@ const XP_GEM_SCENE := preload("res://scenes/pickups/xp_gem.tscn")
 const HEALTH_ORB_SCENE := preload("res://scenes/pickups/health_orb.tscn")
 ## Donmuş düşmanın rengi (Boreas'ın Soluğu).
 const FROZEN_MODULATE := Color(0.55, 0.75, 1.0)
+## "kronos" kartı: kademe başına kalıcı yavaşlama oranı.
+const KRONOS_SLOW_PER_TIER := 0.12
 
-@export var move_speed: float = 120.0
+@export var move_speed: float = 540.0
 @export var max_health: float = 30.0
 @export var contact_damage: float = 10.0
 ## Oyuncuyla temas hâlindeyken iki hasar arası süre.
@@ -39,9 +41,14 @@ func _physics_process(delta: float) -> void:
 	if _tick_frozen(delta):
 		return
 	var direction := (_player.global_position - global_position).normalized()
-	velocity = direction * move_speed
+	velocity = direction * move_speed * speed_multiplier()
 	move_and_slide()
 	_tick_contact_damage(delta)
+
+## "kronos" kartı (Kronos'un Kumu): tüm düşmanlar kademe başına kalıcı yavaşlar.
+## Donmanın aksine bosslar da etkilenir.
+func speed_multiplier() -> float:
+	return 1.0 - KRONOS_SLOW_PER_TIER * GameState.upgrade_tier("kronos")
 
 ## Donma sayacı: donmuşken hareket de temas hasarı da yok. true = donmuş.
 func _tick_frozen(delta: float) -> bool:
@@ -94,5 +101,5 @@ func _spawn_drops() -> void:
 	parent.add_child.call_deferred(gem)
 	if randf() < health_drop_chance:
 		var orb: Node2D = HEALTH_ORB_SCENE.instantiate()
-		orb.position = position + Vector2(randf_range(-24.0, 24.0), randf_range(-24.0, 24.0))
+		orb.position = position + Vector2(randf_range(-110.0, 110.0), randf_range(-110.0, 110.0))
 		parent.add_child.call_deferred(orb)

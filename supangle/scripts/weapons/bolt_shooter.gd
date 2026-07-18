@@ -1,13 +1,13 @@
 extends Node2D
 ## Menzildeki en yakın düşmana kargı fırlatır (eski "büyü ışını", temaya uysun
 ## diye kargıya çevrildi). Başlangıçta kapalıdır: "bolt" kartıyla açılır.
-## Kart seviyeleri: 1 = açılır (8 sn), 2 = hızlanır (4 sn), 3 = hasar iki katı.
+## Kart seviyeleri: 1 = açılır (4 sn), 2 = hızlanır (2 sn), 3 = hasar iki katı.
 
 @export var bolt_scene: PackedScene
-@export var base_interval: float = 8.0
-@export var fast_interval: float = 4.0
+@export var base_interval: float = 4.0
+@export var fast_interval: float = 2.0
 @export var bolt_damage: float = 30.0
-@export var attack_range: float = 750.0
+@export var attack_range: float = 3400.0
 
 @onready var fire_timer: Timer = $FireTimer
 

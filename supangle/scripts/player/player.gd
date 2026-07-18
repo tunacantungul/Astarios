@@ -6,7 +6,7 @@ extends CharacterBody2D
 signal health_changed(current: float, max_value: float)
 signal died
 
-@export var move_speed: float = 340.0
+@export var move_speed: float = 1500.0
 @export var max_health: float = 100.0
 ## Hasar aldıktan sonraki kısa dokunulmazlık süresi.
 @export var invulnerability_time: float = 0.4

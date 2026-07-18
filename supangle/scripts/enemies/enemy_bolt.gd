@@ -4,7 +4,7 @@ extends Area2D
 var direction := Vector2.RIGHT
 var damage := 12.0
 
-@export var speed: float = 520.0
+@export var speed: float = 2300.0
 
 func _ready() -> void:
 	rotation = direction.angle()

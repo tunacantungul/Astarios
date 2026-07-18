@@ -4,17 +4,17 @@
 [ext_resource type="Texture2D" path="res://assets/placeholder/enemy_tank.svg" id="2"]
 
 [sub_resource type="RectangleShape2D" id="Shape_body"]
-size = Vector2(52, 52)
+size = Vector2(234, 234)
 
 [sub_resource type="RectangleShape2D" id="Shape_hit"]
-size = Vector2(62, 62)
+size = Vector2(280, 280)
 
 [node name="EnemyTank" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1")
-move_speed = 70.0
+move_speed = 315.0
 max_health = 90.0
 contact_damage = 18.0
 damage_interval = 1.0
@@ -22,6 +22,7 @@ xp_value = 3
 health_drop_chance = 0.15
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4.5, 4.5)
 texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

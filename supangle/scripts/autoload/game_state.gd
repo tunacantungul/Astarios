@@ -37,8 +37,8 @@ const UPGRADE_TRACKS: Dictionary = {
 		"icon": "res://assets/icons/icon_javelin.svg",
 		"min_chapter": 0,
 		"tiers": [
-			{"title": "Kargı", "desc": "8 sn'de bir en yakın düşmana kargı fırlatır"},
-			{"title": "Hızlı Kargı", "desc": "Kargı bekleme süresi 4 sn'ye iner"},
+			{"title": "Kargı", "desc": "4 sn'de bir en yakın düşmana kargı fırlatır"},
+			{"title": "Hızlı Kargı", "desc": "Kargı bekleme süresi 2 sn'ye iner"},
 			{"title": "Güçlü Kargı", "desc": "Kargı hasarı iki katına çıkar"},
 			{"title": "İkiz Kargı", "desc": "Aynı anda 2 ayrı hedefe kargı"},
 		],
@@ -90,6 +90,26 @@ const UPGRADE_TRACKS: Dictionary = {
 			{"title": "Yaşam Gücü", "desc": "+25 azami can ve anında iyileşme"},
 			{"title": "Yaşam Gücü II", "desc": "+25 azami can ve anında iyileşme"},
 			{"title": "Yaşam Gücü III", "desc": "+25 azami can ve anında iyileşme"},
+		],
+	},
+	"kronos": {
+		"name": "Kronos'un Kumu",
+		"icon": "res://assets/icons/icon_kronos.svg",
+		"min_chapter": 0,
+		"tiers": [
+			{"title": "Kronos'un Kumu", "desc": "Tüm düşmanlar kalıcı %12 yavaşlar"},
+			{"title": "Kronos'un Kumu II", "desc": "Yavaşlama toplam %24 olur"},
+			{"title": "Zamanın Ağırlığı", "desc": "Yavaşlama toplam %36 olur"},
+		],
+	},
+	"artemis": {
+		"name": "Artemis'in Oku",
+		"icon": "res://assets/icons/icon_artemis.svg",
+		"min_chapter": 0,
+		"tiers": [
+			{"title": "Artemis'in Oku", "desc": "6 sn'de bir hattaki tüm düşmanları delen ok"},
+			{"title": "Artemis'in Oku II", "desc": "Ok bekleme süresi 4 sn'ye iner"},
+			{"title": "Gümüş Ok", "desc": "Ok hasarı iki katına çıkar"},
 		],
 	},
 	"magnet": {

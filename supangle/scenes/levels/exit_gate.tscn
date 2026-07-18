@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" path="res://assets/placeholder/exit_gate.svg" id="2"]
 
 [sub_resource type="RectangleShape2D" id="Shape_gate"]
-size = Vector2(96, 140)
+size = Vector2(432, 630)
 
 [node name="ExitGate" type="Area2D"]
 modulate = Color(1, 1, 1, 0.3)
@@ -14,6 +14,7 @@ monitoring = false
 script = ExtResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4.5, 4.5)
 texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

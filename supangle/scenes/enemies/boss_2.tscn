@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_bolt.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="Shape_body"]
-size = Vector2(74, 74)
+size = Vector2(333, 333)
 
 [sub_resource type="RectangleShape2D" id="Shape_hit"]
-size = Vector2(88, 88)
+size = Vector2(396, 396)
 
 [sub_resource type="StyleBoxFlat" id="Style_hp_bg"]
 bg_color = Color(0.08, 0.08, 0.1, 0.85)
@@ -30,12 +30,13 @@ collision_mask = 6
 motion_mode = 1
 script = ExtResource("1")
 bolt_scene = ExtResource("3")
-move_speed = 140.0
+move_speed = 630.0
 max_health = 350.0
 contact_damage = 15.0
 damage_interval = 0.8
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4.5, 4.5)
 texture = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -49,10 +50,10 @@ collision_mask = 1
 shape = SubResource("Shape_hit")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -55.0
-offset_top = -78.0
-offset_right = 55.0
-offset_bottom = -64.0
+offset_left = -250.0
+offset_top = -360.0
+offset_right = 250.0
+offset_bottom = -295.0
 theme_override_styles/background = SubResource("Style_hp_bg")
 theme_override_styles/fill = SubResource("Style_hp_fill")
 max_value = 350.0

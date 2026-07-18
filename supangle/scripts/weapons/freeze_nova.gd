@@ -7,8 +7,8 @@ extends Node2D
 @export var fast_interval: float = 7.0
 @export var freeze_duration: float = 1.5
 @export var long_freeze_duration: float = 2.5
-@export var radius: float = 220.0
-@export var big_radius: float = 320.0
+@export var radius: float = 1000.0
+@export var big_radius: float = 1450.0
 
 @onready var ring: Sprite2D = $Ring
 @onready var pulse_timer: Timer = $PulseTimer

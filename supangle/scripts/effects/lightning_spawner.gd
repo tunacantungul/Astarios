@@ -7,9 +7,9 @@ extends Node2D
 @export var max_interval: float = 4.0
 ## Yıldırımlar oyuncunun etrafında bu yarıçap içinde rastgele bir noktaya düşer
 ## (tamamen rastgele harita noktası çoğu zaman ekran dışında kalacağı için).
-@export var near_player_radius: float = 650.0
+@export var near_player_radius: float = 2900.0
 ## Düşülebilecek alan sınırı (duvarların içi).
-@export var bounds: Rect2 = Rect2(-1550, -950, 3100, 1900)
+@export var bounds: Rect2 = Rect2(-7000, -4300, 14000, 8600)
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
@@ -30,7 +30,7 @@ func _spawn_strike() -> void:
 	var player := get_tree().get_first_node_in_group("player") as Node2D
 	if player == null:
 		return
-	var offset := Vector2.from_angle(randf() * TAU) * randf_range(80.0, near_player_radius)
+	var offset := Vector2.from_angle(randf() * TAU) * randf_range(360.0, near_player_radius)
 	var pos := player.global_position + offset
 	pos.x = clampf(pos.x, bounds.position.x, bounds.end.x)
 	pos.y = clampf(pos.y, bounds.position.y, bounds.end.y)

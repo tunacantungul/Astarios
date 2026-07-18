@@ -14,10 +14,10 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/upgrade_menu.tscn" id="12"]
 
 [sub_resource type="RectangleShape2D" id="Shape_wall_h"]
-size = Vector2(3280, 40)
+size = Vector2(14760, 180)
 
 [sub_resource type="RectangleShape2D" id="Shape_wall_v"]
-size = Vector2(40, 2080)
+size = Vector2(180, 9360)
 
 [node name="Level1" type="Node2D" unique_id=708836335]
 script = ExtResource("1")
@@ -26,10 +26,10 @@ dialogue_lines = Array[String](["Zeus: Demek gidiyorsun. Bir ölümlü için tah
 boss_scene = ExtResource("11")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1731326754]
-offset_left = -1600.0
-offset_top = -1000.0
-offset_right = 1600.0
-offset_bottom = 1000.0
+offset_left = -7200.0
+offset_top = -4500.0
+offset_right = 7200.0
+offset_bottom = 4500.0
 color = Color(0.85, 0.84, 0.79, 1)
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=558254485]
@@ -40,38 +40,38 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="WallTop" type="CollisionShape2D" parent="Walls" unique_id=2140636512]
-position = Vector2(0, -1020)
+position = Vector2(0, -4590)
 shape = SubResource("Shape_wall_h")
 
 [node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1527208785]
-position = Vector2(0, 1020)
+position = Vector2(0, 4590)
 shape = SubResource("Shape_wall_h")
 
 [node name="WallLeft" type="CollisionShape2D" parent="Walls" unique_id=1793018918]
-position = Vector2(-1620, 0)
+position = Vector2(-7290, 0)
 shape = SubResource("Shape_wall_v")
 
 [node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=1781490121]
-position = Vector2(1620, 0)
+position = Vector2(7290, 0)
 shape = SubResource("Shape_wall_v")
 
 [node name="HazardZones" type="Node2D" parent="." unique_id=610983095]
 
 [node name="CloudGap1" parent="HazardZones" unique_id=380605371 instance=ExtResource("5")]
-position = Vector2(350, -420)
+position = Vector2(1600, -1900)
 
 [node name="CloudGap2" parent="HazardZones" unique_id=1842258365 instance=ExtResource("5")]
-position = Vector2(650, 380)
+position = Vector2(2900, 1700)
 scale = Vector2(1.5, 1)
 
 [node name="Player" parent="." unique_id=183612128 instance=ExtResource("2")]
-position = Vector2(-1200, 0)
+position = Vector2(-5400, 0)
 
 [node name="BossArena" parent="." unique_id=411564653 instance=ExtResource("10")]
-position = Vector2(1250, 0)
+position = Vector2(5600, 0)
 
 [node name="ExitGate" parent="." unique_id=89447053 instance=ExtResource("4")]
-position = Vector2(1450, 0)
+position = Vector2(6500, 0)
 
 [node name="EnemySpawner" parent="." unique_id=1623402220 instance=ExtResource("3")]
 enemy_scenes = Array[PackedScene]([ExtResource("9")])

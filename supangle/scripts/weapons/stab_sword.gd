@@ -8,10 +8,10 @@ extends Node2D
 @export var damage: float = 35.0
 @export var cooldown: float = 2.0
 ## Saplamanın tetiklenmesi için düşmanın bu menzilde olması gerekir.
-@export var trigger_range: float = 240.0
+@export var trigger_range: float = 1080.0
 ## Kılıcın oyuncudan başlangıç uzaklığı ve ileri uzanma mesafesi.
-@export var start_offset: float = 26.0
-@export var thrust_distance: float = 72.0
+@export var start_offset: float = 120.0
+@export var thrust_distance: float = 324.0
 ## Çift saplamada iki saplama arası bekleme.
 @export var double_stab_gap: float = 0.22
 

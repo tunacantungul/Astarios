@@ -5,12 +5,12 @@ extends Area2D
 
 var direction := Vector2.RIGHT
 var damage := 20.0
-var speed := 550.0
+var speed := 2500.0
 
-@export var out_distance: float = 420.0
+@export var out_distance: float = 1900.0
 @export var spin_speed: float = 14.0
 ## Dönüşte oyuncuya bu kadar yaklaşınca kaybolur.
-@export var catch_radius: float = 34.0
+@export var catch_radius: float = 150.0
 
 var _returning: bool = false
 var _travelled: float = 0.0

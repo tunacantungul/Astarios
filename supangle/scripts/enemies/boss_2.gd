@@ -5,7 +5,7 @@ extends Boss
 @export var fire_cooldown: float = 2.0
 @export var bolt_damage: float = 12.0
 ## Oyuncuyla korumaya çalıştığı mesafe.
-@export var preferred_distance: float = 380.0
+@export var preferred_distance: float = 1700.0
 
 @onready var fire_timer: Timer = $FireTimer
 
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	var direction := to_player.normalized()
 	if to_player.length() < preferred_distance:
 		direction = -direction
-	velocity = direction * move_speed
+	velocity = direction * move_speed * speed_multiplier()
 	move_and_slide()
 	_tick_contact_damage(delta)
 

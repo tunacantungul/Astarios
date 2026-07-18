@@ -3,7 +3,7 @@ extends Node2D
 ## XP taşının aksine uzaktan çekilmez (magnet kartından etkilenmez).
 
 @export var heal_amount: float = 15.0
-@export var collect_radius: float = 34.0
+@export var collect_radius: float = 150.0
 
 var _player: Player
 

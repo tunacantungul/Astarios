@@ -16,10 +16,10 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/upgrade_menu.tscn" id="14"]
 
 [sub_resource type="RectangleShape2D" id="Shape_wall_h"]
-size = Vector2(3280, 40)
+size = Vector2(14760, 180)
 
 [sub_resource type="RectangleShape2D" id="Shape_wall_v"]
-size = Vector2(40, 2080)
+size = Vector2(180, 9360)
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1")
@@ -30,10 +30,10 @@ power_to_lose = 1
 boss_scene = ExtResource("12")
 
 [node name="Background" type="ColorRect" parent="."]
-offset_left = -1600.0
-offset_top = -1000.0
-offset_right = 1600.0
-offset_bottom = 1000.0
+offset_left = -7200.0
+offset_top = -4500.0
+offset_right = 7200.0
+offset_bottom = 4500.0
 color = Color(0.62, 0.72, 0.88, 1)
 
 [node name="Ground" type="TileMapLayer" parent="."]
@@ -44,52 +44,52 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="WallTop" type="CollisionShape2D" parent="Walls"]
-position = Vector2(0, -1020)
+position = Vector2(0, -4590)
 shape = SubResource("Shape_wall_h")
 
 [node name="WallBottom" type="CollisionShape2D" parent="Walls"]
-position = Vector2(0, 1020)
+position = Vector2(0, 4590)
 shape = SubResource("Shape_wall_h")
 
 [node name="WallLeft" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-1620, 0)
+position = Vector2(-7290, 0)
 shape = SubResource("Shape_wall_v")
 
 [node name="WallRight" type="CollisionShape2D" parent="Walls"]
-position = Vector2(1620, 0)
+position = Vector2(7290, 0)
 shape = SubResource("Shape_wall_v")
 
 [node name="HazardZones" type="Node2D" parent="."]
 
 [node name="CloudGap1" parent="HazardZones" instance=ExtResource("5")]
-position = Vector2(-600, -450)
+position = Vector2(-2700, -2000)
 scale = Vector2(1.6, 1.2)
 
 [node name="CloudGap2" parent="HazardZones" instance=ExtResource("5")]
-position = Vector2(100, 300)
+position = Vector2(450, 1350)
 scale = Vector2(1.2, 1.6)
 
 [node name="CloudGap3" parent="HazardZones" instance=ExtResource("5")]
-position = Vector2(750, -250)
+position = Vector2(3400, -1100)
 
 [node name="CloudGap4" parent="HazardZones" instance=ExtResource("5")]
-position = Vector2(-250, 700)
+position = Vector2(-1100, 3150)
 
 [node name="Player" parent="." instance=ExtResource("2")]
-position = Vector2(-1200, 0)
+position = Vector2(-5400, 0)
 
 [node name="BossArena" parent="." instance=ExtResource("11")]
-position = Vector2(1250, 0)
+position = Vector2(5600, 0)
 
 [node name="LightningSpawner" parent="." instance=ExtResource("13")]
 
 [node name="ExitGate" parent="." instance=ExtResource("4")]
-position = Vector2(1450, 0)
+position = Vector2(6500, 0)
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3")]
 enemy_scenes = Array[PackedScene]([ExtResource("9"), ExtResource("10")])
 spawn_interval = 1.0
-spawn_area = Rect2(-1550, -950, 3100, 1900)
+spawn_area = Rect2(-7000, -4300, 14000, 8600)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
