@@ -1,11 +1,11 @@
-[gd_resource type="TileSet" format=3 uid="uid://cypalxrut1mnk"]
+[gd_scene format=3 uid="uid://vsa531i82bch"]
 
-[ext_resource type="Texture2D" uid="uid://b8bfwmj06hmpi" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg" id="1_7vfpl"]
-[ext_resource type="Texture2D" uid="uid://cywbpoh6jtg31" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26_1.jpeg" id="2_bmy2v"]
-[ext_resource type="Texture2D" uid="uid://bggboie73gl70" path="res://assets/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg" id="3_2godx"]
+[ext_resource type="Texture2D" uid="uid://b8bfwmj06hmpi" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg" id="1_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://cywbpoh6jtg31" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26_1.jpeg" id="2_ppyta"]
+[ext_resource type="Texture2D" uid="uid://bggboie73gl70" path="res://assets/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg" id="3_ykrsh"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fhuy5"]
-texture = ExtResource("1_7vfpl")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g14j6"]
+texture = ExtResource("1_6uqi0")
 texture_region_size = Vector2i(64, 64)
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
@@ -40,8 +40,8 @@ texture_region_size = Vector2i(64, 64)
 6:6/size_in_atlas = Vector2i(2, 2)
 6:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hpd3g"]
-texture = ExtResource("2_bmy2v")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vbegm"]
+texture = ExtResource("2_ppyta")
 texture_region_size = Vector2i(64, 64)
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
@@ -52,8 +52,8 @@ texture_region_size = Vector2i(64, 64)
 0:2/size_in_atlas = Vector2i(2, 2)
 0:2/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5qd0b"]
-texture = ExtResource("3_2godx")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ehkex"]
+texture = ExtResource("3_ykrsh")
 texture_region_size = Vector2i(64, 64)
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
@@ -64,10 +64,15 @@ texture_region_size = Vector2i(64, 64)
 2:2/size_in_atlas = Vector2i(2, 2)
 2:2/0 = 0
 
-[resource]
+[sub_resource type="TileSet" id="TileSet_xersf"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 0
-sources/1 = SubResource("TileSetAtlasSource_fhuy5")
-sources/2 = SubResource("TileSetAtlasSource_hpd3g")
-sources/3 = SubResource("TileSetAtlasSource_5qd0b")
+sources/1 = SubResource("TileSetAtlasSource_g14j6")
+sources/2 = SubResource("TileSetAtlasSource_vbegm")
+sources/3 = SubResource("TileSetAtlasSource_ehkex")
+
+[node name="Node2D" type="Node2D" unique_id=1437715455]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=900719231]
+tile_set = SubResource("TileSet_xersf")
