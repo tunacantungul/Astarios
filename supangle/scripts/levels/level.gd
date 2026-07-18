@@ -8,7 +8,7 @@ extends Node2D
 ## Vurgulanacak kelimeler satır metnine BBCode ile yazılır: [shake]ölümsüz[/shake].
 @export var dialogue_lines: Array[String] = []
 ## Bu bölümün sonunda kaybedilecek güç (GameState.Power sırasıyla aynı).
-@export_enum("Ölümsüzlük:0", "Uçuş:1", "Atak:2") var power_to_lose: int = 0
+@export_enum("Ölümsüzlük:0", "Uçuş:1", "Tanrısal Güç:2") var power_to_lose: int = 0
 ## Bölüm sonu bossu.
 @export var boss_scene: PackedScene
 
