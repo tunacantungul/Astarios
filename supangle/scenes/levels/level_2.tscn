@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cmptivnvqt3ce"]
+[gd_scene format=4 uid="uid://b25d1ad7jffjm"]
 
 [ext_resource type="Script" uid="uid://cqudmuh5d48k6" path="res://scripts/levels/level.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bg40u2euh5uia" path="res://scenes/player/player.tscn" id="2"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/levels/exit_gate.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/levels/hazard_zone.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://1xse1ehjyu8h" path="res://scenes/ui/dialogue_box.tscn" id="7"]
 [ext_resource type="TileSet" uid="uid://cypalxrut1mnk" path="res://resources/placeholder_tileset.tres" id="8"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_fast.tscn" id="10"]

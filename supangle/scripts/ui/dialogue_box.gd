@@ -24,16 +24,25 @@ const SPEAKER_MAX_LENGTH := 24
 ## y ise portrenin altının panelin üst kenarına ne kadar bineceği.
 ## (0, 0) = portre tam kutunun dış çerçevesinden başlar.
 @export var portrait_offset := Vector2(0.0, 0.0)
+## Portrelerin taban kenar uzunluğu. Kayıttaki "scale" bunu çarpar.
+@export var portrait_size: float = 340.0
+
+## Portrenin kutunun hangi ucunda duracağı. Astarios solda, tanrılar sağda:
+## karşılıklı konuşma hissi versin diye.
+enum Side { LEFT, RIGHT }
 
 ## Konuşmacı adına göre diyalog portresi. Yeni portre eklemek için buraya
 ## bir satır eklemek yeterli; adı olmayan konuşmacıda portre gizlenir.
+## "side" verilmezse sol, "scale" verilmezse portrait_size kullanılır.
 var _portraits := {
-	"Astarios": preload("res://assets/Astarios Dialogue.png"),
-	"Zeus": preload("res://assets/Zeus.png"),
+	"Astarios": {"texture": preload("res://assets/Astarios Dialogue.png"), "side": Side.LEFT},
+	"Zeus": {"texture": preload("res://assets/Zeus.png"), "side": Side.RIGHT, "scale": 1.3},
 }
 
 var _lines: Array[String] = []
 var _index: int = 0
+## O an gösterilen portrenin tarafı; konum hesabı bunu kullanıyor.
+var _portrait_side: Side = Side.LEFT
 ## Arkayı karartan tam ekran dikdörtgen. Kendi çocuğumuz olamaz (kutunun
 ## kapsayıcısı onu panele sığdırırdı ve panelin önüne çizilirdi), bu yüzden
 ## kardeşimiz olarak hemen önümüze ekleniyor: HUD/harita/canavarların üstünde,
@@ -137,21 +146,23 @@ func _show_line() -> void:
 
 ## Konuşan kişinin portresi varsa gösterir, yoksa gizler.
 func _update_portrait(speaker: String) -> void:
-	var texture: Texture2D = _portraits.get(speaker)
-	portrait.visible = texture != null
-	if texture == null:
+	var entry: Dictionary = _portraits.get(speaker, {})
+	portrait.visible = not entry.is_empty()
+	if entry.is_empty():
 		return
-	portrait.texture = texture
+	portrait.texture = entry["texture"]
+	portrait.size = Vector2.ONE * portrait_size * float(entry.get("scale", 1.0))
+	_portrait_side = entry.get("side", Side.LEFT)
 	_update_portrait_position()
 
-## Portre kutunun sol üst köşesinden yukarı taşacak şekilde konumlanır.
+## Portre, konuşmacının tarafındaki üst köşeden yukarı taşacak şekilde konumlanır.
 func _update_portrait_position() -> void:
 	if not portrait.visible:
 		return
-	portrait.global_position = global_position + Vector2(
-		portrait_offset.x,
-		portrait_offset.y - portrait.size.y
-	)
+	var x := global_position.x + portrait_offset.x
+	if _portrait_side == Side.RIGHT:
+		x = global_position.x + size.x - portrait_offset.x - portrait.size.x
+	portrait.global_position = Vector2(x, global_position.y + portrait_offset.y - portrait.size.y)
 
 func _complete_line() -> void:
 	_typing = false
