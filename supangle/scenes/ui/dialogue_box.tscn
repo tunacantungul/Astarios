@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://1xse1ehjyu8h"]
 
 [ext_resource type="Script" uid="uid://b1xfag7mga7wr" path="res://scripts/ui/dialogue_box.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://c535i22q6xliq" path="res://assets/Astarios Dialogue.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c535i22q6xliq" path="res://assets/portraits/Astarios Dialogue.png" id="2"]
 [ext_resource type="FontFile" path="res://assets/fonts/GodOfThunder.ttf" id="fnt_t"]
 
 [sub_resource type="StyleBoxFlat" id="Style_panel"]

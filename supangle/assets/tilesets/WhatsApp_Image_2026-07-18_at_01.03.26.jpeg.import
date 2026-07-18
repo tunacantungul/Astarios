@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c535i22q6xliq"
-path="res://.godot/imported/Astarios Dialogue.png-5fcea105fe9535ea7ac0e5799419dfce.ctex"
+uid="uid://b8bfwmj06hmpi"
+path="res://.godot/imported/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg-74c3fc6f6b935fba996241b32fa4a118.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Astarios Dialogue.png"
-dest_files=["res://.godot/imported/Astarios Dialogue.png-5fcea105fe9535ea7ac0e5799419dfce.ctex"]
+source_file="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg"
+dest_files=["res://.godot/imported/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg-74c3fc6f6b935fba996241b32fa4a118.ctex"]
 
 [params]
 

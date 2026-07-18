@@ -1,14 +1,14 @@
 [gd_resource type="TileSet" format=3 uid="uid://dl0jscpgm7h5h"]
 
-[ext_resource type="Texture2D" uid="uid://b8bfwmj06hmpi" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg" id="1_meus6"]
-[ext_resource type="Texture2D" uid="uid://cywbpoh6jtg31" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26_1.jpeg" id="2_j2on4"]
-[ext_resource type="Texture2D" uid="uid://bggboie73gl70" path="res://assets/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg" id="3_5uxy3"]
-[ext_resource type="Texture2D" uid="uid://baqqcsdnvmxcu" path="res://assets/Untitled_Artwork.png" id="4_84c35"]
-[ext_resource type="Texture2D" uid="uid://yupnj72hns31" path="res://assets/Untitled_Artwork (1).png" id="5_tfwl5"]
-[ext_resource type="Texture2D" uid="uid://eqwq017sqv5m" path="res://assets/IMG_5845.png" id="6_atayh"]
-[ext_resource type="Texture2D" uid="uid://dsk0du0whu2eh" path="res://assets/IMG_5846.png" id="7_vvhwm"]
-[ext_resource type="Texture2D" uid="uid://cgn6n87konn6p" path="res://assets/IMG_5847.png" id="8_0yng0"]
-[ext_resource type="Texture2D" uid="uid://c8nnbt2lov0xh" path="res://assets/2D48F36A-957A-49CF-9492-A361776CEF64.png" id="9_p0cxl"]
+[ext_resource type="Texture2D" uid="uid://b8bfwmj06hmpi" path="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg" id="1_meus6"]
+[ext_resource type="Texture2D" uid="uid://cywbpoh6jtg31" path="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.03.26_1.jpeg" id="2_j2on4"]
+[ext_resource type="Texture2D" uid="uid://bggboie73gl70" path="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg" id="3_5uxy3"]
+[ext_resource type="Texture2D" uid="uid://baqqcsdnvmxcu" path="res://assets/tilesets/Untitled_Artwork.png" id="4_84c35"]
+[ext_resource type="Texture2D" uid="uid://yupnj72hns31" path="res://assets/tilesets/Untitled_Artwork (1).png" id="5_tfwl5"]
+[ext_resource type="Texture2D" uid="uid://eqwq017sqv5m" path="res://assets/tilesets/IMG_5845.png" id="6_atayh"]
+[ext_resource type="Texture2D" uid="uid://dsk0du0whu2eh" path="res://assets/tilesets/IMG_5846.png" id="7_vvhwm"]
+[ext_resource type="Texture2D" uid="uid://cgn6n87konn6p" path="res://assets/tilesets/IMG_5847.png" id="8_0yng0"]
+[ext_resource type="Texture2D" uid="uid://c8nnbt2lov0xh" path="res://assets/tilesets/2D48F36A-957A-49CF-9492-A361776CEF64.png" id="9_p0cxl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6uqi0"]
 texture = ExtResource("1_meus6")

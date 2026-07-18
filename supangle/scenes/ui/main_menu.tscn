@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bm5emevrocm7c" path="res://scripts/ui/main_menu.gd" id="1"]
 [ext_resource type="Theme" uid="uid://h8r3ouj6gmqv" path="res://resources/menu_theme.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://c535i22q6xliq" path="res://assets/Astarios Dialogue.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://c535i22q6xliq" path="res://assets/portraits/Astarios Dialogue.png" id="3"]
 [ext_resource type="FontFile" path="res://assets/fonts/NorthEternal.otf" id="fnt_n"]
 [ext_resource type="FontFile" path="res://assets/fonts/GodOfThunder.ttf" id="fnt_t"]
 

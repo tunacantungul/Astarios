@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8nnbt2lov0xh"
-path="res://.godot/imported/2D48F36A-957A-49CF-9492-A361776CEF64.png-f24973e6fcb29070cc04820a4f593868.ctex"
+uid="uid://bggboie73gl70"
+path="res://.godot/imported/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg-df8e29cb989d7a9d8bea2ba8d23e3ed2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/2D48F36A-957A-49CF-9492-A361776CEF64.png"
-dest_files=["res://.godot/imported/2D48F36A-957A-49CF-9492-A361776CEF64.png-f24973e6fcb29070cc04820a4f593868.ctex"]
+source_file="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg"
+dest_files=["res://.godot/imported/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg-df8e29cb989d7a9d8bea2ba8d23e3ed2.ctex"]
 
 [params]
 

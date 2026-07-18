@@ -37,8 +37,8 @@ enum PortraitSide { LEFT, RIGHT }
 ## bir satır eklemek yeterli; adı olmayan konuşmacıda portre gizlenir.
 ## "side" verilmezse sol, "scale" verilmezse portrait_size kullanılır.
 var _portraits := {
-	"Astarios": {"texture": preload("res://assets/Astarios Dialogue.png"), "side": PortraitSide.LEFT},
-	"Zeus": {"texture": preload("res://assets/Zeus.png"), "side": PortraitSide.RIGHT, "scale": 1.3},
+	"Astarios": {"texture": preload("res://assets/portraits/Astarios Dialogue.png"), "side": PortraitSide.LEFT},
+	"Zeus": {"texture": preload("res://assets/portraits/Zeus.png"), "side": PortraitSide.RIGHT, "scale": 1.3},
 }
 
 var _lines: Array[String] = []

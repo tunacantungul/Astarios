@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" format=3 uid="uid://cypalxrut1mnk"]
 
 [ext_resource type="Texture2D" uid="uid://cr60felsb08ct" path="res://assets/new tileset assets/Untitled_Artwork 26.png" id="1_2godx"]
-[ext_resource type="Texture2D" uid="uid://b8bfwmj06hmpi" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg" id="1_7vfpl"]
-[ext_resource type="Texture2D" uid="uid://cywbpoh6jtg31" path="res://assets/WhatsApp_Image_2026-07-18_at_01.03.26_1.jpeg" id="2_bmy2v"]
-[ext_resource type="Texture2D" uid="uid://bggboie73gl70" path="res://assets/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg" id="3_2godx"]
+[ext_resource type="Texture2D" uid="uid://b8bfwmj06hmpi" path="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.03.26.jpeg" id="1_7vfpl"]
+[ext_resource type="Texture2D" uid="uid://cywbpoh6jtg31" path="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.03.26_1.jpeg" id="2_bmy2v"]
+[ext_resource type="Texture2D" uid="uid://bggboie73gl70" path="res://assets/tilesets/WhatsApp_Image_2026-07-18_at_01.28.51.jpeg" id="3_2godx"]
 [ext_resource type="Texture2D" uid="uid://cfqe8v3qrs7vb" path="res://assets/new tileset assets/Untitled_Artwork 27.png" id="5_fhuy5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_er1hf"]
