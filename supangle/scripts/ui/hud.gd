@@ -5,10 +5,13 @@ extends Control
 const COLOR_ACTIVE := Color(1.0, 1.0, 1.0, 1.0)
 const COLOR_LOST := Color(1.0, 1.0, 1.0, 0.2)
 
+const UPGRADE_ENTRY_SCENE := preload("res://scenes/ui/upgrade_entry.tscn")
+
 ## Can barı dolgu stilleri: normal ve ölümsüzlük (korumalı) hali.
 @export var fill_style_normal: StyleBox
 @export var fill_style_immortal: StyleBox
 
+@onready var upgrades_box: VBoxContainer = %UpgradesBox
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var immortal_label: Label = %ImmortalLabel
 @onready var kill_label: Label = %KillLabel
@@ -23,6 +26,8 @@ func _ready() -> void:
 	GameState.powers_changed.connect(_refresh_powers)
 	GameState.xp_changed.connect(_on_xp_changed)
 	GameState.player_level_changed.connect(_on_player_level_changed)
+	GameState.upgrades_changed.connect(_refresh_upgrades)
+	_refresh_upgrades()
 	_on_kills_changed(GameState.kills, GameState.kill_quota)
 	_on_xp_changed(GameState.xp, GameState.xp_required())
 	_on_player_level_changed(GameState.player_level)
@@ -43,6 +48,18 @@ func _on_xp_changed(current: int, required: int) -> void:
 
 func _on_player_level_changed(level: int) -> void:
 	level_label.text = "Seviye %d" % level
+
+## Ekranın solundaki alınmış güçler listesi: her kart için ikon + ad + seviye.
+func _refresh_upgrades() -> void:
+	for child in upgrades_box.get_children():
+		child.queue_free()
+	for id: String in GameState.upgrades:
+		var tier: int = GameState.upgrades[id]
+		if tier <= 0:
+			continue
+		var entry: PanelContainer = UPGRADE_ENTRY_SCENE.instantiate()
+		upgrades_box.add_child(entry)
+		entry.setup(GameState.upgrade_icon(id), "%s  Sv %d" % [GameState.upgrade_name(id), tier])
 
 var _kills: int = 0
 var _required: int = 0
