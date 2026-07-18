@@ -7,14 +7,15 @@ extends Node2D
 ## eşit olasılıkla doğar. Zor düşmanların sayısını kısmak için kullanılıyor.
 @export var spawn_weights: Array[float] = []
 @export var spawn_interval: float = 1.2
-@export var min_spawn_interval: float = 0.35
-## Her spawn sonrası aralığın ne kadar kısalacağı.
-@export var interval_decay: float = 0.015
+@export var min_spawn_interval: float = 0.28
+## Her spawn sonrası aralığın ne kadar kısalacağı. Bölüm ilerledikçe
+## tempo bununla artıyor; min_spawn_interval tabanına kadar iniyor.
+@export var interval_decay: float = 0.022
 ## Oyuncudan ne kadar uzakta doğacakları (ekran dışı olacak şekilde).
 @export var spawn_distance: float = 4300.0
 ## Düşmanların doğabileceği dünya alanı (duvarların içi).
 @export var spawn_area: Rect2 = Rect2(-7000, -4300, 14000, 8600)
-@export var max_enemies: int = 120
+@export var max_enemies: int = 150
 
 @onready var spawn_timer: Timer = $SpawnTimer
 

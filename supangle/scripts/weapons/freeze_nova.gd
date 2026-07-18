@@ -1,5 +1,5 @@
 extends Node2D
-## "freeze" kartı: Boreas'ın Soluğu — çevredeki düşmanları kısa süre dondurur.
+## "freeze" kartı: Boreas'ın Soluğu: çevredeki düşmanları kısa süre dondurur.
 ## Kart seviyeleri: 1 = açılır (10 sn, 1.5 sn donma), 2 = 7 sn ve 2.5 sn donma,
 ## 3 = donma alanı büyür. Bosslar donmaya bağışıktır.
 

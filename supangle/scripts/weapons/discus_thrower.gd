@@ -1,5 +1,5 @@
 extends Node2D
-## "discus" kartı: Olimpiyat Diski — en yakın düşmana doğru gidip geri dönen
+## "discus" kartı: Olimpiyat Diski: en yakın düşmana doğru gidip geri dönen
 ## disk fırlatır. Kart seviyeleri: 1 = açılır (6 sn), 2 = 4 sn, 3 = hasar %60 ve hız artar.
 
 @export var discus_scene: PackedScene

@@ -1,7 +1,7 @@
 extends Sprite2D
 ## Halka/aura görsellerini sabit hızda döndürür. Tamamen görsel bir efekt;
 ## menzil, hasar gibi hiçbir oyun değerini etkilemez.
-## Negatif hız ters yöne döndürür — üst üste binen halkalar birbirinden
+## Negatif hız ters yöne döndürür: üst üste binen halkalar birbirinden
 ## ayrılsın diye farklı yön/hız vermek iyi sonuç veriyor.
 
 @export var degrees_per_second: float = 30.0

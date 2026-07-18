@@ -1,5 +1,5 @@
 extends Node2D
-## "styx" kartı: Styx'in Halkası — oyuncunun çevresindeki halkada duran her
+## "styx" kartı: Styx'in Halkası: oyuncunun çevresindeki halkada duran her
 ## düşmana sürekli hasar veren zehirli aura. Nişan almak gerekmez, yakındaki
 ## her şeyi eritir; bu yüzden efsanevi (legendary) nadirlikte.
 ## Kart seviyeleri: 1 = açılır, 2 = alan büyür, 3 ve 4 = hasar artar.

@@ -14,7 +14,7 @@ Sahne: `scenes/levels/ground_layers.tscn` (iki katman: `Kum` altta, `Cimen` üst
 ## Arazi (terrain) kuralları
 
 İki ayrı **terrain set** var; ayrı olmalarının sebebi ikisinin farklı
-katmanlarda çalışması — aynı sette olsalardı Godot ikisi arasında geçiş
+katmanlarda çalışması: aynı sette olsalardı Godot ikisi arasında geçiş
 yapmaya çalışırdı.
 
 | Set | Arazi | Mod | Kaynak |
@@ -22,11 +22,11 @@ yapmaya çalışırdı.
 | 0 | Çimen | Match Sides | `Grass.png` |
 | 1 | Kum | Match Sides | `Kum.png` |
 
-**Kum** — 9 karenin hepsine "her yanı kum" biti verildi. Godot eşleşen
+**Kum**: 9 karenin hepsine "her yanı kum" biti verildi. Godot eşleşen
 kareler arasından rastgele seçtiği için, Kum arazisiyle boyayınca zemin
 kendiliğinden çeşitleniyor; aynı desen tekrar etmiyor.
 
-**Çimen** — klasik 3×3 yerleşim. Her kare, çimenin devam ettiği yönleri
+**Çimen**: klasik 3×3 yerleşim. Her kare, çimenin devam ettiği yönleri
 işaretliyor:
 
 ```
@@ -53,7 +53,7 @@ sırasını ezer ve çimen oyuncunun, canavarların, toplanabilirlerin de üstü
 ## Bilinen sınır
 
 Godot'nun "Match Sides" modu 16 komşuluk kombinasyonu tanır, elimizde ise
-9 kare var. Yani her kombinasyonun birebir karşılığı yok — örneğin tek
+9 kare var. Yani her kombinasyonun birebir karşılığı yok: örneğin tek
 başına duran bir çimen karesi ya da çapraz bağlantılar için tam eşleşme
 bulunmuyor. Godot bu durumda en çok bite uyan kareyi seçiyor, sonuç
 genellikle kabul edilebilir görünüyor ama kusursuz değil.
@@ -84,7 +84,7 @@ dönüşüm bayraklarıyla yazılıyor (`FLIP_H = 0x1000`, `FLIP_V = 0x2000`,
 `TRANSPOSE = 0x4000`).
 
 Çimen bilerek şu noktalardan uzak tutuldu: oyuncu başlangıcı, iki bulut
-boşluğu, boss arenası ve çıkış kapısı — tehlike ve hedef alanları zemin
+boşluğu, boss arenası ve çıkış kapısı: tehlike ve hedef alanları zemin
 deseniyle karışmasın diye.
 
 Haritayı yeniden üretmek gerekirse mantık basit: her hücre için 12 bayt

@@ -1,5 +1,5 @@
 extends Node2D
-## "artemis" kartı: Artemis'in Oku — en yakın düşmana doğru, hattaki tüm
+## "artemis" kartı: Artemis'in Oku: en yakın düşmana doğru, hattaki tüm
 ## düşmanları delip geçen ok fırlatır. Başlangıçta kapalıdır.
 ## Kart seviyeleri: 1 = açılır (6 sn), 2 = hızlanır (4 sn), 3 = hasar iki katı.
 
