@@ -33,7 +33,7 @@ signal flight_cooldown_changed(remaining: float, total: float)
 const ARMOR_REDUCTION := [0.0, 0.2, 0.35]
 
 ## Uçarken gösterilecek kare: "run_forward"un ilk karesi karakterin öne bakan
-## duruşu. Kanat görseli gelene kadar uçuş bu duruşta donduruluyor.
+## duruşu. Gövde bu duruşta donuyor, kanatlar arkasında çırpınıyor.
 const FLIGHT_ANIMATION := "run_forward"
 const FLIGHT_FRAME := 0
 
@@ -51,6 +51,9 @@ var _lift_tween: Tween
 var _weapons: Array[Node] = []
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+## Yalnızca uçarken görünür; sahnede gövde sprite'ından önce geldiği için
+## karakterin arkasında çizilir.
+@onready var wings: AnimatedSprite2D = $Wings
 @onready var divine_aura: Sprite2D = $DivineAura
 @onready var landing_shadow: Node2D = $LandingShadow
 
@@ -132,6 +135,8 @@ func _take_off() -> void:
 	z_index = flight_z_index
 	landing_shadow.visible = true
 	_freeze_pose()
+	wings.visible = true
+	wings.play("flap")
 	_set_weapons_active(false)
 	_tween_lift(-flight_lift)
 	flight_changed.emit(true)
@@ -144,11 +149,19 @@ func _land() -> void:
 	_set_weapons_active(true)
 	sprite.play()
 	_tween_lift(0.0)
-	# Gölge, karakter yere değene kadar durur.
-	_lift_tween.tween_callback(func() -> void: landing_shadow.visible = false)
+	# Gölge ve kanatlar, karakter yere değene kadar durur: iniş sırasında da
+	# çırpınmaya devam etsinler.
+	_lift_tween.tween_callback(_on_landed)
 	flight_changed.emit(false)
 
-## Kanat görseli gelene kadar uçuş, öne bakan duruşun tek karesinde donuyor.
+## Sprite yere değdiğinde: iniş göstergeleri kalkar.
+func _on_landed() -> void:
+	landing_shadow.visible = false
+	wings.visible = false
+	wings.stop()
+
+## Uçarken gövde, öne bakan duruşun tek karesinde donuyor; hareket hissini
+## arkadaki kanatlar veriyor.
 func _freeze_pose() -> void:
 	sprite.flip_h = false
 	sprite.animation = FLIGHT_ANIMATION
@@ -163,6 +176,7 @@ func _tween_lift(target_y: float) -> void:
 	_lift_tween = create_tween().set_parallel(true)
 	_lift_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	_lift_tween.tween_property(sprite, "position:y", target_y, flight_lift_time)
+	_lift_tween.tween_property(wings, "position:y", target_y, flight_lift_time)
 	_lift_tween.tween_property(divine_aura, "position:y", target_y, flight_lift_time)
 	# Sonraki tween_callback'lerin paralel değil, ardıl çalışması için.
 	_lift_tween.chain()
