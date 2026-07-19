@@ -1,3 +1,10 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Haritanin tek parca kaynagi (14400x9000, ~116 MB). GitHub'in dosya basina
+# 100 MB sinirini astigi icin depoya girmiyor; oyun zaten tools/split_level_art.py
+# ile uretilen assets/levels/map/ karelerini kullaniyor. Kaynagi kendi
+# arsivinizde saklayin.
+/assets/levels/Map.png
+/assets/levels/Map.png.import
