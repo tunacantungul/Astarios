@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5bcgolyv1wm4"
-path="res://.godot/imported/icon_kronos.svg-42dde17c7c8ebe7ed1b0750d5296a1b6.ctex"
+uid="uid://cutuhuf430adt"
+path="res://.godot/imported/icon_javelin.png-9273b68245c2a56d52810a7c7d4bdf61.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/icon_kronos.svg"
-dest_files=["res://.godot/imported/icon_kronos.svg-42dde17c7c8ebe7ed1b0750d5296a1b6.ctex"]
+source_file="res://assets/icons/icon_javelin.png"
+dest_files=["res://.godot/imported/icon_javelin.png-9273b68245c2a56d52810a7c7d4bdf61.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

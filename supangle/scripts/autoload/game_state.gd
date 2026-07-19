@@ -46,7 +46,7 @@ const RARITIES: Dictionary = {
 const UPGRADE_TRACKS: Dictionary = {
 	"orbit": {
 		"name": "Ares'in Yörüngesi",
-		"icon": "res://assets/icons/icon_orbit.svg",
+		"icon": "res://assets/icons/icon_orbit.png",
 		"rarity": Rarity.RARE,
 		"min_chapter": 0,
 		"tiers": [
@@ -57,7 +57,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"bolt": {
 		"name": "Athena'nın Kargısı",
-		"icon": "res://assets/icons/icon_javelin.svg",
+		"icon": "res://assets/icons/icon_javelin.png",
 		"rarity": Rarity.RARE,
 		"min_chapter": 0,
 		"tiers": [
@@ -69,7 +69,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"stab": {
 		"name": "Perseus'un Hamlesi",
-		"icon": "res://assets/icons/icon_stab.svg",
+		"icon": "res://assets/icons/icon_stab.png",
 		"rarity": Rarity.UNCOMMON,
 		"min_chapter": 0,
 		"tiers": [
@@ -80,7 +80,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"discus": {
 		"name": "Olimpiyat Diski",
-		"icon": "res://assets/icons/icon_discus.svg",
+		"icon": "res://assets/icons/icon_discus.png",
 		"rarity": Rarity.RARE,
 		"min_chapter": 0,
 		"tiers": [
@@ -91,7 +91,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"freeze": {
 		"name": "Boreas'ın Soluğu",
-		"icon": "res://assets/icons/icon_freeze.svg",
+		"icon": "res://assets/icons/icon_freeze.png",
 		"rarity": Rarity.EPIC,
 		"min_chapter": 0,
 		"tiers": [
@@ -102,7 +102,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"speed": {
 		"name": "Hermes'in Sandalı",
-		"icon": "res://assets/icons/icon_speed.svg",
+		"icon": "res://assets/icons/icon_speed.png",
 		"rarity": Rarity.COMMON,
 		"min_chapter": 0,
 		"tiers": [
@@ -113,7 +113,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	# Bölüm 1'de oyuncu zaten ölümsüz; can kartı orada anlamsız olurdu.
 	"vitality": {
 		"name": "Hygieia'nın Lütfu",
-		"icon": "res://assets/icons/icon_vitality.svg",
+		"icon": "res://assets/icons/icon_vitality.png",
 		"rarity": Rarity.COMMON,
 		"min_chapter": 1,
 		"tiers": [
@@ -124,7 +124,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"kronos": {
 		"name": "Kronos'un Kumu",
-		"icon": "res://assets/icons/icon_kronos.svg",
+		"icon": "res://assets/icons/icon_kronos.png",
 		"rarity": Rarity.EPIC,
 		"min_chapter": 0,
 		"tiers": [
@@ -135,7 +135,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"artemis": {
 		"name": "Artemis'in Oku",
-		"icon": "res://assets/icons/icon_artemis.svg",
+		"icon": "res://assets/icons/icon_artemis.png",
 		"rarity": Rarity.RARE,
 		"min_chapter": 0,
 		"tiers": [
@@ -146,7 +146,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"magnet": {
 		"name": "Kehribar Tılsımı",
-		"icon": "res://assets/icons/icon_magnet.svg",
+		"icon": "res://assets/icons/icon_magnet.png",
 		"rarity": Rarity.COMMON,
 		"min_chapter": 0,
 		"tiers": [
@@ -157,7 +157,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	# Ölümsüzlük gittikten sonra (2+) anlam kazanan savunma kartları.
 	"armor": {
 		"name": "Hephaistos Zırhı",
-		"icon": "res://assets/icons/icon_armor.svg",
+		"icon": "res://assets/icons/icon_armor.png",
 		"rarity": Rarity.UNCOMMON,
 		"min_chapter": 1,
 		"tiers": [
@@ -167,7 +167,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	},
 	"bloodprice": {
 		"name": "Kan Bedeli",
-		"icon": "res://assets/icons/icon_bloodprice.svg",
+		"icon": "res://assets/icons/icon_bloodprice.png",
 		"rarity": Rarity.UNCOMMON,
 		"min_chapter": 1,
 		"tiers": [
@@ -178,7 +178,7 @@ const UPGRADE_TRACKS: Dictionary = {
 	# Efsanevi: nişan almadan çevredeki her şeyi eriten sürekli aura.
 	"styx": {
 		"name": "Styx'in Halkası",
-		"icon": "res://assets/icons/icon_styx.svg",
+		"icon": "res://assets/icons/icon_styx.png",
 		"rarity": Rarity.LEGENDARY,
 		"min_chapter": 0,
 		"tiers": [

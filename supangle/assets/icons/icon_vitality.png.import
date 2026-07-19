@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eqe84vrh85uh"
-path="res://.godot/imported/icon_styx.svg-172e8b2e28d8bfc6434bd0504a124eb9.ctex"
+uid="uid://butjwctyb3yfi"
+path="res://.godot/imported/icon_vitality.png-cb630e1aa3dbdcd2ded4d094bf9a3fcc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/icon_styx.svg"
-dest_files=["res://.godot/imported/icon_styx.svg-172e8b2e28d8bfc6434bd0504a124eb9.ctex"]
+source_file="res://assets/icons/icon_vitality.png"
+dest_files=["res://.godot/imported/icon_vitality.png-cb630e1aa3dbdcd2ded4d094bf9a3fcc.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

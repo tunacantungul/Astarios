@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmpjkch3d52nu"
-path="res://.godot/imported/icon_nova.svg-5f4affb6c135d4954ffb2dc739ade306.ctex"
+uid="uid://duh5eppc5gmid"
+path="res://.godot/imported/icon_speed.png-37ebd28bf9de39a1d9fadee5c432851e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/icon_nova.svg"
-dest_files=["res://.godot/imported/icon_nova.svg-5f4affb6c135d4954ffb2dc739ade306.ctex"]
+source_file="res://assets/icons/icon_speed.png"
+dest_files=["res://.godot/imported/icon_speed.png-37ebd28bf9de39a1d9fadee5c432851e.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
