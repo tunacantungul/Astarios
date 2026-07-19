@@ -8,9 +8,18 @@ signal card_chosen(id: String)
 const UPGRADE_ENTRY_SCENE := preload("res://scenes/ui/upgrade_entry.tscn")
 
 var _option_ids: Array[String] = []
-## Sahnedeki özgün kart çerçeveleri; her açılışta bunların kopyası boyanır.
-var _base_normal: StyleBoxFlat
-var _base_hover: StyleBoxFlat
+## Kart çizimi kendi altın çerçevesini taşıdığı için nadirlik artık çerçeve
+## rengiyle değil, çizimin üstüne verilen hafif bir renk tonuyla gösteriliyor.
+## Ton beyaza doğru seyreltiliyor: aksi hâlde çizimin altın detayları
+## nadirlik rengine boyanıp çamurlaşıyor.
+const RARITY_TINT := 0.78
+const RARITY_TINT_HOVER := 0.55
+## Üzerine gelince kartın parlaması.
+const HOVER_BRIGHTEN := 1.3
+
+## Sahnedeki özgün kart stilleri; her açılışta bunların kopyası renklendirilir.
+var _base_normal: StyleBoxTexture
+var _base_hover: StyleBoxTexture
 
 @onready var _buttons: Array[Button] = [%Card1, %Card2, %Card3]
 @onready var _owned_label: Label = %OwnedLabel
