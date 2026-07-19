@@ -35,7 +35,7 @@ move_speed = 295.0
 max_health = 480.0
 contact_damage = 25.0
 damage_interval = 1.0
-flip_with_direction = false
+art_faces_right = true
 
 [node name="SlamRing" type="Sprite2D" parent="."]
 visible = false
