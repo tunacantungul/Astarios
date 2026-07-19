@@ -9,9 +9,15 @@ NorthEternal.otf
   Kaynak : https://www.fontspace.com/north-eternal-font-f161966
   Lisans : Freeware, Non-Commercial (ticari kullanim YOK)
 
-!! DIKKAT: Her iki font da yalnizca ticari olmayan kullanim icin serbest.
-   Oyun bir gun satilacak ya da parayla dagitilacaksa bu iki fontun
+BerkshireSwash-Regular.ttf
+  Kaynak : Google Fonts
+  Lisans : SIL Open Font License 1.1 (bkz. BerkshireSwash-OFL.txt)
+           Ticari kullanim SERBEST.
+
+!! DIKKAT: GodOfThunder ve NorthEternal yalnizca ticari olmayan kullanim icin
+   serbest. Oyun bir gun satilacak ya da parayla dagitilacaksa bu iki fontun
    degistirilmesi veya ticari lisanslarinin alinmasi gerekir.
+   BerkshireSwash bu kisitlamaya tabi degil.
 
 
 TURKCE KARAKTER DURUMU
@@ -31,6 +37,11 @@ NorthEternal  ->  GUVENLI DEGIL. Su harfler bozuk ciziyor:
                   kullanilmali. Su an sadece ana menudeki "ASTARIOS"
                   logosunda kullaniliyor; o metin tamamen ASCII oldugu icin
                   guvenli.
+
+BerkshireSwash ->  GUVENLI. Turkce'ye ozgu harflerin hepsi (cCgGiIoOsSuU ve
+                  aksanli a/i/u) fontun kendi cmap tablosunda gercek glif
+                  olarak var; sentezleme yapilmiyor.
+                  Diyalog repliklerinde kullaniliyor.
 
 NorthEternal'i baska bir yere uygularken metinde s/S, i/I, g/G var mi diye
 mutlaka bakin.
