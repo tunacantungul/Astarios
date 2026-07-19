@@ -10,7 +10,8 @@ extends Node2D
 
 func _ready() -> void:
 	# Menü müziği buraya taşmasın; açılış konuşması sessiz sahnede geçiyor.
-	Music.pause_all()
+	# Kesmek yerine kısılarak sussun, menüden prologa geçiş yumuşak olsun.
+	Music.fade_out_all(1.0)
 	dialogue_box.finished.connect(_on_dialogue_finished)
 	dialogue_box.start(speaker_name, dialogue_lines)
 

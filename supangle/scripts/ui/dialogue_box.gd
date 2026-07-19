@@ -52,7 +52,8 @@ var _portraits := {
 	"Hermes": {"texture": preload("res://assets/portraits/Hermes.png"), "side": PortraitSide.RIGHT, "scale": 1.3},
 	"Athena": {"texture": preload("res://assets/portraits/Athena.png"), "side": PortraitSide.RIGHT, "scale": 1.35},
 	# Kavuşma sahnesinde Astarios ile yan yana duruyor; ikisi aynı boyda görünsün.
-	"Kallisto": {"texture": preload("res://assets/portraits/Kallisto.png"), "side": PortraitSide.RIGHT, "scale": 1.3},
+	# 1.3'te ondan uzun kalıyordu.
+	"Kallisto": {"texture": preload("res://assets/portraits/Kallisto.png"), "side": PortraitSide.RIGHT, "scale": 1.2},
 }
 
 var _lines: Array[String] = []

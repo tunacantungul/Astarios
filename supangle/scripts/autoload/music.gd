@@ -29,6 +29,10 @@ const EPILOGUE_VOLUME_DB := -5.5
 ## bir fark kalmıyor ve iniş daha doğal oluyor.
 const SILENCE_DB := -40.0
 
+## Parçalar arası çapraz geçiş süresi. Boss dövüşünün başlaması gecikmiş
+## hissettirmeyecek kadar kısa, kesme gibi durmayacak kadar uzun.
+const CROSSFADE_TIME := 1.0
+
 var _menu: AudioStreamPlayer
 var _main: AudioStreamPlayer
 var _boss: AudioStreamPlayer
@@ -69,12 +73,6 @@ func play_boss() -> void:
 func play_epilogue() -> void:
 	_switch_to(_epilogue, true)
 
-## Menülerde sessizlik; ana tema kaldığı yerde bekler.
-func pause_all() -> void:
-	_kill_fade()
-	for player in _players:
-		player.stream_paused = true
-
 ## Çalan müziği yumuşakça kısıp duraklatır. Sert kesme yerine; kavuşma sahnesi
 ## bitip oyun sonu ekranına geçerken müziğin bıçakla kesilmesi kötü duruyordu.
 ## Duraklatma kaldığı yeri koruduğu için parça daha sonra kaldığı yerden devam
@@ -88,17 +86,43 @@ func fade_out_all(duration: float = 2.0) -> void:
 		_fade_tween.tween_property(player, "volume_db", SILENCE_DB, duration)
 	_fade_tween.chain().tween_callback(_finish_fade)
 
-## Hedefi çalar, diğerlerini duraklatır. `restart` false ise duraklamış parça
-## kaldığı yerden devam eder.
+## Hedefe çapraz geçiş yapar: çalan parça kısılırken hedef sessizden açılır.
+## `restart` false ise duraklamış parça kaldığı yerden devam eder.
+## Zaten çalan parça yeniden istenirse hiçbir şey yapılmaz — sesi boşuna
+## kısılıp açılmasın.
 func _switch_to(target: AudioStreamPlayer, restart: bool) -> void:
-	# Sönme sürerken yeni parça istenirse yarım kalan kısma devam etmemeli.
+	# Yarım kalmış bir geçiş varsa iptal: seviyeler normale döner.
 	_kill_fade()
+
+	var outgoing: Array[AudioStreamPlayer] = []
 	for player in _players:
-		if player != target:
-			player.stream_paused = true
+		if player != target and player.playing and not player.stream_paused:
+			outgoing.append(player)
+	var was_silent := not target.playing or target.stream_paused
+
 	target.stream_paused = false
 	if restart or not target.playing:
 		target.play()
+
+	if outgoing.is_empty() and not was_silent:
+		return
+
+	_fade_tween = create_tween().set_parallel(true)
+	if was_silent:
+		target.volume_db = SILENCE_DB
+		_fade_tween.tween_property(target, "volume_db", _base_volume[target], CROSSFADE_TIME)
+	for player in outgoing:
+		_fade_tween.tween_property(player, "volume_db", SILENCE_DB, CROSSFADE_TIME)
+	# Susan parçalar ancak geçiş bitince duraklatılır; erken duraklatmak
+	# kısılmayı yarıda keserdi.
+	_fade_tween.chain().tween_callback(_finish_switch.bind(outgoing))
+
+## Çapraz geçiş bitti: susan parçaları duraklat ve seviyelerini geri yaz.
+func _finish_switch(outgoing: Array) -> void:
+	for player: AudioStreamPlayer in outgoing:
+		player.stream_paused = true
+		player.volume_db = _base_volume.get(player, 0.0)
+	_fade_tween = null
 
 ## Sönme bitti: sesi kes ve seviyeleri eski hâline al ki sonraki çalışta
 ## sessiz başlamasınlar.
