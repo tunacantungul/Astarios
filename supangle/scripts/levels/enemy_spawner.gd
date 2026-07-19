@@ -19,16 +19,17 @@ extends Node2D
 ## bir sınır, bölüm başında oyuncunun elinde tek kart varken sürünün birikip
 ## onu ezmesine yol açıyordu; oyuncu güçlendikçe kalabalık da büyüyor.
 ## Seviye her bölüm başında 1'e döndüğü için her bölüm sakin başlıyor.
-@export var max_enemies_base: int = 30
-@export var max_enemies_per_level: int = 7
+@export var max_enemies_base: int = 20
+@export var max_enemies_per_level: int = 5
 ## Tavan: seviye ne kadar yükselirse yükselsin bunun üstüne çıkılmıyor.
-@export var max_enemies: int = 85
-## Bu mesafeden uzaktaki canavarlar silinir. Oyuncu görüş alanının yarı köşegeni
-## ~2200 birim, doğma mesafesi 4300; bu yüzden sınır ikisinin de belirgin
-## üstünde: kaçarken peşindekiler silinmiyor, ama geride kalan sürü birikip
-## sayıyı doldurmuyordu. Sayı dolunca oyuncunun yanında yeni canavar doğmuyor
-## ve bölüm ölü hissettiriyordu.
-@export var despawn_distance: float = 6800.0
+@export var max_enemies: int = 55
+## Bu mesafeden uzaktaki canavarlar silinir. Görüş alanının yarı köşegeni ~2200,
+## doğma mesafesi 4300; sınır ikisinin de üstünde ki kaçarken peşindekiler
+## silinmesin. Doğma mesafesine 1300 birim pay bırakılıyor: daha da kısaltmak
+## yeni doğan canavarların oyuncu birkaç adım uzaklaşınca silinmesine yol açar.
+## Geride kalan sürünün silinmesi önemli, yoksa azami sayıyı doldurup oyuncunun
+## çevresinde yeni canavar doğmasını engelliyorlar.
+@export var despawn_distance: float = 5600.0
 
 @onready var spawn_timer: Timer = $SpawnTimer
 
