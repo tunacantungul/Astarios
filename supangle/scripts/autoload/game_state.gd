@@ -171,8 +171,8 @@ const UPGRADE_TRACKS: Dictionary = {
 		"rarity": Rarity.UNCOMMON,
 		"min_chapter": 1,
 		"tiers": [
-			{"title": "Kan Bedeli", "desc": "Öldürünce %10 ihtimalle 5 can"},
-			{"title": "Kan Bedeli II", "desc": "İhtimal %20, iyileşme 8 can olur"},
+			{"title": "Kan Bedeli", "desc": "Öldürünce %8 ihtimalle 2 can"},
+			{"title": "Kan Bedeli II", "desc": "İhtimal %12, iyileşme 3 can olur"},
 		],
 	},
 	# Efsanevi: nişan almadan çevredeki her şeyi eriten sürekli aura.

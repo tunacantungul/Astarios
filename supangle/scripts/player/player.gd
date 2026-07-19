@@ -234,6 +234,9 @@ func heal(amount: float) -> void:
 	health_changed.emit(health, max_health)
 
 func _apply_damage(amount: float) -> void:
+	# Hem temas hem zemin hasarında çalsın diye burada; Sfx tarafında asgari
+	# aralık var, zemin hasarı her karede tetiklendiği için gerekli.
+	Sfx.play_player_hurt()
 	# "armor" kartı: alınan tüm hasarı yüzdesel azaltır.
 	var tier := mini(GameState.upgrade_tier("armor"), ARMOR_REDUCTION.size() - 1)
 	amount *= 1.0 - ARMOR_REDUCTION[tier]
@@ -247,10 +250,13 @@ func _on_enemy_killed() -> void:
 	var tier := GameState.upgrade_tier("bloodprice")
 	if tier <= 0 or health <= 0.0 or health >= max_health:
 		return
-	var chance := 0.2 if tier >= 2 else 0.1
+	# Değerler bilerek küçük: bölüm başına binlerce düşman ölüyor, bu yüzden
+	# ölüm başına yarım candan fazlası oyuncuyu pratikte ölümsüz yapıyordu.
+	# Şimdi 5 dakikalık bir bölümde 1. kademe ~1.5, 2. kademe ~3.5 can barı verir.
+	var chance := 0.12 if tier >= 2 else 0.08
 	if randf() >= chance:
 		return
-	var heal_amount := 8.0 if tier >= 2 else 5.0
+	var heal_amount := 3.0 if tier >= 2 else 2.0
 	health = minf(health + heal_amount, max_health)
 	health_changed.emit(health, max_health)
 
