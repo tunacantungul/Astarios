@@ -78,9 +78,16 @@ func _make_player(stream: AudioStream, volume_db: float) -> AudioStreamPlayer:
 	player.stream = stream
 	player.volume_db = volume_db
 	player.process_mode = Node.PROCESS_MODE_ALWAYS
+	# Kaynak üzerindeki döngü bayrağı içe aktarma ayarlarına göre işlemeyebiliyor;
+	# bu sinyal yedek olarak parçayı yeniden başlatıyor. Döngü zaten çalışıyorsa
+	# parça hiç bitmediği için sinyal gelmez ve bu kod devreye girmez.
+	player.finished.connect(_on_stream_finished.bind(player))
 	add_child(player)
 	_players.append(player)
 	return player
+
+func _on_stream_finished(player: AudioStreamPlayer) -> void:
+	player.play()
 
 func _loop(stream: AudioStream) -> void:
 	if stream is AudioStreamWAV:

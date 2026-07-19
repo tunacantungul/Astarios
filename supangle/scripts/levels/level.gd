@@ -17,6 +17,13 @@ const GATE_ARROW_COLOR := Color(0.42, 1.0, 0.55)
 @export var dialogue_lines: Array[String] = []
 ## Bu bölümün sonunda kaybedilecek güç (GameState.Power sırasıyla aynı).
 @export_enum("Ölümsüzlük:0", "Uçuş:1", "Tanrısal Güç:2") var power_to_lose: int = 0
+## Açıkken diyalog ve güç kaybı boss dövüşünden ÖNCE yaşanır: tanrı arenada
+## karşına çıkar, gücü alır, dövüş o güç olmadan geçer. 1. bölümde açık —
+## ölümsüzlük gidince can barı açılıyor ve Zeus'un bossuyla ölümlü olarak
+## dövüşmek hikâyeyle örtüşüyor.
+## Sonraki bölümlerde kapalı olmalı: 3. bölümde kaybedilen güç saldırı gücü,
+## onu dövüşten önce almak bossu öldürülemez yapardı.
+@export var dialogue_before_boss: bool = false
 ## Bölüm sonu bossu.
 @export var boss_scene: PackedScene
 
@@ -27,6 +34,9 @@ const GATE_ARROW_COLOR := Color(0.42, 1.0, 0.55)
 @onready var upgrade_menu: Control = $UI/UpgradeMenu
 
 var _arena_armed: bool = false
+## dialogue_before_boss akışında diyalog ve güç kaybı yaşandı mı. Kapıya
+## varıldığında ikinci kez diyalog başlamasın diye tutuluyor.
+var _power_lost: bool = false
 ## Bölüm başında hazırlanan, arenaya girilince ağaca eklenen boss.
 var _boss: Boss
 ## Kart menüsü açıkken biriken ek seviye atlamaları (aynı karede çoklu ölüm).
@@ -156,12 +166,23 @@ func _on_kills_changed(current: int, _required: int) -> void:
 func _on_arena_triggered() -> void:
 	if _boss == null or not is_instance_valid(_boss):
 		return
+	hud.clear_arrow()
+	# Tanrı önce konuşup gücü alıyor; boss ancak ondan sonra geliyor.
+	if dialogue_before_boss and not _power_lost:
+		hud.set_objective("")
+		get_tree().paused = true
+		dialogue_box.start(god_name, dialogue_lines)
+		return
+	_spawn_boss()
+
+## Bossu arenaya koyar ve dövüş müziğini başlatır.
+func _spawn_boss() -> void:
+	if _boss == null or not is_instance_valid(_boss):
+		return
 	_boss.position = boss_arena.position
 	add_child(_boss)
 	Music.play_boss()
 	hud.set_objective("Boss'u yen!")
-	# Boss dövüşü sırasında gösterilecek bir yön yok.
-	hud.clear_arrow()
 
 func _on_boss_died() -> void:
 	# Ana tema, boss dövüşünden önce kaldığı yerden devam eder.
@@ -174,6 +195,11 @@ func _on_boss_died() -> void:
 func _on_gate_entered() -> void:
 	hud.set_objective("")
 	hud.clear_arrow()
+	# Güç boss öncesi alındıysa söylenecek söz kalmadı: doğrudan sonraki bölüm.
+	if _power_lost:
+		Sfx.play_level_passed()
+		SceneTransition.play_power_loss("", GameState.advance_level)
+		return
 	get_tree().paused = true
 	dialogue_box.start(god_name, dialogue_lines)
 
@@ -181,8 +207,23 @@ func _on_gate_entered() -> void:
 ## yazılır. Perde SceneTransition autoload'unda durduğu için sahne değişimi ekran
 ## tamamen siyahken yapılır; biten bölüm bir daha görünmez.
 func _on_dialogue_finished() -> void:
+	if dialogue_before_boss and not _power_lost:
+		_lose_power_then_boss()
+		return
 	GameState.lose_power(power_to_lose)
 	Sfx.play_level_passed()
 	SceneTransition.play_power_loss(
 		GameState.power_loss_text(power_to_lose), GameState.advance_level
 	)
+
+## Boss öncesi güç kaybı: sahne değişmiyor, perde inip kalkıyor ve arkasından
+## boss beliriyor. Perde kapalıyken oyunun duraklı kalması önemli, yoksa oyuncu
+## göremediği bir sırada canavarlardan hasar alırdı.
+func _lose_power_then_boss() -> void:
+	_power_lost = true
+	GameState.lose_power(power_to_lose)
+	await SceneTransition.play_power_loss(
+		GameState.power_loss_text(power_to_lose), func() -> void: pass
+	)
+	get_tree().paused = false
+	_spawn_boss()

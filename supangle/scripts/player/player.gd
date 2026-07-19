@@ -62,13 +62,20 @@ func _ready() -> void:
 	_base_max_health = max_health
 	health = max_health
 	health_changed.emit(health, max_health)
-	divine_aura.visible = GameState.has_power(GameState.Power.IMMORTALITY)
+	_refresh_aura()
 	_weapons.assign(get_tree().get_nodes_in_group("player_weapons"))
 	landing_shadow.visible = false
+	# Ölümsüzlük artık bölüm ortasında da kaybedilebiliyor (1. bölümde Zeus onu
+	# boss dövüşünden önce alıyor); aura buna anında uymalı.
+	GameState.powers_changed.connect(_refresh_aura)
 	GameState.upgrades_changed.connect(_on_upgrades_changed)
 	GameState.enemy_killed.connect(_on_enemy_killed)
 	_on_upgrades_changed()
 	flight_cooldown_changed.emit(0.0, flight_cooldown)
+
+## Altın aura yalnızca Ölümsüzlük gücü dururken görünür.
+func _refresh_aura() -> void:
+	divine_aura.visible = GameState.has_power(GameState.Power.IMMORTALITY)
 
 func _physics_process(delta: float) -> void:
 	_tick_flight(delta)

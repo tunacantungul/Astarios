@@ -25,6 +25,7 @@ script = ExtResource("1")
 kill_quota = 22
 dialogue_lines = Array[String](["Zeus: Bir ölümlü için aileni, seni yaratanları geride bırakıyorsun demek!", "Astarios: Hayır! Geride bırakmıyo…", "Zeus: Bu kadar bahane yeter!", "Zeus: Bir ölümlünün bizimle eş olması kabul edilemez!", "Zeus: Madem bir ölümlü seveceksin,", "Zeus: ...onlar gibi [shake rate=22 level=14]ölümlü[/shake] olacaksın!"])
 boss_scene = ExtResource("11")
+dialogue_before_boss = true
 
 [node name="MapArt" parent="." instance=ExtResource("map_art")]
 
