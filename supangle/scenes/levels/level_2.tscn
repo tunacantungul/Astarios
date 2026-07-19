@@ -1,10 +1,9 @@
-[gd_scene format=4 uid="uid://b25d1ad7jffjm"]
+[gd_scene format=3 uid="uid://b25d1ad7jffjm"]
 
 [ext_resource type="Script" uid="uid://cqudmuh5d48k6" path="res://scripts/levels/level.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bg40u2euh5uia" path="res://scenes/player/player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/levels/enemy_spawner.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/levels/exit_gate.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/levels/hazard_zone.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://1xse1ehjyu8h" path="res://scenes/ui/dialogue_box.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="9"]
@@ -31,7 +30,7 @@ dialogue_lines = Array[String](["Hermes: Demek babamızın gazabından kaçabild
 power_to_lose = 1
 boss_scene = ExtResource("12")
 
-[node name="MapArt" parent="." instance=ExtResource("map_art")]
+[node name="MapArt" parent="." unique_id=938611907 instance=ExtResource("map_art")]
 
 [node name="Background" type="ColorRect" parent="." unique_id=309989018]
 visible = false
@@ -60,22 +59,6 @@ shape = SubResource("Shape_wall_v")
 [node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=1880843796]
 position = Vector2(7290, 0)
 shape = SubResource("Shape_wall_v")
-
-[node name="HazardZones" type="Node2D" parent="." unique_id=1870575465]
-
-[node name="CloudGap1" parent="HazardZones" unique_id=1129639286 instance=ExtResource("5")]
-position = Vector2(-2700, -2000)
-scale = Vector2(1.6, 1.2)
-
-[node name="CloudGap2" parent="HazardZones" unique_id=1846531018 instance=ExtResource("5")]
-position = Vector2(450, 1350)
-scale = Vector2(1.2, 1.6)
-
-[node name="CloudGap3" parent="HazardZones" unique_id=1683733469 instance=ExtResource("5")]
-position = Vector2(3400, -1100)
-
-[node name="CloudGap4" parent="HazardZones" unique_id=2051977306 instance=ExtResource("5")]
-position = Vector2(-1100, 3150)
 
 [node name="Player" parent="." unique_id=1105739708 instance=ExtResource("2")]
 position = Vector2(-5400, 0)

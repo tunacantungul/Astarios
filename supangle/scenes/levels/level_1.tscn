@@ -1,10 +1,9 @@
-[gd_scene format=4 uid="uid://diy7twwj8m2e8"]
+[gd_scene format=3 uid="uid://diy7twwj8m2e8"]
 
 [ext_resource type="Script" uid="uid://cqudmuh5d48k6" path="res://scripts/levels/level.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bg40u2euh5uia" path="res://scenes/player/player.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/levels/enemy_spawner.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/levels/exit_gate.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/levels/hazard_zone.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://1xse1ehjyu8h" path="res://scenes/ui/dialogue_box.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy.tscn" id="9"]
@@ -24,10 +23,10 @@ size = Vector2(180, 9360)
 script = ExtResource("1")
 kill_quota = 22
 dialogue_lines = Array[String](["Zeus: Bir ölümlü için aileni, seni yaratanları geride bırakıyorsun demek!", "Astarios: Hayır! Geride bırakmıyo…", "Zeus: Bu kadar bahane yeter!", "Zeus: Bir ölümlünün bizimle eş olması kabul edilemez!", "Zeus: Madem bir ölümlü seveceksin,", "Zeus: ...onlar gibi [shake rate=22 level=14]ölümlü[/shake] olacaksın!"])
-boss_scene = ExtResource("11")
 dialogue_before_boss = true
+boss_scene = ExtResource("11")
 
-[node name="MapArt" parent="." instance=ExtResource("map_art")]
+[node name="MapArt" parent="." unique_id=1637923655 instance=ExtResource("map_art")]
 
 [node name="Background" type="ColorRect" parent="." unique_id=1731326754]
 visible = false
@@ -56,15 +55,6 @@ shape = SubResource("Shape_wall_v")
 [node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=1781490121]
 position = Vector2(7290, 0)
 shape = SubResource("Shape_wall_v")
-
-[node name="HazardZones" type="Node2D" parent="." unique_id=610983095]
-
-[node name="CloudGap1" parent="HazardZones" unique_id=380605371 instance=ExtResource("5")]
-position = Vector2(1600, -1900)
-
-[node name="CloudGap2" parent="HazardZones" unique_id=1842258365 instance=ExtResource("5")]
-position = Vector2(2900, 1700)
-scale = Vector2(1.5, 1)
 
 [node name="Player" parent="." unique_id=183612128 instance=ExtResource("2")]
 position = Vector2(-5400, 0)
