@@ -15,6 +15,13 @@ signal finished
 ## iki nokta üst üstenin yanlışlıkla konuşmacı sanılmasını engeller.
 const SPEAKER_MAX_LENGTH := 24
 
+## Harf harf yazım boyunca çalan ses. Satır başında başlar, yazım bitince
+## (kendiliğinden ya da tuşla tamamlanınca) susar.
+const TYPE_SOUND := preload("res://assets/Sound/Dialogue2.mp3")
+## Yazım sesinin kazancı: diyalog sırasında kısılmış müziğin üstünde duyulacak
+## ama repliği okumayı yormayacak seviyede.
+const TYPE_VOLUME_DB := -8.0
+
 ## Saniyede kaç harf yazılacağı.
 @export var chars_per_second: float = 45.0
 ## Diyalog açıkken arkayı karartan filtrenin rengi ve yoğunluğu.
@@ -69,6 +76,8 @@ var _dim: ColorRect
 var _typing: bool = false
 ## Kesirli ilerleme; int'e yuvarlanarak visible_characters'a yazılır.
 var _revealed: float = 0.0
+## Yazım sesinin oynatıcısı; _dim gibi koddan kuruluyor.
+var _type_voice: AudioStreamPlayer
 
 @onready var name_label: Label = %NameLabel
 @onready var text_label: RichTextLabel = %TextLabel
@@ -79,6 +88,14 @@ func _ready() -> void:
 	# Portre top_level olduğu için kapsayıcı onu yerleştirmez; kutu her
 	# yeniden boyutlandığında konumunu kendimiz tazeliyoruz.
 	resized.connect(_update_portrait_position)
+	# Uzun repliklerde ses yazım bitene dek kesilmeden dönsün.
+	# (Const üzerinden property atanamadığı için yerel değişkene alınıyor.)
+	var type_stream: AudioStreamMP3 = TYPE_SOUND
+	type_stream.loop = true
+	_type_voice = AudioStreamPlayer.new()
+	_type_voice.stream = type_stream
+	_type_voice.volume_db = TYPE_VOLUME_DB
+	add_child(_type_voice)
 
 func start(speaker: String, lines: Array[String]) -> void:
 	if lines.is_empty():
@@ -161,6 +178,8 @@ func _show_line() -> void:
 	text_label.visible_characters = 0
 	_revealed = 0.0
 	_typing = true
+	# Her satır sesin başından başlar; yazım bitince _complete_line durdurur.
+	_type_voice.play()
 
 ## Konuşan kişinin portresi varsa gösterir, yoksa gizler.
 func _update_portrait(speaker: String) -> void:
@@ -185,9 +204,11 @@ func _update_portrait_position() -> void:
 func _complete_line() -> void:
 	_typing = false
 	text_label.visible_characters = -1
+	_type_voice.stop()
 
 func _close() -> void:
 	_typing = false
+	_type_voice.stop()
 	visible = false
 	portrait.visible = false
 	set_process(false)
