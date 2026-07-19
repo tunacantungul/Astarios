@@ -28,6 +28,13 @@ signal flight_cooldown_changed(remaining: float, total: float)
 @export var flight_z_index: int = 50
 ## Yükselme/alçalma animasyonunun süresi.
 @export var flight_lift_time: float = 0.22
+## Bölüm başında uçuşun tetiklenemeyeceği süre. Diyaloglar SPACE ile ilerliyor
+## ve oyuncular sahne yüklenirken tuşa basmaya devam ediyor; o basış yeni bölüme
+## taşınıp oyun başlar başlamaz uçuşu harcıyordu.
+## Perdenin açılma süresinden (0.8 sn) uzun tutuldu: kısa olsaydı koruma ekran
+## hâlâ karanlıkken biter ve basış yine boşa giderdi. İlk saniyede düşman
+## menzilde olmadığı için kaçış hamlesine ihtiyaç da yok.
+@export var input_grace_time: float = 1.0
 
 ## "armor" kartı: kademe başına hasar azaltma oranı.
 const ARMOR_REDUCTION := [0.0, 0.2, 0.35]
@@ -46,6 +53,8 @@ var _base_max_health: float
 var _vitality_applied: int = 0
 var _flight_left: float = 0.0
 var _flight_cooldown_left: float = 0.0
+## Bölüm başındaki girdi koruma süresi; bkz. input_grace_time.
+var _input_grace_left: float = 0.0
 var _lift_tween: Tween
 ## Silahlar Player'ın çocuğu; uçuşta hepsi birden durdurulup gizleniyor.
 var _weapons: Array[Node] = []
@@ -62,6 +71,7 @@ func _ready() -> void:
 	_base_max_health = max_health
 	health = max_health
 	health_changed.emit(health, max_health)
+	_input_grace_left = input_grace_time
 	_refresh_aura()
 	_weapons.assign(get_tree().get_nodes_in_group("player_weapons"))
 	landing_shadow.visible = false
@@ -119,10 +129,13 @@ func can_fly() -> bool:
 		GameState.has_power(GameState.Power.FLIGHT)
 		and not is_flying
 		and _flight_cooldown_left <= 0.0
+		and _input_grace_left <= 0.0
 		and health > 0.0
 	)
 
 func _tick_flight(delta: float) -> void:
+	if _input_grace_left > 0.0:
+		_input_grace_left = maxf(_input_grace_left - delta, 0.0)
 	if _flight_cooldown_left > 0.0:
 		_flight_cooldown_left = maxf(_flight_cooldown_left - delta, 0.0)
 		flight_cooldown_changed.emit(_flight_cooldown_left, flight_cooldown)

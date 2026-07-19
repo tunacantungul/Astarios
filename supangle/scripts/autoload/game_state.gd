@@ -351,8 +351,11 @@ func start_new_game() -> void:
 	_change_scene(PROLOGUE_SCENE)
 
 ## Prolog diyaloğu bitince çağrılır.
+## Perdeli geçiş: bölüm sahnesi ağır (elle çizilmiş harita) ve yüklenirken oyun
+## donuyor. Perde olmadan oyuncu prolog ekranına bakarken saniyelerce takılıyor
+## ve oyunu kilitlenmiş sanıyordu.
 func start_first_level() -> void:
-	_change_scene(LEVEL_SCENES[0])
+	SceneTransition.change_scene_covered(LEVEL_SCENES[0])
 
 ## Ölünce mevcut bölümü, o ana kadar kaybedilmiş güçlerle yeniden başlatır.
 func retry_level() -> void:
@@ -361,7 +364,7 @@ func retry_level() -> void:
 		powers[power] = false
 	powers_changed.emit()
 	victory = false
-	_change_scene(LEVEL_SCENES[current_level])
+	SceneTransition.change_scene_covered(LEVEL_SCENES[current_level])
 
 ## Bölüm sonu diyaloğu bitince çağrılır. Son bölümden sonra kavuşma sahnesine geçilir.
 func advance_level() -> void:

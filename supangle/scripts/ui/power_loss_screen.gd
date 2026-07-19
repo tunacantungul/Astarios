@@ -15,12 +15,14 @@ func _ready() -> void:
 
 ## Ekranı karartıp yazıyı gösterir; yazı okunacak kadar bekledikten sonra döner.
 ## Örnek: "Ölümsüzlüğünü kaybettin..."
-func fade_to_black(text: String) -> void:
+## `fade_time` ve `hold_time` verilmezse dışa açık varsayılanlar kullanılır;
+## yazısız sade geçişte ikisi de kısaltılıyor, orada okunacak bir şey yok.
+func fade_to_black(text: String, fade_time: float = -1.0, hold_time: float = -1.0) -> void:
 	label.text = text
 	modulate.a = 0.0
 	var tween := create_tween()
-	tween.tween_property(self, "modulate:a", 1.0, fade_in)
-	tween.tween_interval(hold)
+	tween.tween_property(self, "modulate:a", 1.0, fade_in if fade_time < 0.0 else fade_time)
+	tween.tween_interval(hold if hold_time < 0.0 else hold_time)
 	await tween.finished
 
 ## Karanlığı açar; arkadaki yeni bölüm ortaya çıkar.
