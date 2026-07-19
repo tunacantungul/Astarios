@@ -65,7 +65,11 @@ func _refresh_upgrades() -> void:
 			continue
 		var entry: PanelContainer = UPGRADE_ENTRY_SCENE.instantiate()
 		upgrades_box.add_child(entry)
-		entry.setup(GameState.upgrade_icon(id), "%s  Sv %d" % [GameState.upgrade_name(id), tier], GameState.rarity_color(id))
+		# Soldaki listede yalnızca ikon ve seviye: oynanış sırasında gücün adını
+		# okumaya kimse fırsat bulmuyor, ikon zaten tanıtıyor. Ad çıkınca
+		# kutucuklar daralıp ekranın solunu boşaltıyor.
+		# Kart menüsündeki liste tam adı göstermeye devam ediyor.
+		entry.setup(GameState.upgrade_icon(id), "Sv %d" % tier, GameState.rarity_color(id))
 
 ## Level scripti boss akışı sırasında ekranın üstündeki hedef metnini bununla
 ## değiştirir. Canavar sayacı artık gösterilmiyor, arka planda sayılıyor.

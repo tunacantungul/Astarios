@@ -14,6 +14,10 @@ extends Node2D
 @export var pulse_amount: float = 0.04
 @export var pulse_speed: float = 2.2
 
+## Görselin parıltısının tuvalin yarı genişliğine oranı. Styx.png'de parıltı
+## 1024'lük tuvalin ~%93'ünü dolduruyor (alfa sınırı 952 px).
+const RING_EDGE_RATIO := 0.93
+
 var _pulse_time: float = 0.0
 ## Halkanın o anki yarıçapa karşılık gelen taban ölçeği.
 var _base_scale: float = 1.0
@@ -41,8 +45,7 @@ func _refresh() -> void:
 		ring.visible = false
 		set_process(false)
 		return
-	# Halka görseli 220 px çapında çizildi; yarıçapa ölçekleniyor.
-	_base_scale = _current_radius(tier) / 110.0
+	_base_scale = _current_radius(tier) / _ring_half_extent()
 	ring.scale = Vector2.ONE * _base_scale
 	ring.visible = true
 	set_process(true)
@@ -61,6 +64,16 @@ func _on_tick_timer_timeout() -> void:
 			continue
 		if global_position.distance_to(enemy.global_position) <= r:
 			enemy.take_damage(dmg)
+
+## Halka dokusundaki görünür yarıçap (piksel). Doku boyutundan hesaplanıyor;
+## görsel değişince burada sabit güncellemek gerekmesin diye.
+## Parıltı tuvalin kenarına kadar gitmeyip sönümlenerek bittiği için tam yarı
+## genişlik değil, onun bir oranı alınıyor: böylece görünen halkanın kenarı
+## hasar menziline oturuyor, hasar veren alan görselden taşmıyor.
+func _ring_half_extent() -> float:
+	if ring.texture == null:
+		return 1.0
+	return ring.texture.get_width() * 0.5 * RING_EDGE_RATIO
 
 func _current_radius(tier: int) -> float:
 	return _tier_value(tier_radius, tier)
