@@ -6,7 +6,9 @@ extends Control
 @onready var retry_button: Button = %RetryButton
 
 func _ready() -> void:
-	Music.pause_all()
+	# Sert kesme yerine kısılarak sussun; kavuşma sahnesinden buraya geçerken
+	# müziğin bıçakla kesilmesi kötü duruyordu.
+	Music.fade_out_all()
 	if GameState.victory:
 		title_label.text = "BEDEL ÖDENDİ"
 		message_label.text = "Ölümsüzlüğün, kanatların, gücün... hepsi geride kaldı.\nArtık sıradan bir insansın, ama kalbin nihayet özgür."

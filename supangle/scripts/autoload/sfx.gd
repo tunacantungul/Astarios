@@ -30,6 +30,15 @@ const HURT_MIN_INTERVAL := 0.35
 ## Tepe değeri -0.1 dBFS olduğu için kırpma da olmuyor (-6.1'de kalıyor).
 const HURT_VOLUME_DB := -6.0
 
+## Vuruş ve seviye atlama kazançları. Bu iki ses kısa ve vurmalı: ortalama
+## seviyeleri (RMS) düşük görünse de tepe değerleri yüksek ve kulakta öne
+## çıkan da o. Eski ayarlarında tepeleri -8 ve -5.4 dBFS'e ulaşıp -24 dBFS'te
+## çalan ana temayı bastırıyorlardı.
+## Vuruş ayrıca saniyede 20 kez ve 12 kanaldan çalabiliyor; -13 ile üst üste
+## bindiklerinde toplamları müzikle aynı seviyede kalıyor.
+const HIT_VOLUME_DB := -13.0
+const LEVEL_UP_VOLUME_DB := -9.0
+
 var _voices: Array[AudioStreamPlayer] = []
 var _next_voice: int = 0
 var _hit_cooldown: float = 0.0
@@ -64,7 +73,7 @@ func play_hit_enemy() -> void:
 	if _hit_cooldown > 0.0:
 		return
 	_hit_cooldown = HIT_MIN_INTERVAL
-	_play(HIT_ENEMY, -7.0, randf_range(HIT_PITCH_RANGE.x, HIT_PITCH_RANGE.y))
+	_play(HIT_ENEMY, HIT_VOLUME_DB, randf_range(HIT_PITCH_RANGE.x, HIT_PITCH_RANGE.y))
 
 ## Oyuncu hasar aldı. Kendi kanalında ve efekt yığınının üstünde çalıyor:
 ## çarpışma sırasında 12 vuruş sesi üst üste binince toplamları ~-18 dBFS'e
@@ -77,7 +86,7 @@ func play_player_hurt() -> void:
 
 ## Seviye atlandı (kart menüsü açılmadan hemen önce).
 func play_level_up() -> void:
-	_play(LEVEL_UP, -2.0)
+	_play(LEVEL_UP, LEVEL_UP_VOLUME_DB)
 
 ## Bölüm tamamlandı, sıradaki bölüme geçiliyor.
 func play_level_passed() -> void:

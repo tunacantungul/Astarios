@@ -25,6 +25,10 @@ const MAIN_VOLUME_DB := -7.5
 const BOSS_VOLUME_DB := -5.0
 const EPILOGUE_VOLUME_DB := -5.5
 
+## Sönerken inilen seviye. Tam sessizlik (-80) yerine bu: son saniyede duyulur
+## bir fark kalmıyor ve iniş daha doğal oluyor.
+const SILENCE_DB := -40.0
+
 var _menu: AudioStreamPlayer
 var _main: AudioStreamPlayer
 var _boss: AudioStreamPlayer
@@ -32,6 +36,10 @@ var _epilogue: AudioStreamPlayer
 ## Duraklatma her seferinde hepsini gezsin diye tek listede tutuluyor;
 ## yeni parça eklendiğinde başka yeri güncellemek gerekmiyor.
 var _players: Array[AudioStreamPlayer] = []
+## Sönme sırasında seviyeler geçici olarak düşürülüyor; her parçanın kendi
+## ayarlı seviyesi burada saklanıyor ki sonradan geri yazılabilsin.
+var _base_volume: Dictionary = {}
+var _fade_tween: Tween
 
 func _ready() -> void:
 	# Kart menüsü, diyalog ve bölüm geçişi ağacı duraklatıyor; müzik akmalı.
@@ -63,12 +71,28 @@ func play_epilogue() -> void:
 
 ## Menülerde sessizlik; ana tema kaldığı yerde bekler.
 func pause_all() -> void:
+	_kill_fade()
 	for player in _players:
 		player.stream_paused = true
+
+## Çalan müziği yumuşakça kısıp duraklatır. Sert kesme yerine; kavuşma sahnesi
+## bitip oyun sonu ekranına geçerken müziğin bıçakla kesilmesi kötü duruyordu.
+## Duraklatma kaldığı yeri koruduğu için parça daha sonra kaldığı yerden devam
+## edebilir; ses seviyesi de eski değerine geri yazılıyor.
+func fade_out_all(duration: float = 2.0) -> void:
+	_kill_fade()
+	_fade_tween = create_tween().set_parallel(true)
+	for player in _players:
+		if player.stream_paused or not player.playing:
+			continue
+		_fade_tween.tween_property(player, "volume_db", SILENCE_DB, duration)
+	_fade_tween.chain().tween_callback(_finish_fade)
 
 ## Hedefi çalar, diğerlerini duraklatır. `restart` false ise duraklamış parça
 ## kaldığı yerden devam eder.
 func _switch_to(target: AudioStreamPlayer, restart: bool) -> void:
+	# Sönme sürerken yeni parça istenirse yarım kalan kısma devam etmemeli.
+	_kill_fade()
 	for player in _players:
 		if player != target:
 			player.stream_paused = true
@@ -76,11 +100,30 @@ func _switch_to(target: AudioStreamPlayer, restart: bool) -> void:
 	if restart or not target.playing:
 		target.play()
 
+## Sönme bitti: sesi kes ve seviyeleri eski hâline al ki sonraki çalışta
+## sessiz başlamasınlar.
+func _finish_fade() -> void:
+	for player in _players:
+		player.stream_paused = true
+	_restore_volumes()
+
+## Yarıda kalan sönmeyi iptal eder ve seviyeleri geri yükler.
+func _kill_fade() -> void:
+	if _fade_tween != null and _fade_tween.is_valid():
+		_fade_tween.kill()
+	_fade_tween = null
+	_restore_volumes()
+
+func _restore_volumes() -> void:
+	for player in _players:
+		player.volume_db = _base_volume.get(player, 0.0)
+
 func _make_player(stream: AudioStream, volume_db: float) -> AudioStreamPlayer:
 	var player := AudioStreamPlayer.new()
 	player.stream = stream
 	player.volume_db = volume_db
 	player.process_mode = Node.PROCESS_MODE_ALWAYS
+	_base_volume[player] = volume_db
 	# Kaynak üzerindeki döngü bayrağı içe aktarma ayarlarına göre işlemeyebiliyor;
 	# bu sinyal yedek olarak parçayı yeniden başlatıyor. Döngü zaten çalışıyorsa
 	# parça hiç bitmediği için sinyal gelmez ve bu kod devreye girmez.
