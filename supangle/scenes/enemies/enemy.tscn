@@ -6,8 +6,9 @@
 [sub_resource type="CircleShape2D" id="Shape_body"]
 radius = 53.0
 
-[sub_resource type="RectangleShape2D" id="Shape_hit"]
-size = Vector2(153, 193)
+[sub_resource type="CapsuleShape2D" id="Shape_hit"]
+radius = 70.0
+height = 193.0
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
