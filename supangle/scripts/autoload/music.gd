@@ -17,7 +17,9 @@ const EPILOGUE := preload("res://assets/Sound/Epilogue_music.mp3")
 ## Müzik efektlerin altında kalsın diye kısık.
 const MENU_VOLUME_DB := -12.0
 const MAIN_VOLUME_DB := -14.0
-const BOSS_VOLUME_DB := -12.0
+## Boss dövüşünde vuruş efektleri sürekli üst üste bindiği için müzik maskeleniyor;
+## diğer parçaların belirgin şekilde üstünde tutuluyor.
+const BOSS_VOLUME_DB := -5.0
 const EPILOGUE_VOLUME_DB := -12.0
 
 var _menu: AudioStreamPlayer
