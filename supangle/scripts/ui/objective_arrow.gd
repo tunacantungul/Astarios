@@ -56,9 +56,18 @@ func _process(delta: float) -> void:
 		if _player == null:
 			return
 	# Şekil yukarıyı gösterdiği için açıya çeyrek tur eklenir.
-	rotation = (_target.global_position - _player.global_position).angle() + PI * 0.5
+	rotation = (_target_center() - _player.global_position).angle() + PI * 0.5
 	_time += delta
 	queue_redraw()
+
+## Hedefin tam ortası. Düğüm orijini yerine çarpışma şeklinin global konumu
+## kullanılıyor: arena çemberi ve kapı büyük alanlar, şekil düğüme göre
+## kayarsa ok kenarı gösterip oyuncuyu yanlış noktaya yollardı.
+func _target_center() -> Vector2:
+	var shape := _target.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if shape != null:
+		return shape.global_position
+	return _target.global_position
 
 func _draw() -> void:
 	var center := size * 0.5 + Vector2(0.0, -absf(sin(_time * bob_speed)) * bob_amount)
