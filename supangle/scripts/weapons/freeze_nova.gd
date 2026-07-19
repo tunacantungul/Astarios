@@ -10,6 +10,13 @@ extends Node2D
 @export var radius: float = 1000.0
 @export var big_radius: float = 1450.0
 
+## Halka görselindeki parıltının yarıçapı (piksel). Ring_glow.png'de daire
+## 1024'lük tuvalin 968 pikselini dolduruyor; ölçek buna göre hesaplanınca
+## görünen halkanın kenarı donma menziline oturuyor.
+const RING_HALF_EXTENT := 484.0
+## Halka mor çizildi; buzul mavisi olarak okunması için çarpılıyor.
+const RING_COLOR := Color(0.64, 2.49, 1.48, 0.9)
+
 @onready var ring: Sprite2D = $Ring
 @onready var pulse_timer: Timer = $PulseTimer
 
@@ -45,8 +52,8 @@ func _on_pulse_timer_timeout() -> void:
 ## Halka görseli zaten mavi çizildi, bu yüzden renk bozulmasın diye
 ## modulate nötr tutuluyor.
 func _flash(r: float) -> void:
-	ring.scale = Vector2.ONE * (r / 108.0)
-	ring.modulate = Color(1.0, 1.0, 1.0, 0.9)
+	ring.scale = Vector2.ONE * (r / RING_HALF_EXTENT)
+	ring.modulate = RING_COLOR
 	ring.visible = true
 	var tween := create_tween()
 	tween.tween_property(ring, "modulate:a", 0.0, 0.4)

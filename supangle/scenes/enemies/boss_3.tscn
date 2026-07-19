@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/enemies/boss_3.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d04uvl2ticrw8" path="res://assets/Bosses/Cyclops.png" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_fast.tscn" id="3"]
-[ext_resource type="Texture2D" path="res://assets/placeholder/telegraph.svg" id="4"]
+[ext_resource type="Texture2D" path="res://assets/effects/Ring_glow.png" id="4"]
 
 [sub_resource type="RectangleShape2D" id="Shape_body"]
 size = Vector2(380, 470)
@@ -39,7 +39,8 @@ art_faces_right = true
 
 [node name="SlamRing" type="Sprite2D" parent="."]
 visible = false
-scale = Vector2(9.1, 9.1)
+modulate = Color(1.43, 0.41, 0.15, 1)
+scale = Vector2(2.066, 2.066)
 texture = ExtResource("4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
