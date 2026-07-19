@@ -38,6 +38,9 @@ const PUSH_STRENGTH := 0.8
 @export var xp_value: int = 1
 ## Can küresi düşürme ihtimali (0-1).
 @export var health_drop_chance: float = 0.025
+## Çizimin varsayılan bakış yönü. Mob çizimleri sola bakıyor, Minotaur sağa;
+## aynalama bu bayrağa göre ters çevriliyor.
+@export var art_faces_right: bool = false
 
 var health: float
 
@@ -90,13 +93,14 @@ func _push_blocking_enemies(delta: float) -> void:
 		# Normal bizden ona doğru bakar; itmek için ters yöne kaydırıyoruz.
 		other.global_position -= collision.get_normal() * push_speed
 
-## Çizimler sola bakıyor; sağa giderken aynalanıyor.
+## Gidilen yöne dönme. Çizimin kendi bakış yönü art_faces_right ile veriliyor:
+## sola bakan çizim sağa giderken, sağa bakan çizim sola giderken aynalanır.
 ## Neredeyse dikey hareket ederken yatay yön anlamsız derecede küçülüyor ve
 ## sprite her karede takla atıyordu, bu yüzden eşiğin altında son bakış korunur.
 func _update_facing() -> void:
 	if absf(velocity.x) < FACING_DEADZONE:
 		return
-	sprite.flip_h = velocity.x > 0.0
+	sprite.flip_h = (velocity.x > 0.0) != art_faces_right
 
 ## Yürürken sprite'ı çok hafif sağa-sola sallar; durunca düzelir.
 func _animate_walk(delta: float) -> void:
