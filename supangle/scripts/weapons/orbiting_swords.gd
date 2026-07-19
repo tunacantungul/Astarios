@@ -4,7 +4,10 @@ extends Node2D
 ## Kılıçlar bu sahnenin Area2D çocuklarıdır, dizilim kart seviyesine göre eşit dağıtılır.
 
 @export var rotation_speed: float = 1.8
-@export var damage: float = 15.0
+## Turuncu canavarı (30 can) 1. kademeden itibaren tek vuruşta düşürür.
+## Kılıç sayısı kademeyle arttığı için hasarın kademeye göre ayrıca artmasına
+## gerek yok; buradaki değer üç kademede de aynı.
+@export var damage: float = 30.0
 ## Aynı düşmana iki vuruş arası minimum süre.
 @export var hit_cooldown: float = 0.5
 @export var orbit_radius: float = 400.0
