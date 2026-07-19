@@ -34,6 +34,8 @@ var _pending_level_ups: int = 0
 
 func _ready() -> void:
 	get_tree().paused = false
+	# Bölümler arasında kaldığı yerden devam eder, baştan başlamaz.
+	Music.play_main()
 	GameState.setup_level(kill_quota, xp_requirement_mult, enemy_damage_mult)
 	GameState.kills_changed.connect(_on_kills_changed)
 	GameState.leveled_up.connect(_on_leveled_up)
