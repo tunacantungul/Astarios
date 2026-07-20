@@ -62,14 +62,25 @@ func _process(delta: float) -> void:
 	# Ekranda karakterin başının hemen üstünde dur. Ok bir HUD (ekran uzayı)
 	# ögesi; oyuncunun dünya konumu kamera dönüşümüyle ekrana çevriliyor.
 	# Kontrolün orijini doğrudan hedef noktaya konuyor; şekil orijin etrafında
-	# çiziliyor (aşağıya bak), böylece kontrolün boyutuna bağlı kalmıyor —
-	# eskiden boyuta güvenince ok karakterin sol üstüne kayıyordu.
-	var player_screen := get_viewport().get_canvas_transform() * _player.global_position
+	# çiziliyor (aşağıya bak), böylece kontrolün boyutuna bağlı kalmıyor.
+	# Fizik enterpolasyonu açık: karakterin ekrandaki (render) konumu fizik
+	# adımları arasında yumuşatılıyor. Ham global_position fizik adımında
+	# donduğu için ok, yumuşak kayan kameraya göre takılıyordu; enterpolasyonlu
+	# dönüşümü okuyunca ok karakterle aynı ritimde akıyor.
+	var player_pos := _player_render_position()
+	var player_screen := get_viewport().get_canvas_transform() * player_pos
 	global_position = player_screen - Vector2(0.0, above_player)
 	# Şekil yukarıyı gösterdiği için açıya çeyrek tur eklenir.
-	rotation = (_target_center() - _player.global_position).angle() + PI * 0.5
+	rotation = (_target_center() - player_pos).angle() + PI * 0.5
 	_time += delta
 	queue_redraw()
+
+## Karakterin render (enterpolasyonlu) dünya konumu. Fizik enterpolasyonunun
+## olmadığı sürümlere karşı ham konuma düşer.
+func _player_render_position() -> Vector2:
+	if _player.has_method("get_global_transform_interpolated"):
+		return _player.get_global_transform_interpolated().origin
+	return _player.global_position
 
 ## Hedefin tam ortası. Düğüm orijini yerine çarpışma şeklinin global konumu
 ## kullanılıyor: arena çemberi ve kapı büyük alanlar, şekil düğüme göre
