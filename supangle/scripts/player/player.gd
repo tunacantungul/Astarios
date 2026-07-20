@@ -68,6 +68,11 @@ var _weapons_retired: bool = false
 @onready var wings: AnimatedSprite2D = $Wings
 @onready var divine_aura: Sprite2D = $DivineAura
 @onready var landing_shadow: Node2D = $LandingShadow
+## Hedef oku (dünya uzayında, başın üstünde). Uçarken sprite'la birlikte
+## yükselsin diye lift tween'ine dahil ediliyor.
+@onready var objective_arrow: Node2D = $ObjectiveArrow
+## Okun yerdeki taban y konumu; lift bunun üstüne ekleniyor.
+@onready var _arrow_base_y: float = objective_arrow.position.y
 
 func _ready() -> void:
 	add_to_group("player")
@@ -203,6 +208,9 @@ func _tween_lift(target_y: float) -> void:
 	_lift_tween.tween_property(sprite, "position:y", target_y, flight_lift_time)
 	_lift_tween.tween_property(wings, "position:y", target_y, flight_lift_time)
 	_lift_tween.tween_property(divine_aura, "position:y", target_y, flight_lift_time)
+	# Ok kendi taban yüksekliğinden aynı miktar kadar yükselir; uçarken karakter
+	# okun üstüne çıkmasın diye onunla birlikte inip kalkıyor.
+	_lift_tween.tween_property(objective_arrow, "position:y", _arrow_base_y + target_y, flight_lift_time)
 	# Sonraki tween_callback'lerin paralel değil, ardıl çalışması için.
 	_lift_tween.chain()
 
