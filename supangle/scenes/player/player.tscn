@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bg40u2euh5uia"]
 
 [ext_resource type="Script" uid="uid://d4ld6a1u068gf" path="res://scripts/player/player.gd" id="1"]
+[ext_resource type="Script" uid="uid://tplwcpodqj1o" path="res://scripts/ui/objective_arrow.gd" id="30"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/orbiting_swords.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/weapons/bolt_shooter.tscn" id="3"]
 [ext_resource type="Texture2D" path="res://assets/effects/Divine_aura.png" id="5"]
@@ -178,3 +179,9 @@ position_smoothing_speed = 8.0
 [node name="ArrowShooter" parent="." unique_id=336114443 instance=ExtResource("14") groups=["player_weapons"]]
 
 [node name="StyxAura" parent="." unique_id=1440690763 instance=ExtResource("23") groups=["player_weapons"]]
+
+[node name="ObjectiveArrow" type="Node2D" parent="."]
+position = Vector2(0, -260)
+z_index = 100
+z_as_relative = false
+script = ExtResource("30")

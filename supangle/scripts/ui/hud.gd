@@ -16,7 +16,6 @@ const UPGRADE_ENTRY_SCENE := preload("res://scenes/ui/upgrade_entry.tscn")
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var immortal_label: Label = %ImmortalLabel
 @onready var objective_label: Label = %ObjectiveLabel
-@onready var objective_arrow: Control = %ObjectiveArrow
 @onready var level_label: Label = %LevelLabel
 @onready var xp_bar: ProgressBar = %XPBar
 @onready var power_immortality: Label = %PowerImmortality
@@ -77,11 +76,16 @@ func set_objective(text: String) -> void:
 	objective_label.text = text
 
 ## Hedef okunu verilen düğüme yöneltir (boss arenası, çıkış kapısı...).
+## Ok artık karakterin çocuğu (dünya uzayında); HUD onu grup üzerinden bulur.
 func point_to(target: Node2D, color: Color) -> void:
-	objective_arrow.point_to(target, color)
+	var arrow := get_tree().get_first_node_in_group("objective_arrow")
+	if arrow != null:
+		arrow.point_to(target, color)
 
 func clear_arrow() -> void:
-	objective_arrow.clear_target()
+	var arrow := get_tree().get_first_node_in_group("objective_arrow")
+	if arrow != null:
+		arrow.clear_target()
 
 ## --- Uçuş göstergesi ---
 

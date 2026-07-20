@@ -1,12 +1,15 @@
-extends Control
-## Ekranın üstünde duran, hedefe doğru dönen yön oku (pusula gibi).
-## Boss arenası açılınca arenayı, boss ölünce çıkış kapısını gösterir.
-## Dünya koordinatlarında değil ekranda sabit durur; sadece yönü döner,
-## böylece hedef ekran dışındayken de nereye gidileceği belli olur.
+extends Node2D
+## Karakterin başının üstünde durup hedefe (boss arenası / kapı) dönen yön oku.
+##
+## Karakterin ÇOCUĞU olarak dünyada duruyor, ekran (HUD) ögesi değil. Sebep:
+## fizik enterpolasyonu açık ve kamera yumuşatmalı; oku HUD'da tutup her karede
+## kamera dönüşümüyle elle konumlandırınca render'ın kullandığı enterpolasyonlu
+## değerle uyuşmuyor ve Windows'ta yüksek yenileme hızında takılıyordu. Çocuk
+## olarak konumu sabit; motor karakterle birlikte onu da enterpolasyonla
+## yumuşatıyor. Yön ve süzülme yalnızca _draw içinde (görsel), transform hiç
+## değişmiyor — bu yüzden takılma olmuyor.
 
 ## Ok yukarıyı (-Y) gösterecek şekilde, merkezi orijinde çizildi.
-## arrow_size ile ölçeklenir. PackedVector2Array sabit ifade olamadığı için
-## düz dizi tutulup çizim sırasında paketleniyor.
 const SHAPE: Array[Vector2] = [
 	Vector2(0.0, -1.0),
 	Vector2(0.72, -0.1),
@@ -19,28 +22,20 @@ const SHAPE: Array[Vector2] = [
 
 @export var arrow_color: Color = Color(1.0, 0.85, 0.25)
 @export var outline_color: Color = Color(0.0, 0.0, 0.0, 1.0)
-@export var outline_width: float = 7.0
-## Okun yarı yüksekliği (piksel). Uzaktan görünecek kadar büyük.
-@export var arrow_size: float = 48.0
-## Okun gösterdiği yönde hafifçe ileri geri süzülmesi. Yalnızca karakter
-## dururken oynar; hareket ederken ok zaten karakterle kaydığı için üstüne bir
-## de süzülme binince takılıyordu.
-@export var bob_amount: float = 8.0
+## Dünya uzayında çizildiği ve kamera 0.5 yakınlaştırdığı için değerler eski
+## ekran-uzayı hâlinin ~2 katı: ekranda aynı boyutta görünsün.
+@export var outline_width: float = 14.0
+@export var arrow_size: float = 96.0
+## Okun gösterdiği yönde hafifçe ileri geri süzülmesi. Artık her zaman açık:
+## dünya çocuğu olduğu için hareket hâlinde de takılmadan akıyor.
+@export var bob_amount: float = 16.0
 @export var bob_speed: float = 3.5
-## Süzülmenin ne kadar hızlı sönüp geri geleceği (saniyede). Ani sıçrama olmasın.
-@export var bob_fade: float = 6.0
-## Okun karakterin ekrandaki merkezinden ne kadar yukarıda duracağı (piksel).
-## Konumu zaten karaktere göre gösterdiği için ekranın tepesi yerine başının
-## hemen üstünde duruyor.
-@export var above_player: float = 130.0
 
 var _target: Node2D
-var _player: Node2D
 var _time: float = 0.0
-## Süzülmenin o anki gücü (0 = kapalı/hareket ediyor, 1 = tam/duruyor).
-var _bob_strength: float = 1.0
 
 func _ready() -> void:
+	add_to_group("objective_arrow")
 	visible = false
 	set_process(false)
 
@@ -61,40 +56,12 @@ func _process(delta: float) -> void:
 	if _target == null or not is_instance_valid(_target):
 		clear_target()
 		return
-	if _player == null or not is_instance_valid(_player):
-		_player = get_tree().get_first_node_in_group("player") as Node2D
-		if _player == null:
-			return
-	# Ekranda karakterin başının hemen üstünde dur. Ok bir HUD (ekran uzayı)
-	# ögesi; oyuncunun dünya konumu kamera dönüşümüyle ekrana çevriliyor.
-	# Kontrolün orijini doğrudan hedef noktaya konuyor; şekil orijin etrafında
-	# çiziliyor (aşağıya bak), böylece kontrolün boyutuna bağlı kalmıyor.
-	# Fizik enterpolasyonu açık: karakterin ekrandaki (render) konumu fizik
-	# adımları arasında yumuşatılıyor. Ham global_position fizik adımında
-	# donduğu için ok, yumuşak kayan kameraya göre takılıyordu; enterpolasyonlu
-	# dönüşümü okuyunca ok karakterle aynı ritimde akıyor.
-	var player_pos := _player_render_position()
-	var player_screen := get_viewport().get_canvas_transform() * player_pos
-	global_position = player_screen - Vector2(0.0, above_player)
-	# Şekil yukarıyı gösterdiği için açıya çeyrek tur eklenir.
-	rotation = (_target_center() - player_pos).angle() + PI * 0.5
-	# Hareket ederken süzülmeyi söndür, dururken geri getir.
-	var body := _player as CharacterBody2D
-	var moving := body != null and body.velocity.length_squared() > 1.0
-	_bob_strength = move_toward(_bob_strength, 0.0 if moving else 1.0, bob_fade * delta)
 	_time += delta
 	queue_redraw()
 
-## Karakterin render (enterpolasyonlu) dünya konumu. Fizik enterpolasyonunun
-## olmadığı sürümlere karşı ham konuma düşer.
-func _player_render_position() -> Vector2:
-	if _player.has_method("get_global_transform_interpolated"):
-		return _player.get_global_transform_interpolated().origin
-	return _player.global_position
-
 ## Hedefin tam ortası. Düğüm orijini yerine çarpışma şeklinin global konumu
-## kullanılıyor: arena çemberi ve kapı büyük alanlar, şekil düğüme göre
-## kayarsa ok kenarı gösterip oyuncuyu yanlış noktaya yollardı.
+## kullanılıyor: arena çemberi ve kapı büyük alanlar, şekil düğüme göre kayarsa
+## ok kenarı gösterip oyuncuyu yanlış noktaya yollardı.
 func _target_center() -> Vector2:
 	var shape := _target.get_node_or_null("CollisionShape2D") as CollisionShape2D
 	if shape != null:
@@ -102,13 +69,15 @@ func _target_center() -> Vector2:
 	return _target.global_position
 
 func _draw() -> void:
-	# Kontrolün orijini (0,0) etrafında çiziliyor; konum _process'te oraya
-	# oturtuluyor. bob yalnızca hafif yukarı-aşağı süzülme; _bob_strength ile
-	# hareket hâlinde 0'a sönüyor.
-	var center := Vector2(0.0, -absf(sin(_time * bob_speed)) * bob_amount * _bob_strength)
+	if _target == null or not is_instance_valid(_target):
+		return
+	# Yön ve süzülme yalnızca çizimde: düğümün transformu değişmiyor, böylece
+	# karakterin enterpolasyonlu hareketiyle birebir akıyor.
+	var dir := (_target_center() - global_position).angle() + PI * 0.5
+	var bob := Vector2(0.0, -absf(sin(_time * bob_speed)) * bob_amount)
 	var points := PackedVector2Array()
 	for point in SHAPE:
-		points.append(center + point * arrow_size)
+		points.append((point * arrow_size + bob).rotated(dir))
 	# Önce kalın siyah kenarlık, sonra üstüne dolgu: her zeminde okunur kalsın.
 	var outline := points.duplicate()
 	outline.append(points[0])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://diy7twwj8m2e8"]
+[gd_scene format=3 uid="uid://diy7twwj8m2e8"]
 
 [ext_resource type="Script" uid="uid://cqudmuh5d48k6" path="res://scripts/levels/level.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bg40u2euh5uia" path="res://scenes/player/player.tscn" id="2"]
@@ -24,11 +24,9 @@ size = Vector2(14760, 180)
 [sub_resource type="RectangleShape2D" id="Shape_wall_v"]
 size = Vector2(180, 9360)
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" unique_id=703584970]
 script = ExtResource("1")
 boss_scenes = Array[PackedScene]([ExtResource("11"), ExtResource("11b"), ExtResource("11c")])
-boss_trigger_levels = Array[int]([8, 18, 30])
-god_names = Array[String](["Zeus", "Hermes", "Athena"])
 dialogue_boss_1 = Array[String](["Zeus: Bir ölümlü için aileni, seni yaratanları geride bırakıyorsun demek!", "Astarios: Hayır! Geride bırakmıyo…", "Zeus: Bu kadar bahane yeter!", "Zeus: Bir ölümlünün bizimle eş olması kabul edilemez!", "Zeus: Madem bir ölümlü seveceksin,", "Zeus: ...onlar gibi [shake rate=22 level=14]ölümlü[/shake] olacaksın!"])
 dialogue_boss_2 = Array[String](["Hermes: Demek babamızın gazabından kaçabildin Astarios,", "Hermes: … ben babamız kadar merhametli olmayacağım!", "Hermes: Ölümünün yanına yürüyerek git de görelim ne kadar sevdiğini!", "Astarios: Gerekirse sürünerek bile giderim!", "Astarios: Senin kanatlarına ihtiyacım yok!", "Hermes: Demek öyle ha!?", "Astarios: [shake rate=22 level=14]ARRGGHHH!!!![/shake]"])
 dialogue_boss_3 = Array[String](["Athena: Ölümsüzlüğünü ve kanatlarını bir ölümlü için feda ettin,", "Athena: … ne kadar da [shake rate=22 level=14]TATLI![/shake]", "Astarios: Alınacak başka bir şeyim kalmadı Athena,", "Astarios: … ne alacaksan al!", "Astarios: Benim hiçbirine ihtiyacım [shake rate=22 level=14]yok![/shake]", "Athena: Sen öyle san!"])
@@ -37,9 +35,9 @@ enemy_red = ExtResource("9f")
 enemy_tank = ExtResource("9t")
 xp_requirement_mult = 0.8
 
-[node name="MapArt" parent="." instance=ExtResource("map_art")]
+[node name="MapArt" parent="." unique_id=932512961 instance=ExtResource("map_art")]
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=353234934]
 visible = false
 offset_left = -7200.0
 offset_top = -4500.0
@@ -47,53 +45,53 @@ offset_right = 7200.0
 offset_bottom = 4500.0
 color = Color(0.85, 0.84, 0.79, 1)
 
-[node name="Walls" type="StaticBody2D" parent="."]
+[node name="Walls" type="StaticBody2D" parent="." unique_id=280677049]
 collision_layer = 4
 collision_mask = 0
 
-[node name="WallTop" type="CollisionShape2D" parent="Walls"]
+[node name="WallTop" type="CollisionShape2D" parent="Walls" unique_id=1484111325]
 position = Vector2(0, -4590)
 shape = SubResource("Shape_wall_h")
 
-[node name="WallBottom" type="CollisionShape2D" parent="Walls"]
+[node name="WallBottom" type="CollisionShape2D" parent="Walls" unique_id=1779706567]
 position = Vector2(0, 4590)
 shape = SubResource("Shape_wall_h")
 
-[node name="WallLeft" type="CollisionShape2D" parent="Walls"]
+[node name="WallLeft" type="CollisionShape2D" parent="Walls" unique_id=706360824]
 position = Vector2(-7290, 0)
 shape = SubResource("Shape_wall_v")
 
-[node name="WallRight" type="CollisionShape2D" parent="Walls"]
+[node name="WallRight" type="CollisionShape2D" parent="Walls" unique_id=517689955]
 position = Vector2(7290, 0)
 shape = SubResource("Shape_wall_v")
 
-[node name="Player" parent="." instance=ExtResource("2")]
+[node name="Player" parent="." unique_id=1667265658 instance=ExtResource("2")]
 position = Vector2(-5400, 0)
 
-[node name="BossArena1" parent="." instance=ExtResource("10")]
+[node name="BossArena1" parent="." unique_id=1324757297 instance=ExtResource("10")]
 position = Vector2(5600, 0)
 
-[node name="BossArena2" parent="." instance=ExtResource("10")]
+[node name="BossArena2" parent="." unique_id=1170978286 instance=ExtResource("10")]
 position = Vector2(-4000, -3400)
 
-[node name="BossArena3" parent="." instance=ExtResource("10")]
+[node name="BossArena3" parent="." unique_id=1576766781 instance=ExtResource("10")]
 position = Vector2(4000, 3400)
 
-[node name="ExitGate" parent="." instance=ExtResource("4")]
+[node name="ExitGate" parent="." unique_id=562604182 instance=ExtResource("4")]
 position = Vector2(6500, 0)
 
-[node name="EnemySpawner" parent="." instance=ExtResource("3")]
+[node name="EnemySpawner" parent="." unique_id=2082103961 instance=ExtResource("3")]
 enemy_scenes = Array[PackedScene]([ExtResource("9")])
 
-[node name="LightningSpawner" parent="." instance=ExtResource("14")]
+[node name="LightningSpawner" parent="." unique_id=1499471439 instance=ExtResource("14")]
 autostart = false
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1754008701]
 
-[node name="HUD" parent="UI" instance=ExtResource("6")]
+[node name="HUD" parent="UI" unique_id=1829973606 instance=ExtResource("6")]
 
-[node name="DialogueBox" parent="UI" instance=ExtResource("7")]
+[node name="DialogueBox" parent="UI" unique_id=120805600 instance=ExtResource("7")]
 
-[node name="UpgradeMenu" parent="UI" instance=ExtResource("12")]
+[node name="UpgradeMenu" parent="UI" unique_id=1623093693 instance=ExtResource("12")]
 
-[node name="PauseMenu" parent="UI" instance=ExtResource("13")]
+[node name="PauseMenu" parent="UI" unique_id=504695715 instance=ExtResource("13")]
