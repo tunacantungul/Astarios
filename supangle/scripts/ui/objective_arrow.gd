@@ -22,9 +22,13 @@ const SHAPE: Array[Vector2] = [
 @export var outline_width: float = 7.0
 ## Okun yarı yüksekliği (piksel). Uzaktan görünecek kadar büyük.
 @export var arrow_size: float = 48.0
-## Okun gösterdiği yönde hafifçe ileri geri süzülmesi.
+## Okun gösterdiği yönde hafifçe ileri geri süzülmesi. Yalnızca karakter
+## dururken oynar; hareket ederken ok zaten karakterle kaydığı için üstüne bir
+## de süzülme binince takılıyordu.
 @export var bob_amount: float = 8.0
 @export var bob_speed: float = 3.5
+## Süzülmenin ne kadar hızlı sönüp geri geleceği (saniyede). Ani sıçrama olmasın.
+@export var bob_fade: float = 6.0
 ## Okun karakterin ekrandaki merkezinden ne kadar yukarıda duracağı (piksel).
 ## Konumu zaten karaktere göre gösterdiği için ekranın tepesi yerine başının
 ## hemen üstünde duruyor.
@@ -33,6 +37,8 @@ const SHAPE: Array[Vector2] = [
 var _target: Node2D
 var _player: Node2D
 var _time: float = 0.0
+## Süzülmenin o anki gücü (0 = kapalı/hareket ediyor, 1 = tam/duruyor).
+var _bob_strength: float = 1.0
 
 func _ready() -> void:
 	visible = false
@@ -72,6 +78,10 @@ func _process(delta: float) -> void:
 	global_position = player_screen - Vector2(0.0, above_player)
 	# Şekil yukarıyı gösterdiği için açıya çeyrek tur eklenir.
 	rotation = (_target_center() - player_pos).angle() + PI * 0.5
+	# Hareket ederken süzülmeyi söndür, dururken geri getir.
+	var body := _player as CharacterBody2D
+	var moving := body != null and body.velocity.length_squared() > 1.0
+	_bob_strength = move_toward(_bob_strength, 0.0 if moving else 1.0, bob_fade * delta)
 	_time += delta
 	queue_redraw()
 
@@ -93,8 +103,9 @@ func _target_center() -> Vector2:
 
 func _draw() -> void:
 	# Kontrolün orijini (0,0) etrafında çiziliyor; konum _process'te oraya
-	# oturtuluyor. bob yalnızca hafif yukarı-aşağı süzülme.
-	var center := Vector2(0.0, -absf(sin(_time * bob_speed)) * bob_amount)
+	# oturtuluyor. bob yalnızca hafif yukarı-aşağı süzülme; _bob_strength ile
+	# hareket hâlinde 0'a sönüyor.
+	var center := Vector2(0.0, -absf(sin(_time * bob_speed)) * bob_amount * _bob_strength)
 	var points := PackedVector2Array()
 	for point in SHAPE:
 		points.append(center + point * arrow_size)
